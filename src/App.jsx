@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ArrowDown, ArrowUpRight, Menu, ShoppingBag, MoveUpRight, X, Plus, ChevronDown, Check } from 'lucide-react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -15,6 +15,15 @@ const App = () => {
   const [openFaq, setOpenFaq] = useState(0)
   const [newsletterSent, setNewsletterSent] = useState(false)
   const addToBag = () => setCartCount((count) => count + 1)
+
+  useEffect(() => {
+    if (!cartOpen) return undefined
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setCartOpen(false)
+    }
+    window.addEventListener('keydown', closeOnEscape)
+    return () => window.removeEventListener('keydown', closeOnEscape)
+  }, [cartOpen])
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -103,7 +112,8 @@ const App = () => {
         y: 55, autoAlpha: 0, duration: 0.8, stagger: 0.14, ease: 'power3.out',
         scrollTrigger: { trigger: '.standards-grid', start: 'top 78%', toggleActions: 'play none none reverse' },
       })
-      gsap.from('.flavour-card, .apparel-feature-card', { y: 70, autoAlpha: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: '.flavour-grid', start: 'top 82%', toggleActions: 'play none none reverse' } })
+      gsap.from('.flavour-card', { y: 70, autoAlpha: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: '.flavour-grid', start: 'top 82%', toggleActions: 'play none none reverse' } })
+      gsap.from('.apparel-feature-card', { y: 70, autoAlpha: 0, stagger: 0.14, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: '.apparel-feature-grid', start: 'top 82%', toggleActions: 'play none none reverse' } })
       gsap.from('.faq-row', { y: 28, autoAlpha: 0, stagger: 0.08, duration: 0.65, ease: 'power3.out', scrollTrigger: { trigger: '.faq-list', start: 'top 82%', toggleActions: 'play none none reverse' } })
       gsap.to('.scroll-progress', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: '.site-shell', start: 'top top', end: 'bottom bottom', scrub: true } })
       gsap.from('.closing-title', {
@@ -210,13 +220,13 @@ const App = () => {
           <a className="text-link" href="#standards">VIEW THE STANDARD <ArrowUpRight size={16} /></a>
         </div>
         <div className="category-grid">
-          <a className="category-card supplements-card" href="#standards">
+          <a className="category-card supplements-card" href="#supplements">
             <span className="category-number">01 / PERFORMANCE NUTRITION</span>
             <span className="category-art supplement-art" aria-hidden="true"><span className="art-orbit-ring" /><span className="art-glow" /><span className="mini-tub"><i /><b>IRON<br />VAULT</b><small>WHEY<br />PROTEIN</small><em>24G PROTEIN</em></span><span className="art-caption">DAILY FUEL / 001</span></span>
             <span className="category-title">FUEL<br />YOUR <em>FOCUS.</em></span>
             <span className="category-cta">EXPLORE SUPPLEMENTS <ArrowUpRight size={16} /></span>
           </a>
-          <a className="category-card apparel-card" href="#standards">
+          <a className="category-card apparel-card" href="#apparel">
             <span className="category-number">02 / TRAINING APPAREL</span>
             <span className="category-art apparel-art" aria-hidden="true"><span className="apparel-halo" /><span className="shirt-shape"><i>IV</i></span><span className="art-caption">TRAINING / SERIES 002</span></span>
             <span className="category-title">MADE TO<br /><em>MOVE.</em></span>
