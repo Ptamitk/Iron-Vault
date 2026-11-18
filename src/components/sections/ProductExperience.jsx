@@ -70,6 +70,8 @@ export default function ProductExperience() {
     scene.add(rimLight)
 
     const product = new THREE.Group()
+    const productModel = new THREE.Group()
+    product.add(productModel)
     scene.add(product)
 
     const label = makeLabelTexture()
@@ -78,28 +80,28 @@ export default function ProductExperience() {
       new THREE.MeshStandardMaterial({ map: label, metalness: 0.18, roughness: 0.42 }),
     )
     body.position.y = -0.08
-    product.add(body)
+    productModel.add(body)
 
     const lid = new THREE.Mesh(
       new THREE.CylinderGeometry(1.045, 1.045, 0.25, 96),
       new THREE.MeshStandardMaterial({ color: 0x34372f, metalness: 0.72, roughness: 0.28 }),
     )
     lid.position.y = 1.43
-    product.add(lid)
+    productModel.add(lid)
 
     const lidRim = new THREE.Mesh(
       new THREE.CylinderGeometry(1.055, 1.055, 0.055, 96),
       new THREE.MeshStandardMaterial({ color: 0x9a9c89, metalness: 0.8, roughness: 0.22 }),
     )
     lidRim.position.y = 1.30
-    product.add(lidRim)
+    productModel.add(lidRim)
 
     const bottom = new THREE.Mesh(
       new THREE.CylinderGeometry(0.95, 0.95, 0.08, 96),
       new THREE.MeshStandardMaterial({ color: 0x171914, metalness: 0.25, roughness: 0.55 }),
     )
     bottom.position.y = -1.48
-    product.add(bottom)
+    productModel.add(bottom)
 
     const floor = new THREE.Mesh(
       new THREE.CircleGeometry(2.15, 64),
@@ -107,7 +109,7 @@ export default function ProductExperience() {
     )
     floor.rotation.x = -Math.PI / 2
     floor.position.y = -1.58
-    product.add(floor)
+    productModel.add(floor)
 
     const resize = () => {
       const width = stage.clientWidth
@@ -122,6 +124,52 @@ export default function ProductExperience() {
     resize()
     const observer = new ResizeObserver(resize)
     observer.observe(stage)
+
+    // Hover animation is applied to the model inside the scroll-driven group,
+    // so pointer movement never fights the ScrollTrigger rotation.
+    const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    const tiltX = gsap.quickTo(productModel.rotation, 'x', { duration: 0.55, ease: 'power3.out' })
+    const tiltY = gsap.quickTo(productModel.rotation, 'y', { duration: 0.7, ease: 'power3.out' })
+    const tiltZ = gsap.quickTo(productModel.rotation, 'z', { duration: 0.6, ease: 'power3.out' })
+    const scaleX = gsap.quickTo(productModel.scale, 'x', { duration: 0.55, ease: 'power3.out' })
+    const scaleY = gsap.quickTo(productModel.scale, 'y', { duration: 0.55, ease: 'power3.out' })
+    const scaleZ = gsap.quickTo(productModel.scale, 'z', { duration: 0.55, ease: 'power3.out' })
+    const lightX = gsap.quickTo(keyLight.position, 'x', { duration: 0.6, ease: 'power2.out' })
+    const lightY = gsap.quickTo(keyLight.position, 'y', { duration: 0.6, ease: 'power2.out' })
+    const rimPower = gsap.quickTo(rimLight, 'intensity', { duration: 0.5, ease: 'power2.out' })
+    const onPointerMove = (event) => {
+      const rect = stage.getBoundingClientRect()
+      const nx = ((event.clientX - rect.left) / rect.width) * 2 - 1
+      const ny = ((event.clientY - rect.top) / rect.height) * 2 - 1
+      tiltX(-ny * 0.2)
+      tiltY(nx * 0.34)
+      tiltZ(-nx * 0.055)
+      scaleX(1.075)
+      scaleY(1.075)
+      scaleZ(1.075)
+      lightX(4 + nx * 2.8)
+      lightY(5 - ny * 2.2)
+      rimPower(34)
+      stage.classList.add('is-product-hovered')
+      stage.style.setProperty('--hover-x', `${(nx + 1) * 50}%`)
+      stage.style.setProperty('--hover-y', `${(ny + 1) * 50}%`)
+    }
+    const onPointerLeave = () => {
+      tiltX(0)
+      tiltY(0)
+      tiltZ(0)
+      scaleX(1)
+      scaleY(1)
+      scaleZ(1)
+      lightX(4)
+      lightY(5)
+      rimPower(24)
+      stage.classList.remove('is-product-hovered')
+    }
+    if (canHover) {
+      stage.addEventListener('pointermove', onPointerMove)
+      stage.addEventListener('pointerleave', onPointerLeave)
+    }
 
     let frame
     const render = () => {
@@ -161,6 +209,8 @@ export default function ProductExperience() {
 
     return () => {
       mm.revert()
+      stage.removeEventListener('pointermove', onPointerMove)
+      stage.removeEventListener('pointerleave', onPointerLeave)
       observer.disconnect()
       cancelAnimationFrame(frame)
       body.geometry.dispose()
