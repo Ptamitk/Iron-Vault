@@ -115,6 +115,7 @@ export default function ProductExperience() {
       if (!width || !height) return
       camera.aspect = width / height
       camera.position.z = width < 700 ? 10.5 : 9
+      camera.lookAt(0, 0, 0)
       camera.updateProjectionMatrix()
       renderer.setSize(width, height, false)
     }
@@ -132,7 +133,7 @@ export default function ProductExperience() {
     const mm = gsap.matchMedia()
     mm.add('(prefers-reduced-motion: no-preference)', () => {
       const mobile = window.matchMedia('(max-width: 700px)').matches
-      gsap.set(product.position, { x: mobile ? 0 : 1.65, y: mobile ? -0.9 : 0 })
+      gsap.set(product.position, { x: mobile ? 0 : 2.2, y: mobile ? -1.45 : 0 })
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -146,14 +147,14 @@ export default function ProductExperience() {
       })
       timeline
         .to(product.rotation, { y: Math.PI * 1.05, x: 0.12, z: -0.08, ease: 'none' }, 0)
-        .to(product.position, { x: mobile ? 0 : 1.15, y: mobile ? -1.05 : -0.08, ease: 'none' }, 0)
+        .to(product.position, { x: mobile ? 0 : 2.05, y: mobile ? -1.5 : -0.08, ease: 'none' }, 0)
         .to(product.scale, { x: 1.12, y: 1.12, z: 1.12, ease: 'none' }, 0.12)
-        .to('.experience-panel-one', { autoAlpha: 0, y: -35, ease: 'none' }, 0.28)
-        .fromTo('.experience-panel-two', { autoAlpha: 0, y: 35 }, { autoAlpha: 1, y: 0, ease: 'none' }, 0.3)
+        .to('.experience-panel-one', { autoAlpha: 0, y: -24, duration: 0.12, ease: 'power1.in' }, 0.27)
+        .fromTo('.experience-panel-two', { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.14, ease: 'power1.out', immediateRender: false }, 0.42)
         .to(product.rotation, { y: Math.PI * 1.95, x: -0.08, ease: 'none' }, 0.48)
         .to(product.position, { x: mobile ? 0 : 1.75, y: mobile ? -1.12 : 0.05, ease: 'none' }, 0.48)
-        .to('.experience-panel-two', { autoAlpha: 0, y: -35, ease: 'none' }, 0.68)
-        .fromTo('.experience-panel-three', { autoAlpha: 0, y: 35 }, { autoAlpha: 1, y: 0, ease: 'none' }, 0.7)
+        .to('.experience-panel-two', { autoAlpha: 0, y: -24, duration: 0.12, ease: 'power1.in' }, 0.67)
+        .fromTo('.experience-panel-three', { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.14, ease: 'power1.out', immediateRender: false }, 0.82)
         .to(product.rotation, { y: Math.PI * 2, x: 0, z: 0, ease: 'none' }, 0.76)
         .to(product.scale, { x: 1, y: 1, z: 1, ease: 'none' }, 0.82)
     })
