@@ -20,3 +20,22 @@
 .site-footer{padding:35px 4.5%;border-top:1px solid #ffffff24;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;gap:20px}.footer-wordmark{font-size:25px}.site-footer>span,.site-footer>a:not(.wordmark){font-size:8px;letter-spacing:.13em;color:#aaa99f}.site-footer>a:not(.wordmark){justify-self:end}.site-footer small{grid-column:1/-1;font-size:8px;letter-spacing:.12em;color:#66665e;margin-top:20px}
 @media(max-width:800px){.site-header{height:70px}.desktop-nav{gap:17px}.desktop-nav a{font-size:8px}.hero{min-height:620px;height:auto;grid-template-columns:1fr 1fr;padding-top:65px}.hero h1{font-size:clamp(67px,11vw,100px)}.protein-tub{width:clamp(175px,30vw,245px);height:clamp(285px,48vw,390px)}.intro-section,.collection-section,.standards-section{padding:95px 6%}.category-card{min-height:370px}}
 @media(max-width:560px){.announcement-bar{padding:0 5%;font-size:7px}.announcement-bar span:nth-child(2){display:none}.site-header{padding:0 5%}.desktop-nav,.shop-link{display:none}.mobile-menu{display:grid}.hero{display:flex;flex-direction:column;min-height:0;padding:72px 6% 55px}.hero-copy{padding:0}.hero h1{font-size:clamp(76px,19vw,112px);margin:35px 0 25px}.hero-bottom{gap:30px}.hero-art{height:440px;margin-top:12px}.protein-tub{width:225px;height:365px}.art-index{bottom:0}.vertical-note{right:0}.hero-side-note{display:none}.ticker{padding:13px 0}.ticker div{font-size:17px}.intro-section,.collection-section,.standards-section{padding:78px 6%}.intro-content{grid-template-columns:1fr;gap:25px;margin-top:40px}.intro-content h2,.section-heading h2,.standards-section h2{font-size:clamp(67px,16vw,95px)}.section-heading{align-items:flex-start;flex-direction:column;margin-bottom:30px}.section-heading h2{margin-top:30px}.category-grid{grid-template-columns:1fr}.category-card{min-height:390px}.standards-section{min-height:470px}.site-footer{grid-template-columns:1fr 1fr;padding:30px 6%}.site-footer>span{display:none}.site-footer small{margin-top:10px}}
+
+/* Pinned product-story sequence */
+.product-story{height:100svh;min-height:650px;background:#171813;color:var(--color-iv-cream);position:relative}
+.story-stage{height:100svh;min-height:650px;position:relative;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 50% 52%,#424638 0%,#22251e 32%,#171813 72%)}
+.story-grid-lines{position:absolute;inset:0;opacity:.17;background-image:linear-gradient(#dce2ce18 1px,transparent 1px),linear-gradient(90deg,#dce2ce18 1px,transparent 1px);background-size:8vw 8vw;mask-image:linear-gradient(transparent,#000 20%,#000 80%,transparent)}
+.story-heading{position:absolute;top:34px;left:5%;right:5%;display:flex;justify-content:space-between;font-size:9px;letter-spacing:.17em;color:#b5c49a;z-index:3}
+.story-orbit{position:absolute;width:min(58vw,720px);aspect-ratio:1;border:1px solid #b5c49a55;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%) rotate(20deg) scaleY(.38);box-shadow:0 0 0 45px #b5c49a08,0 0 0 90px #b5c49a05}
+.story-tub-wrap{position:absolute;inset:0;display:grid;place-items:center;z-index:2;pointer-events:none}
+.story-tub{width:clamp(190px,23vw,310px);height:clamp(305px,36vw,455px);transform:rotate(-12deg);will-change:transform}
+.story-panels{position:absolute;inset:0;z-index:3;pointer-events:none}
+.story-panel{position:absolute;top:50%;left:7%;width:min(35%,440px);transform:translateY(-50%);opacity:0}
+.story-panel-one{opacity:1}
+.story-panel>span{font-size:9px;letter-spacing:.2em;color:var(--color-iv-accent)}
+.story-panel h2{font-family:var(--font-heading);font-size:clamp(58px,7.5vw,112px);line-height:.82;letter-spacing:-.035em;margin:25px 0}
+.story-panel h2 em{font-style:normal;color:var(--color-iv-accent)}
+.story-panel p{max-width:290px;color:#b9b9ad;font-size:13px;line-height:1.8}
+.story-progress-label{position:absolute;bottom:32px;left:5%;right:5%;display:flex;justify-content:space-between;font-size:9px;letter-spacing:.18em;color:#b5c49a;z-index:3}
+@media(max-width:700px){.product-story,.story-stage{min-height:680px}.story-heading{top:24px;font-size:7px}.story-tub{width:185px;height:300px;transform:translateY(60px) rotate(-10deg)}.story-panel{left:7%;top:16%;width:86%;transform:none}.story-panel h2{font-size:clamp(55px,14vw,82px);margin:16px 0}.story-panel p{max-width:250px;font-size:11px}.story-orbit{width:110vw;top:65%}.story-progress-label{bottom:20px;font-size:7px}}
+@media(prefers-reduced-motion:reduce){.product-story{height:auto}.story-stage{position:relative}}
