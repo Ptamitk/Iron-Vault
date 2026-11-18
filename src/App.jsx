@@ -3,6 +3,7 @@ import { ArrowDown, ArrowUpRight, Menu, ShoppingBag } from 'lucide-react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
+import ProductExperience from './components/sections/ProductExperience.jsx'
 import './App.css'
 
 const App = () => {
@@ -38,68 +39,7 @@ const App = () => {
         },
       })
 
-      // A dedicated pinned product film: the tub travels through three story beats.
-      const story = gsap.timeline({
-        scrollTrigger: {
-          trigger: '.product-story',
-          start: 'top top',
-          end: '+=2400',
-          scrub: 1,
-          pin: '.story-stage',
-          anticipatePin: 1,
-          invalidateOnRefresh: true,
-        },
-      })
 
-      story
-        .to('.story-tub', { rotation: 105, scale: 1.12, x: '14vw', y: -12, ease: 'none' }, 0)
-        .to('.story-orbit', { rotation: 130, scale: 1.25, ease: 'none' }, 0)
-        .to('.story-panel-one', { autoAlpha: 0, y: -55, ease: 'none' }, 0.28)
-        .fromTo('.story-panel-two', { autoAlpha: 0, y: 55 }, { autoAlpha: 1, y: 0, ease: 'none' }, 0.28)
-        .to('.story-tub', { rotation: 235, scale: 0.94, x: '-13vw', y: 18, ease: 'none' }, 0.48)
-        .to('.story-panel-two', { autoAlpha: 0, y: -55, ease: 'none' }, 0.68)
-        .fromTo('.story-panel-three', { autoAlpha: 0, y: 55 }, { autoAlpha: 1, y: 0, ease: 'none' }, 0.68)
-        .to('.story-tub', { rotation: 360, scale: 1.08, x: 0, y: 0, ease: 'none' }, 0.72)
-        .to('.story-orbit', { rotation: 300, scale: 0.9, ease: 'none' }, 0.72)
-
-      gsap.from('.intro-content > *', {
-        y: 65,
-        opacity: 0,
-        duration: 0.9,
-        stagger: 0.16,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.intro-section',
-          start: 'top 72%',
-          once: true,
-        },
-      })
-
-      gsap.from('.category-card', {
-        y: 75,
-        opacity: 0,
-        duration: 0.85,
-        stagger: 0.18,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.category-grid',
-          start: 'top 78%',
-          once: true,
-        },
-      })
-
-      gsap.from('.standards-section h2, .standards-section > p:last-child', {
-        y: 55,
-        opacity: 0,
-        duration: 0.9,
-        stagger: 0.18,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: '.standards-section',
-          start: 'top 72%',
-          once: true,
-        },
-      })
     })
 
     return () => motion.revert()
@@ -164,32 +104,7 @@ const App = () => {
         <div>DISCIPLINE IS A DAILY PRACTICE <span>✳</span> BUILT FOR PROGRESS <span>✳</span> EARN YOUR EDGE <span>✳</span> DISCIPLINE IS A DAILY PRACTICE <span>✳</span></div>
       </section>
 
-      <section className="product-story" aria-label="The Iron Vault product story">
-        <div className="story-stage">
-          <div className="story-grid-lines" />
-          <div className="story-orbit" />
-          <div className="story-heading"><span>IRON VAULT / 001</span><span>THE PRODUCT IN MOTION</span></div>
-          <div className="story-tub-wrap">
-            <div className="protein-tub story-tub">
-              <div className="tub-lid" />
-              <div className="tub-body">
-                <div className="tub-topline">IRON VAULT / PERFORMANCE SERIES</div>
-                <div className="tub-brand">IRON<br /><b>VAULT</b></div>
-                <div className="tub-divider" />
-                <div className="tub-product">WHEY<br />PROTEIN</div>
-                <div className="tub-flavour">DARK COCOA · PREMIUM BLEND</div>
-                <div className="tub-footer"><span>24G<br />PROTEIN</span><span>01<br />KG</span></div>
-              </div>
-            </div>
-          </div>
-          <div className="story-panels">
-            <div className="story-panel story-panel-one"><span>01 — THE FORMULA</span><h2>BUILT FOR<br /><em>THE DAILY.</em></h2><p>Purposeful performance, designed to fit your everyday training ritual.</p></div>
-            <div className="story-panel story-panel-two"><span>02 — THE FOCUS</span><h2>NO NOISE.<br /><em>JUST RESULTS.</em></h2><p>Keep your focus on the work. Let consistency do the talking.</p></div>
-            <div className="story-panel story-panel-three"><span>03 — THE STANDARD</span><h2>MAKE EVERY<br /><em>REP COUNT.</em></h2><p>Your routine. Your effort. Your next level starts with showing up.</p></div>
-          </div>
-          <div className="story-progress-label">SCROLL TO EXPLORE <span>↓</span></div>
-        </div>
-      </section>
+      <ProductExperience />
 
       <section className="intro-section" id="philosophy">
         <p className="eyebrow"><span className="eyebrow-line" /> THE IRON VAULT MINDSET</p>
