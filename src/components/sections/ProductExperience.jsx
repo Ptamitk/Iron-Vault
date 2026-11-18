@@ -162,9 +162,9 @@ export default function ProductExperience() {
     productModel.add(flavourGroup)
     const flavourTextures = []
     const flavourCanisters = [
-      { name: 'DARK COCOA', subtitle: 'RICH & BOLD', colour: '#8b6044', x: -1.42, y: -1.02, z: 1.28, rz: -0.055 },
-      { name: 'VANILLA', subtitle: 'SMOOTH & CLEAN', colour: '#b5a477', x: 0, y: -1.02, z: 1.52, rz: 0.015 },
-      { name: 'STRAWBERRY', subtitle: 'FRESH & BRIGHT', colour: '#a95d68', x: 1.42, y: -1.02, z: 1.28, rz: 0.055 },
+      { name: 'DARK COCOA', subtitle: 'RICH & BOLD', colour: '#8b6044', x: -2.65, y: -1.02, z: 1.62, rz: -0.045 },
+      { name: 'VANILLA', subtitle: 'SMOOTH & CLEAN', colour: '#b5a477', x: -1.70, y: -1.02, z: 1.78, rz: 0, },
+      { name: 'STRAWBERRY', subtitle: 'FRESH & BRIGHT', colour: '#a95d68', x: -0.75, y: -1.02, z: 1.62, rz: 0.045 },
     ]
     const flavourMeshes = []
     flavourCanisters.forEach((flavour) => {
@@ -293,7 +293,7 @@ export default function ProductExperience() {
     const mm = gsap.matchMedia()
     mm.add('(prefers-reduced-motion: no-preference)', () => {
       const mobile = window.matchMedia('(max-width: 700px)').matches
-      gsap.set(product.position, { x: mobile ? 0 : 1.05, y: mobile ? -1.45 : 0 })
+      gsap.set(product.position, { x: mobile ? 0 : 2.0, y: mobile ? -1.45 : 0 })
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -315,25 +315,25 @@ export default function ProductExperience() {
         // The reveal is an additional scroll chapter; existing product rotation and panels remain intact.
         .to(lidAssembly.position, { y: 2.62, ease: 'power3.inOut' }, 0.13)
         .to(lidAssembly.rotation, { x: 0.24, z: -0.34, y: -0.16, ease: 'power3.inOut' }, 0.13)
-        .to(flavourMeshes[0].canister.position, { x: 0, y: 2.02, z: 0.62, ease: 'power2.out' }, 0.21)
-        .to(flavourMeshes[0].canister.scale, { x: 1, y: 1, z: 1, ease: 'back.out(1.35)' }, 0.22)
-        .to(flavourMeshes[0].canister.position, { x: flavourMeshes[0].x, y: flavourMeshes[0].y, z: flavourMeshes[0].z, ease: 'power3.inOut' }, 0.29)
-        .to(flavourMeshes[0].canister.rotation, { z: flavourMeshes[0].rz, y: -0.18, ease: 'power2.out' }, 0.29)
-        .to(flavourMeshes[1].canister.position, { x: 0, y: 2.18, z: 0.82, ease: 'power2.out' }, 0.25)
-        .to(flavourMeshes[1].canister.scale, { x: 1, y: 1, z: 1, ease: 'back.out(1.35)' }, 0.26)
-        .to(flavourMeshes[1].canister.position, { x: flavourMeshes[1].x, y: flavourMeshes[1].y, z: flavourMeshes[1].z, ease: 'power3.inOut' }, 0.34)
-        .to(flavourMeshes[1].canister.rotation, { y: 0.12, ease: 'power2.out' }, 0.34)
-        .to(flavourMeshes[2].canister.position, { x: 0, y: 2.02, z: 0.62, ease: 'power2.out' }, 0.29)
-        .to(flavourMeshes[2].canister.scale, { x: 1, y: 1, z: 1, ease: 'back.out(1.35)' }, 0.30)
-        .to(flavourMeshes[2].canister.position, { x: flavourMeshes[2].x, y: flavourMeshes[2].y, z: flavourMeshes[2].z, ease: 'power3.inOut' }, 0.39)
-        .to(flavourMeshes[2].canister.rotation, { z: flavourMeshes[2].rz, y: 0.18, ease: 'power2.out' }, 0.39)
+        .to(flavourMeshes[0].canister.position, { x: -0.15, y: 2.02, z: 0.82, duration: 0.16, ease: 'power3.out' }, 0.21)
+        .to(flavourMeshes[0].canister.scale, { x: 1, y: 1, z: 1, duration: 0.13, ease: 'back.out(1.25)' }, 0.22)
+        .to(flavourMeshes[0].canister.position, { x: flavourMeshes[0].x, y: flavourMeshes[0].y, z: flavourMeshes[0].z, duration: 0.2, ease: 'power3.inOut' }, 0.34)
+        .to(flavourMeshes[0].canister.rotation, { z: flavourMeshes[0].rz, y: -0.18, duration: 0.2, ease: 'power2.out' }, 0.34)
+        .to(flavourMeshes[1].canister.position, { x: -0.15, y: 2.18, z: 0.92, duration: 0.16, ease: 'power3.out' }, 0.27)
+        .to(flavourMeshes[1].canister.scale, { x: 1, y: 1, z: 1, duration: 0.13, ease: 'back.out(1.25)' }, 0.28)
+        .to(flavourMeshes[1].canister.position, { x: flavourMeshes[1].x, y: flavourMeshes[1].y, z: flavourMeshes[1].z, duration: 0.2, ease: 'power3.inOut' }, 0.40)
+        .to(flavourMeshes[1].canister.rotation, { y: 0.12, duration: 0.2, ease: 'power2.out' }, 0.40)
+        .to(flavourMeshes[2].canister.position, { x: -0.15, y: 2.02, z: 0.82, duration: 0.16, ease: 'power3.out' }, 0.33)
+        .to(flavourMeshes[2].canister.scale, { x: 1, y: 1, z: 1, duration: 0.13, ease: 'back.out(1.25)' }, 0.34)
+        .to(flavourMeshes[2].canister.position, { x: flavourMeshes[2].x, y: flavourMeshes[2].y, z: flavourMeshes[2].z, duration: 0.2, ease: 'power3.inOut' }, 0.46)
+        .to(flavourMeshes[2].canister.rotation, { z: flavourMeshes[2].rz, y: 0.18, duration: 0.2, ease: 'power2.out' }, 0.46)
         .to(product.rotation, { y: Math.PI * 1.05, x: 0.12, z: -0.08, ease: 'none' }, 0)
-        .to(product.position, { x: mobile ? 0 : 1.05, y: mobile ? -1.5 : -0.08, ease: 'none' }, 0)
+        .to(product.position, { x: mobile ? 0 : 2.0, y: mobile ? -1.5 : -0.08, ease: 'none' }, 0)
         .to(product.scale, { x: 1.12, y: 1.12, z: 1.12, ease: 'none' }, 0.12)
         .to('.experience-panel-one', { autoAlpha: 0, y: -24, duration: 0.12, ease: 'power1.in' }, 0.27)
         .fromTo('.experience-panel-two', { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.14, ease: 'power1.out', immediateRender: false }, 0.42)
         .to(product.rotation, { y: Math.PI * 1.95, x: -0.08, ease: 'none' }, 0.56)
-        .to(product.position, { x: mobile ? 0 : 1.05, y: mobile ? -1.12 : 0.05, ease: 'none' }, 0.56)
+        .to(product.position, { x: mobile ? 0 : 2.0, y: mobile ? -1.12 : 0.05, ease: 'none' }, 0.56)
         .to('.experience-panel-two', { autoAlpha: 0, y: -24, duration: 0.12, ease: 'power1.in' }, 0.67)
         .fromTo('.experience-panel-three', { autoAlpha: 0, y: 24 }, { autoAlpha: 1, y: 0, duration: 0.14, ease: 'power1.out', immediateRender: false }, 0.82)
         .to(product.rotation, { y: Math.PI * 2, x: 0, z: 0, ease: 'none' }, 0.76)
