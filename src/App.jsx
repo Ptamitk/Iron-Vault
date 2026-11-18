@@ -1,9 +1,88 @@
+import { useRef } from 'react'
 import { ArrowDown, ArrowUpRight, Menu, ShoppingBag } from 'lucide-react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 import './App.css'
 
 const App = () => {
+  const pageRef = useRef(null)
+
+  useGSAP(() => {
+    gsap.registerPlugin(ScrollTrigger)
+
+    const motion = gsap.matchMedia()
+    motion.add('(prefers-reduced-motion: no-preference)', () => {
+      // The hero tub responds continuously to the visitor's scroll position.
+      gsap.to('.hero-art .protein-tub', {
+        rotation: 8,
+        y: 58,
+        scale: 0.94,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      })
+
+      gsap.to('.orbit-one', {
+        rotation: 18,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: '.hero',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.4,
+        },
+      })
+
+      gsap.from('.intro-content > *', {
+        y: 65,
+        opacity: 0,
+        duration: 0.9,
+        stagger: 0.16,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.intro-section',
+          start: 'top 72%',
+          once: true,
+        },
+      })
+
+      gsap.from('.category-card', {
+        y: 75,
+        opacity: 0,
+        duration: 0.85,
+        stagger: 0.18,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.category-grid',
+          start: 'top 78%',
+          once: true,
+        },
+      })
+
+      gsap.from('.standards-section h2, .standards-section > p:last-child', {
+        y: 55,
+        opacity: 0,
+        duration: 0.9,
+        stagger: 0.18,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.standards-section',
+          start: 'top 72%',
+          once: true,
+        },
+      })
+    })
+
+    return () => motion.revert()
+  }, { scope: pageRef })
+
   return (
-    <main className="site-shell">
+    <main className="site-shell" ref={pageRef}>
       <div className="announcement-bar">
         <span>BUILT FOR THE WORK</span>
         <span>PERFORMANCE. WITHOUT COMPROMISE.</span>
