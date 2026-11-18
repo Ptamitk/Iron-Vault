@@ -273,3 +273,8 @@ html.lenis, html.lenis body { height: auto; }
   .button-primary, .button-primary::before, .category-card, .category-art, .standard-item,
   .standard-item::before, .editorial-big-type, .editorial-stamp { transition: none !important; }
 }
+
+/* Pointer tilt is intentionally kept on the hero wrapper, not the tub mesh. */
+.hero-art {
+  transform: perspective(1000px) rotateX(var(--tilt-x,0deg)) rotateY(var(--tilt-y,0deg));
+}
