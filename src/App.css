@@ -409,7 +409,7 @@ html.lenis, html.lenis body { height: auto; }
 .hero-art .protein-tub{transition:filter .55s cubic-bezier(.2,.75,.25,1),transform .65s cubic-bezier(.2,.75,.25,1)}
 .hero-art:hover .protein-tub{transform:translateY(-9px) rotate(-2deg) scale(1.045);filter:drop-shadow(38px 48px 38px #000d) brightness(1.16) saturate(1.12)}
 .ticker{position:relative}
-.ticker div{width:max-content;min-width:200%;text-align:left;animation:iv-marquee 28s linear infinite}
+.ticker div{width:max-content;min-width:0;text-align:left;animation:iv-marquee 34s linear infinite}.ticker div:after{content:' DISCIPLINE IS A DAILY PRACTICE ✳ BUILT FOR PROGRESS ✳ EARN YOUR EDGE ✳ DISCIPLINE IS A DAILY PRACTICE ✳';padding-left:2.5rem;white-space:pre}
 .ticker:hover div{animation-play-state:paused}
 @keyframes iv-marquee{to{transform:translateX(-50%)}}
 .manifesto-line,.editorial-copy>*{will-change:transform}
