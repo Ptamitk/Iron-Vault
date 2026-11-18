@@ -167,10 +167,11 @@ export default function ProductExperience() {
     const flavourGroup = new THREE.Group()
     productModel.add(flavourGroup)
     const flavourTextures = []
+    const compactLayout = window.matchMedia('(max-width: 700px)').matches
     const flavourCanisters = [
-      { name: 'DARK COCOA', subtitle: 'RICH & BOLD', colour: '#8b6044', x: -2.65, y: -1.02, z: 1.62, rz: -0.045 },
-      { name: 'VANILLA', subtitle: 'SMOOTH & CLEAN', colour: '#b5a477', x: -1.70, y: -1.02, z: 1.78, rz: 0, },
-      { name: 'STRAWBERRY', subtitle: 'FRESH & BRIGHT', colour: '#a95d68', x: -0.75, y: -1.02, z: 1.62, rz: 0.045 },
+      { name: 'DARK COCOA', subtitle: 'RICH & BOLD', colour: '#8b6044', x: compactLayout ? -1.05 : -2.65, y: compactLayout ? -1.42 : -1.02, z: compactLayout ? 2.05 : 1.62, rz: -0.045 },
+      { name: 'VANILLA', subtitle: 'SMOOTH & CLEAN', colour: '#b5a477', x: compactLayout ? 0 : -1.70, y: compactLayout ? -1.42 : -1.02, z: compactLayout ? 2.18 : 1.78, rz: 0 },
+      { name: 'STRAWBERRY', subtitle: 'FRESH & BRIGHT', colour: '#a95d68', x: compactLayout ? 1.05 : -0.75, y: compactLayout ? -1.42 : -1.02, z: compactLayout ? 2.05 : 1.62, rz: 0.045 },
     ]
     const flavourMeshes = []
     flavourCanisters.forEach((flavour) => {
@@ -332,15 +333,15 @@ export default function ProductExperience() {
         .to(lidAssembly.position, { y: 2.62, ease: 'power3.inOut' }, 0.13)
         .to(lidAssembly.rotation, { x: 0.24, z: -0.34, y: -0.16, ease: 'power3.inOut' }, 0.13)
         .to(flavourMeshes[0].canister.position, { x: -0.15, y: 2.02, z: 0.82, duration: 0.16, ease: 'power3.out' }, 0.21)
-        .to(flavourMeshes[0].canister.scale, { x: 1, y: 1, z: 1, duration: 0.13, ease: 'back.out(1.25)' }, 0.22)
+        .to(flavourMeshes[0].canister.scale, { x: mobile ? 0.82 : 1, y: mobile ? 0.82 : 1, z: mobile ? 0.82 : 1, duration: 0.13, ease: 'back.out(1.25)' }, 0.22)
         .to(flavourMeshes[0].canister.position, { x: flavourMeshes[0].x, y: flavourMeshes[0].y, z: flavourMeshes[0].z, duration: 0.2, ease: 'power3.inOut' }, 0.34)
         .to(flavourMeshes[0].canister.rotation, { z: flavourMeshes[0].rz, y: -0.18, duration: 0.2, ease: 'power2.out' }, 0.34)
         .to(flavourMeshes[1].canister.position, { x: -0.15, y: 2.18, z: 0.92, duration: 0.16, ease: 'power3.out' }, 0.27)
-        .to(flavourMeshes[1].canister.scale, { x: 1, y: 1, z: 1, duration: 0.13, ease: 'back.out(1.25)' }, 0.28)
+        .to(flavourMeshes[1].canister.scale, { x: mobile ? 0.82 : 1, y: mobile ? 0.82 : 1, z: mobile ? 0.82 : 1, duration: 0.13, ease: 'back.out(1.25)' }, 0.28)
         .to(flavourMeshes[1].canister.position, { x: flavourMeshes[1].x, y: flavourMeshes[1].y, z: flavourMeshes[1].z, duration: 0.2, ease: 'power3.inOut' }, 0.40)
         .to(flavourMeshes[1].canister.rotation, { y: 0.12, duration: 0.2, ease: 'power2.out' }, 0.40)
         .to(flavourMeshes[2].canister.position, { x: -0.15, y: 2.02, z: 0.82, duration: 0.16, ease: 'power3.out' }, 0.33)
-        .to(flavourMeshes[2].canister.scale, { x: 1, y: 1, z: 1, duration: 0.13, ease: 'back.out(1.25)' }, 0.34)
+        .to(flavourMeshes[2].canister.scale, { x: mobile ? 0.82 : 1, y: mobile ? 0.82 : 1, z: mobile ? 0.82 : 1, duration: 0.13, ease: 'back.out(1.25)' }, 0.34)
         .to(flavourMeshes[2].canister.position, { x: flavourMeshes[2].x, y: flavourMeshes[2].y, z: flavourMeshes[2].z, duration: 0.2, ease: 'power3.inOut' }, 0.46)
         .to(flavourMeshes[2].canister.rotation, { z: flavourMeshes[2].rz, y: 0.18, duration: 0.2, ease: 'power2.out' }, 0.46)
         .to(product.rotation, { y: Math.PI * 1.05, x: 0.12, z: -0.08, duration: 0.18, ease: 'none' }, 0.56)
