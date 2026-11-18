@@ -157,14 +157,6 @@ export default function ProductExperience() {
     lidRim.position.y = -0.02
     lidAssembly.add(lidRim)
 
-    const innerSeal = new THREE.Mesh(
-      new THREE.CircleGeometry(0.83, 64),
-      new THREE.MeshBasicMaterial({ color: 0x090b08, side: THREE.DoubleSide }),
-    )
-    innerSeal.rotation.x = -Math.PI / 2
-    innerSeal.position.y = 1.285
-    productModel.add(innerSeal)
-
     // Three flavour tins start tucked inside the tub and fan out as the lid opens.
     const flavourGroup = new THREE.Group()
     productModel.add(flavourGroup)
@@ -323,7 +315,6 @@ export default function ProductExperience() {
         // The reveal is an additional scroll chapter; existing product rotation and panels remain intact.
         .to(lidAssembly.position, { y: 2.62, ease: 'power3.inOut' }, 0.25)
         .to(lidAssembly.rotation, { x: 0.24, z: -0.34, y: -0.16, ease: 'power3.inOut' }, 0.25)
-        .to(innerSeal.scale, { x: 0.82, y: 0.82, z: 0.82, ease: 'power2.out' }, 0.28)
         .to(flavourMeshes[0].canister.position, { x: flavourMeshes[0].x, y: flavourMeshes[0].y, z: flavourMeshes[0].z, ease: 'power2.out' }, 0.34)
         .to(flavourMeshes[0].canister.scale, { x: 1, y: 1, z: 1, ease: 'power2.out' }, 0.36)
         .to(flavourMeshes[0].canister.rotation, { z: flavourMeshes[0].rz, y: -0.18, ease: 'power2.out' }, 0.36)
@@ -364,8 +355,6 @@ export default function ProductExperience() {
       lid.material.dispose()
       lidRim.geometry.dispose()
       lidRim.material.dispose()
-      innerSeal.geometry.dispose()
-      innerSeal.material.dispose()
       flavourMeshes.forEach(({ canister }) => {
         canister.traverse((child) => {
           if (child.isMesh) {
