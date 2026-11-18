@@ -110,3 +110,52 @@
 @media(prefers-reduced-motion:reduce) {
   .experience-stage, .flavour-reveal-note { transition: none !important; }
 }
+
+
+/* REFINED PRODUCT FILM — clearer depth, calmer pacing, stronger separation */
+.experience-stage {
+  background:
+    radial-gradient(ellipse at 69% 48%, #59634a 0%, #303629 27%, #20231c 54%, #151611 82%);
+  --story-progress: 0;
+}
+.experience-canvas { touch-action: pan-y; }
+.experience-stage::before {
+  opacity: .19;
+  background-size: 6.2vw 6.2vw;
+  mask-image: radial-gradient(ellipse at 65% 48%, #000 8%, #0008 58%, transparent 88%);
+}
+.experience-stage::after {
+  background:
+    radial-gradient(ellipse at 70% 48%, #c6d7a51c, transparent 42%),
+    radial-gradient(ellipse at 70% 78%, #0008, transparent 38%),
+    radial-gradient(520px circle at var(--hover-x) var(--hover-y), #d9e9bd24, transparent 68%);
+}
+.experience-stage.is-flavour-reveal {
+  background:
+    radial-gradient(ellipse at 70% 38%, #788765 0%, #424c36 24%, #252b20 53%, #151611 84%);
+}
+.experience-stage.is-flavour-reveal::before { opacity: .31; background-size: 5.4vw 5.4vw; }
+.experience-panel { filter: drop-shadow(0 12px 28px #0003); }
+.experience-panel h2 { text-shadow: 0 10px 38px #0003; }
+.flavour-reveal-note {
+  right: 6%;
+  bottom: 12%;
+  padding: 17px 20px;
+  border-right: 1px solid #b5c49a99;
+  background: linear-gradient(90deg, transparent, #11140f55);
+  backdrop-filter: blur(3px);
+}
+.flavour-reveal-note strong { letter-spacing: .015em; }
+.experience-stage.is-flavour-reveal .experience-panel-two {
+  text-shadow: 0 8px 30px #0005;
+}
+@media (max-width: 700px) {
+  .experience-stage::before { background-size: 13vw 13vw; }
+  .flavour-reveal-note {
+    left: 7%; right: 7%; bottom: 8%;
+    text-align: left; align-items: flex-start;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .experience-stage { transition: none !important; }
+}
