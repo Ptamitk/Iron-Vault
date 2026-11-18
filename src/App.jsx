@@ -39,6 +39,43 @@ const App = () => {
         },
       })
 
+      // Collection title enters first, followed by the two category cards.
+      gsap.fromTo('.collection-section .section-heading', {
+        autoAlpha: 0,
+        y: 54,
+      }, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.85,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.collection-section',
+          start: 'top 76%',
+          toggleActions: 'play none none reverse',
+        },
+      })
+
+      gsap.fromTo('.category-card', {
+        autoAlpha: 0,
+        y: 86,
+        rotate: (index) => index === 0 ? -2 : 2,
+        scale: 0.96,
+      }, {
+        autoAlpha: 1,
+        y: 0,
+        rotate: 0,
+        scale: 1,
+        duration: 1,
+        stagger: 0.18,
+        ease: 'power3.out',
+        clearProps: 'transform',
+        scrollTrigger: {
+          trigger: '.category-grid',
+          start: 'top 82%',
+          toggleActions: 'play none none reverse',
+        },
+      })
+
 
     })
 
