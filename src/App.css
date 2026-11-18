@@ -536,7 +536,7 @@ html.lenis, html.lenis body { height: auto; }
 @media(max-width:700px){
  .desktop-nav{display:none}
  .mobile-menu{display:grid}
- .mobile-nav{display:flex;position:fixed;top:100px;left:0;right:0;z-index:15;flex-direction:column;padding:18px 6% 28px;background:#171813f7;border-bottom:1px solid #ffffff30;backdrop-filter:blur(18px);opacity:0;visibility:hidden;transform:translateY(-12px);transition:opacity .35s,transform .45s,visibility .35s}
+ .mobile-nav{display:flex;position:fixed;top:70px;left:0;right:0;z-index:15;flex-direction:column;padding:18px 6% 28px;background:#171813f7;border-bottom:1px solid #ffffff30;backdrop-filter:blur(18px);opacity:0;visibility:hidden;transform:translateY(-12px);transition:opacity .35s,transform .45s,visibility .35s}
  .mobile-nav.is-open{opacity:1;visibility:visible;transform:translateY(0)}
  .mobile-nav a{min-height:58px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ffffff25;font-family:var(--font-heading);font-size:23px;letter-spacing:.04em}
  .mobile-nav a:last-child{border:0}
@@ -577,3 +577,13 @@ html.lenis, html.lenis body { height: auto; }
  .hero-art .protein-tub,.category-card,.flavour-card,.flavour-can,.apparel-feature-card,.feature-shirt,.feature-hoodie,.editorial-big-type,.back-to-top,.cart-drawer,.mobile-nav,.faq-answer,.faq-row>button svg{transition:none!important}
  .hero-art:hover .protein-tub,.category-card:hover,.flavour-card:hover,.apparel-feature-card:hover{transform:none}
 }
+
+/* Anchor offsets and safe-area polish */
+#top,#shop,#philosophy,#standards,#supplements,#apparel,#faq{scroll-margin-top:92px}
+@supports(padding:max(0px)){
+ .cart-drawer{padding-top:max(30px,env(safe-area-inset-top));padding-bottom:max(30px,env(safe-area-inset-bottom))}
+ .back-to-top{bottom:max(13px,env(safe-area-inset-bottom))}
+}
+.experience-stage.is-3d-unavailable .experience-canvas{display:none}
+.experience-stage.is-3d-unavailable .flavour-reveal-note{opacity:1;transform:none}
+@media(max-width:700px){#top,#shop,#philosophy,#standards,#supplements,#apparel,#faq{scroll-margin-top:76px}}
