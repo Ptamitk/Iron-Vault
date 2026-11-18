@@ -1,0 +1,15 @@
+.product-experience{height:100svh;min-height:650px;background:#171813;color:var(--color-iv-cream);position:relative}
+.experience-stage{height:100svh;min-height:650px;position:relative;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 65% 50%,#414638 0%,#24271f 34%,#171813 74%)}
+.experience-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
+.experience-stage:before{content:"";position:absolute;inset:0;z-index:0;opacity:.14;background-image:linear-gradient(#dce2ce18 1px,transparent 1px),linear-gradient(90deg,#dce2ce18 1px,transparent 1px);background-size:8vw 8vw;mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent)}
+.experience-topline,.experience-bottomline{position:absolute;left:5%;right:5%;display:flex;justify-content:space-between;z-index:4;color:#b5c49a;font-size:9px;letter-spacing:.17em;pointer-events:none}
+.experience-topline{top:32px}.experience-bottomline{bottom:30px}
+.experience-panels{position:absolute;inset:0;z-index:3;pointer-events:none}
+.experience-panel{position:absolute;left:7%;top:50%;width:min(38%,450px);transform:translateY(-50%);opacity:0;visibility:hidden}
+.experience-panel-one{opacity:1;visibility:visible}
+.experience-panel>span{font-size:9px;letter-spacing:.2em;color:#b5c49a}
+.experience-panel h2{font-family:var(--font-heading);font-size:clamp(62px,7.5vw,112px);line-height:.82;letter-spacing:-.035em;margin:24px 0}
+.experience-panel h2 em{font-style:normal;color:#b5c49a}
+.experience-panel p{max-width:300px;color:#b9b9ad;font-size:13px;line-height:1.8}
+@media(max-width:700px){.product-experience,.experience-stage{min-height:680px}.experience-topline{top:22px;font-size:7px}.experience-bottomline{bottom:20px;font-size:7px}.experience-panel{top:15%;left:7%;width:86%;transform:none}.experience-panel h2{font-size:clamp(55px,14vw,82px);margin:15px 0}.experience-panel p{max-width:260px;font-size:11px}.experience-canvas{top:20%;height:80%}}
+@media(prefers-reduced-motion:reduce){.product-experience{height:auto}.experience-stage{position:relative}}
