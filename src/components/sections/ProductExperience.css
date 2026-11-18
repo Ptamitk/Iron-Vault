@@ -1,4 +1,4 @@
-.product-experience{height:100svh;min-height:650px;background:#171813;color:var(--color-iv-cream);position:relative}
+.product-experience{height:auto;min-height:100svh;background:#171813;color:var(--color-iv-cream);position:relative;display:flow-root}
 .experience-stage{height:100svh;min-height:650px;position:relative;overflow:hidden;isolation:isolate;background:radial-gradient(ellipse at 65% 50%,#414638 0%,#24271f 34%,#171813 74%)}
 .experience-canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:1}
 .experience-stage:before{content:"";position:absolute;inset:0;z-index:0;opacity:.14;background-image:linear-gradient(#dce2ce18 1px,transparent 1px),linear-gradient(90deg,#dce2ce18 1px,transparent 1px);background-size:8vw 8vw;mask-image:linear-gradient(transparent,#000 18%,#000 82%,transparent)}
