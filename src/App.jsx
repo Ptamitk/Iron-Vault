@@ -3,6 +3,7 @@ import { ArrowDown, ArrowUpRight, Menu, ShoppingBag, MoveUpRight } from 'lucide-
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
+import Lenis from 'lenis'
 import ProductExperience from './components/sections/ProductExperience.jsx'
 import './App.css'
 
@@ -11,6 +12,49 @@ const App = () => {
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger)
+
+    // One smooth-scroll engine drives both the page and GSAP ScrollTrigger.
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 0.9,
+      touchMultiplier: 1.35,
+    })
+    const syncScroll = (time) => lenis.raf(time * 1000)
+    lenis.on('scroll', ScrollTrigger.update)
+    gsap.ticker.add(syncScroll)
+    gsap.ticker.lagSmoothing(0)
+
+    // Pointer-responsive depth for the hero object and collection cards.
+    const tiltTargets = pageRef.current?.querySelectorAll('.category-card, .hero-art, .standard-item') ?? []
+    const cleanups = []
+    tiltTargets.forEach((element) => {
+      const move = (event) => {
+        const rect = element.getBoundingClientRect()
+        const px = (event.clientX - rect.left) / rect.width
+        const py = (event.clientY - rect.top) / rect.height
+        const rotateY = (px - 0.5) * (element.classList.contains('category-card') ? 10 : 5)
+        const rotateX = (0.5 - py) * (element.classList.contains('category-card') ? 8 : 4)
+        element.style.setProperty('--pointer-x', `${px * 100}%`)
+        element.style.setProperty('--pointer-y', `${py * 100}%`)
+        element.style.setProperty('--tilt-x', `${rotateX}deg`)
+        element.style.setProperty('--tilt-y', `${rotateY}deg`)
+      }
+      const leave = () => {
+        element.style.setProperty('--tilt-x', '0deg')
+        element.style.setProperty('--tilt-y', '0deg')
+        element.style.setProperty('--pointer-x', '50%')
+        element.style.setProperty('--pointer-y', '50%')
+      }
+      element.addEventListener('pointermove', move)
+      element.addEventListener('pointerleave', leave)
+      cleanups.push(() => {
+        element.removeEventListener('pointermove', move)
+        element.removeEventListener('pointerleave', leave)
+      })
+    })
+
     const motion = gsap.matchMedia()
     motion.add('(prefers-reduced-motion: no-preference)', () => {
       gsap.from('.hero-kicker, .hero h1, .hero-description, .hero-actions', {
@@ -58,7 +102,13 @@ const App = () => {
         scrollTrigger: { trigger: '.closing-section', start: 'top 75%', toggleActions: 'play none none reverse' },
       })
     })
-    return () => motion.revert()
+    return () => {
+      motion.revert()
+      cleanups.forEach((cleanup) => cleanup())
+      lenis.off('scroll', ScrollTrigger.update)
+      gsap.ticker.remove(syncScroll)
+      lenis.destroy()
+    }
   }, { scope: pageRef })
 
   return (
