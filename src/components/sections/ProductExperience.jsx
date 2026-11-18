@@ -137,10 +137,20 @@ export default function ProductExperience() {
     const lightX = gsap.quickTo(keyLight.position, 'x', { duration: 0.6, ease: 'power2.out' })
     const lightY = gsap.quickTo(keyLight.position, 'y', { duration: 0.6, ease: 'power2.out' })
     const rimPower = gsap.quickTo(rimLight, 'intensity', { duration: 0.5, ease: 'power2.out' })
+    const raycaster = new THREE.Raycaster()
+    const pointer = new THREE.Vector2()
+    const hitTargets = [body, lid, lidRim, bottom]
     const onPointerMove = (event) => {
-      const rect = stage.getBoundingClientRect()
-      const nx = ((event.clientX - rect.left) / rect.width) * 2 - 1
-      const ny = ((event.clientY - rect.top) / rect.height) * 2 - 1
+      const rect = canvas.getBoundingClientRect()
+      pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
+      pointer.y = -((event.clientY - rect.top) / rect.height) * 2 + 1
+      raycaster.setFromCamera(pointer, camera)
+      if (raycaster.intersectObjects(hitTargets, false).length === 0) {
+        if (stage.classList.contains('is-product-hovered')) onPointerLeave()
+        return
+      }
+      const nx = pointer.x
+      const ny = -pointer.y
       tiltX(-ny * 0.2)
       tiltY(nx * 0.34)
       tiltZ(-nx * 0.055)
@@ -167,8 +177,8 @@ export default function ProductExperience() {
       stage.classList.remove('is-product-hovered')
     }
     if (canHover) {
-      stage.addEventListener('pointermove', onPointerMove)
-      stage.addEventListener('pointerleave', onPointerLeave)
+      canvas.addEventListener('pointermove', onPointerMove)
+      canvas.addEventListener('pointerleave', onPointerLeave)
     }
 
     let frame
@@ -209,8 +219,8 @@ export default function ProductExperience() {
 
     return () => {
       mm.revert()
-      stage.removeEventListener('pointermove', onPointerMove)
-      stage.removeEventListener('pointerleave', onPointerLeave)
+      canvas.removeEventListener('pointermove', onPointerMove)
+      canvas.removeEventListener('pointerleave', onPointerLeave)
       observer.disconnect()
       cancelAnimationFrame(frame)
       body.geometry.dispose()
