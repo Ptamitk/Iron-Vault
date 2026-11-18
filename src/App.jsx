@@ -17,13 +17,19 @@ const App = () => {
   const addToBag = () => setCartCount((count) => count + 1)
 
   useEffect(() => {
-    if (!cartOpen) return undefined
+    document.body.style.overflow = cartOpen || mobileOpen ? 'hidden' : ''
     const closeOnEscape = (event) => {
-      if (event.key === 'Escape') setCartOpen(false)
+      if (event.key === 'Escape') {
+        setCartOpen(false)
+        setMobileOpen(false)
+      }
     }
     window.addEventListener('keydown', closeOnEscape)
-    return () => window.removeEventListener('keydown', closeOnEscape)
-  }, [cartOpen])
+    return () => {
+      window.removeEventListener('keydown', closeOnEscape)
+      document.body.style.overflow = ''
+    }
+  }, [cartOpen, mobileOpen])
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger)
