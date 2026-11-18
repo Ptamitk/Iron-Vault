@@ -40,6 +40,37 @@ function makeLabelTexture() {
   return texture
 }
 
+function makeFlavourTexture(name, subtitle, colour) {
+  const canvas = document.createElement('canvas')
+  canvas.width = 512
+  canvas.height = 512
+  const ctx = canvas.getContext('2d')
+  const gradient = ctx.createLinearGradient(0, 0, 512, 0)
+  gradient.addColorStop(0, '#11130f')
+  gradient.addColorStop(0.48, colour)
+  gradient.addColorStop(1, '#171914')
+  ctx.fillStyle = gradient
+  ctx.fillRect(0, 0, 512, 512)
+  ctx.fillStyle = '#f3f0e8'
+  ctx.textAlign = 'center'
+  ctx.font = '800 43px Arial'
+  ctx.fillText('IRON VAULT', 256, 155)
+  ctx.fillStyle = '#ffffff'
+  ctx.fillRect(70, 184, 372, 3)
+  ctx.font = '800 52px Arial'
+  ctx.fillText(name, 256, 270)
+  ctx.font = '500 20px Arial'
+  ctx.fillText(subtitle, 256, 316)
+  ctx.fillStyle = colour
+  ctx.fillRect(70, 385, 372, 8)
+  ctx.fillStyle = '#f3f0e8'
+  ctx.font = '700 23px Arial'
+  ctx.fillText('WHEY PROTEIN  /  01 KG', 256, 430)
+  const texture = new THREE.CanvasTexture(canvas)
+  texture.colorSpace = THREE.SRGBColorSpace
+  return texture
+}
+
 export default function ProductExperience() {
   const sectionRef = useRef(null)
   const stageRef = useRef(null)
@@ -76,25 +107,69 @@ export default function ProductExperience() {
 
     const label = makeLabelTexture()
     const body = new THREE.Mesh(
-      new THREE.CylinderGeometry(1.02, 0.94, 2.75, 96, 1, false),
+      new THREE.CylinderGeometry(1.02, 0.94, 2.75, 96, 1, true),
       new THREE.MeshStandardMaterial({ map: label, metalness: 0.18, roughness: 0.42 }),
     )
     body.position.y = -0.08
     productModel.add(body)
 
+    // The cap is mounted on its own pivot so the scroll sequence can lift and tilt it open.
+    const lidAssembly = new THREE.Group()
+    lidAssembly.position.y = 1.32
+    productModel.add(lidAssembly)
+
     const lid = new THREE.Mesh(
       new THREE.CylinderGeometry(1.045, 1.045, 0.25, 96),
       new THREE.MeshStandardMaterial({ color: 0x34372f, metalness: 0.72, roughness: 0.28 }),
     )
-    lid.position.y = 1.43
-    productModel.add(lid)
+    lid.position.y = 0.11
+    lidAssembly.add(lid)
 
     const lidRim = new THREE.Mesh(
       new THREE.CylinderGeometry(1.055, 1.055, 0.055, 96),
       new THREE.MeshStandardMaterial({ color: 0x9a9c89, metalness: 0.8, roughness: 0.22 }),
     )
-    lidRim.position.y = 1.30
-    productModel.add(lidRim)
+    lidRim.position.y = -0.02
+    lidAssembly.add(lidRim)
+
+    const innerSeal = new THREE.Mesh(
+      new THREE.CircleGeometry(0.83, 64),
+      new THREE.MeshBasicMaterial({ color: 0x090b08, side: THREE.DoubleSide }),
+    )
+    innerSeal.rotation.x = -Math.PI / 2
+    innerSeal.position.y = 1.295
+    productModel.add(innerSeal)
+
+    // Three flavour tins start tucked inside the tub and fan out as the lid opens.
+    const flavourGroup = new THREE.Group()
+    productModel.add(flavourGroup)
+    const flavourTextures = []
+    const flavourCanisters = [
+      { name: 'DARK COCOA', subtitle: 'RICH & BOLD', colour: '#8b6044', x: -1.18, y: 1.95, z: 0.35, rz: -0.16 },
+      { name: 'VANILLA', subtitle: 'SMOOTH & CLEAN', colour: '#b5a477', x: 0, y: 2.22, z: 0.72, rz: 0.02 },
+      { name: 'STRAWBERRY', subtitle: 'FRESH & BRIGHT', colour: '#a95d68', x: 1.18, y: 1.95, z: 0.35, rz: 0.16 },
+    ]
+    const flavourMeshes = []
+    flavourCanisters.forEach((flavour) => {
+      const texture = makeFlavourTexture(flavour.name, flavour.subtitle, flavour.colour)
+      flavourTextures.push(texture)
+      const canister = new THREE.Group()
+      const tin = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.32, 0.32, 0.92, 64, 1, false),
+        new THREE.MeshStandardMaterial({ map: texture, metalness: 0.12, roughness: 0.48 }),
+      )
+      const tinLid = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.335, 0.335, 0.11, 64),
+        new THREE.MeshStandardMaterial({ color: 0x77796b, metalness: 0.72, roughness: 0.25 }),
+      )
+      tin.position.y = -0.02
+      tinLid.position.y = 0.49
+      canister.add(tin, tinLid)
+      canister.position.set(0, 0.62, 0)
+      canister.scale.setScalar(0.001)
+      flavourGroup.add(canister)
+      flavourMeshes.push({ canister, ...flavour })
+    })
 
     const bottom = new THREE.Mesh(
       new THREE.CylinderGeometry(0.95, 0.95, 0.08, 96),
@@ -204,6 +279,19 @@ export default function ProductExperience() {
         },
       })
       timeline
+        // The reveal is an additional scroll chapter; existing product rotation and panels remain intact.
+        .to(lidAssembly.position, { y: 2.38, ease: 'power2.inOut' }, 0.28)
+        .to(lidAssembly.rotation, { x: 0.16, z: -0.24, ease: 'power2.inOut' }, 0.28)
+        .to(innerSeal.material, { opacity: 0.92, duration: 0.12 }, 0.29)
+        .to(flavourMeshes[0].canister.position, { x: flavourMeshes[0].x, y: flavourMeshes[0].y, z: flavourMeshes[0].z, ease: 'back.out(1.35)' }, 0.36)
+        .to(flavourMeshes[0].canister.scale, { x: 1, y: 1, z: 1, ease: 'back.out(1.5)' }, 0.36)
+        .to(flavourMeshes[0].canister.rotation, { z: flavourMeshes[0].rz, y: -0.18, ease: 'power2.out' }, 0.36)
+        .to(flavourMeshes[1].canister.position, { x: flavourMeshes[1].x, y: flavourMeshes[1].y, z: flavourMeshes[1].z, ease: 'back.out(1.35)' }, 0.42)
+        .to(flavourMeshes[1].canister.scale, { x: 1, y: 1, z: 1, ease: 'back.out(1.5)' }, 0.42)
+        .to(flavourMeshes[1].canister.rotation, { y: 0.12, ease: 'power2.out' }, 0.42)
+        .to(flavourMeshes[2].canister.position, { x: flavourMeshes[2].x, y: flavourMeshes[2].y, z: flavourMeshes[2].z, ease: 'back.out(1.35)' }, 0.48)
+        .to(flavourMeshes[2].canister.scale, { x: 1, y: 1, z: 1, ease: 'back.out(1.5)' }, 0.48)
+        .to(flavourMeshes[2].canister.rotation, { z: flavourMeshes[2].rz, y: 0.18, ease: 'power2.out' }, 0.48)
         .to(product.rotation, { y: Math.PI * 1.05, x: 0.12, z: -0.08, ease: 'none' }, 0)
         .to(product.position, { x: mobile ? 0 : 2.05, y: mobile ? -1.5 : -0.08, ease: 'none' }, 0)
         .to(product.scale, { x: 1.12, y: 1.12, z: 1.12, ease: 'none' }, 0.12)
@@ -229,6 +317,17 @@ export default function ProductExperience() {
       lid.material.dispose()
       lidRim.geometry.dispose()
       lidRim.material.dispose()
+      innerSeal.geometry.dispose()
+      innerSeal.material.dispose()
+      flavourMeshes.forEach(({ canister }) => {
+        canister.traverse((child) => {
+          if (child.isMesh) {
+            child.geometry.dispose()
+            child.material.dispose()
+          }
+        })
+      })
+      flavourTextures.forEach((texture) => texture.dispose())
       bottom.geometry.dispose()
       bottom.material.dispose()
       floor.geometry.dispose()
