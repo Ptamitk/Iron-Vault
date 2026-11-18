@@ -87,16 +87,16 @@ export default function ProductExperience() {
     camera.position.set(0, 0, 9)
 
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true })
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8))
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
     renderer.outputColorSpace = THREE.SRGBColorSpace
     renderer.toneMapping = THREE.ACESFilmicToneMapping
     renderer.toneMappingExposure = 1.25
 
     scene.add(new THREE.HemisphereLight(0xe8f0d8, 0x171914, 2.1))
-    const keyLight = new THREE.DirectionalLight(0xffffff, 3.4)
+    const keyLight = new THREE.DirectionalLight(0xffffff, 4.2)
     keyLight.position.set(4, 5, 6)
     scene.add(keyLight)
-    const rimLight = new THREE.PointLight(0xb5c49a, 24, 14)
+    const rimLight = new THREE.PointLight(0xb5c49a, 30, 18)
     rimLight.position.set(-4, 1, -2)
     scene.add(rimLight)
 
@@ -107,11 +107,36 @@ export default function ProductExperience() {
 
     const label = makeLabelTexture()
     const body = new THREE.Mesh(
-      new THREE.CylinderGeometry(1.02, 0.94, 2.75, 96, 1, true),
-      new THREE.MeshStandardMaterial({ map: label, metalness: 0.18, roughness: 0.42 }),
+      new THREE.CylinderGeometry(1.02, 0.94, 2.75, 128, 1, true),
+      new THREE.MeshStandardMaterial({ map: label, metalness: 0.22, roughness: 0.34 }),
     )
     body.position.y = -0.08
     productModel.add(body)
+
+    // A real inner wall and base make the open mouth read as a deep container,
+    // rather than a flat dark disc when the cap lifts away.
+    const innerWall = new THREE.Mesh(
+      new THREE.CylinderGeometry(0.91, 0.86, 2.58, 96, 1, true, 0, Math.PI * 2),
+      new THREE.MeshStandardMaterial({ color: 0x20231b, metalness: 0.08, roughness: 0.82, side: THREE.BackSide }),
+    )
+    innerWall.position.y = -0.08
+    productModel.add(innerWall)
+
+    const mouthRim = new THREE.Mesh(
+      new THREE.TorusGeometry(0.985, 0.055, 16, 100),
+      new THREE.MeshStandardMaterial({ color: 0xa5aa91, metalness: 0.82, roughness: 0.2 }),
+    )
+    mouthRim.rotation.x = Math.PI / 2
+    mouthRim.position.y = 1.295
+    productModel.add(mouthRim)
+
+    const innerBase = new THREE.Mesh(
+      new THREE.CircleGeometry(0.87, 64),
+      new THREE.MeshStandardMaterial({ color: 0x090b08, metalness: 0.05, roughness: 0.95, side: THREE.DoubleSide }),
+    )
+    innerBase.rotation.x = -Math.PI / 2
+    innerBase.position.y = -1.365
+    productModel.add(innerBase)
 
     // The cap is mounted on its own pivot so the scroll sequence can lift and tilt it open.
     const lidAssembly = new THREE.Group()
@@ -137,7 +162,7 @@ export default function ProductExperience() {
       new THREE.MeshBasicMaterial({ color: 0x090b08, side: THREE.DoubleSide }),
     )
     innerSeal.rotation.x = -Math.PI / 2
-    innerSeal.position.y = 1.295
+    innerSeal.position.y = 1.285
     productModel.add(innerSeal)
 
     // Three flavour tins start tucked inside the tub and fan out as the lid opens.
@@ -145,9 +170,9 @@ export default function ProductExperience() {
     productModel.add(flavourGroup)
     const flavourTextures = []
     const flavourCanisters = [
-      { name: 'DARK COCOA', subtitle: 'RICH & BOLD', colour: '#8b6044', x: -1.18, y: 1.95, z: 0.35, rz: -0.16 },
-      { name: 'VANILLA', subtitle: 'SMOOTH & CLEAN', colour: '#b5a477', x: 0, y: 2.22, z: 0.72, rz: 0.02 },
-      { name: 'STRAWBERRY', subtitle: 'FRESH & BRIGHT', colour: '#a95d68', x: 1.18, y: 1.95, z: 0.35, rz: 0.16 },
+      { name: 'DARK COCOA', subtitle: 'RICH & BOLD', colour: '#8b6044', x: -1.42, y: 1.92, z: 0.62, rz: -0.13 },
+      { name: 'VANILLA', subtitle: 'SMOOTH & CLEAN', colour: '#b5a477', x: 0, y: 2.28, z: 1.02, rz: 0.015 },
+      { name: 'STRAWBERRY', subtitle: 'FRESH & BRIGHT', colour: '#a95d68', x: 1.42, y: 1.92, z: 0.62, rz: 0.13 },
     ]
     const flavourMeshes = []
     flavourCanisters.forEach((flavour) => {
@@ -164,7 +189,17 @@ export default function ProductExperience() {
       )
       tin.position.y = -0.02
       tinLid.position.y = 0.49
-      canister.add(tin, tinLid)
+      const lowerBand = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.324, 0.324, 0.035, 64),
+        new THREE.MeshStandardMaterial({ color: 0xb5c49a, metalness: 0.78, roughness: 0.24 }),
+      )
+      lowerBand.position.y = -0.39
+      const topBand = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.337, 0.337, 0.025, 64),
+        new THREE.MeshStandardMaterial({ color: 0xd0d2c2, metalness: 0.86, roughness: 0.2 }),
+      )
+      topBand.position.y = 0.43
+      canister.add(tin, tinLid, lowerBand, topBand)
       canister.position.set(0, 0.62, 0)
       canister.scale.setScalar(0.001)
       flavourGroup.add(canister)
@@ -214,7 +249,7 @@ export default function ProductExperience() {
     const rimPower = gsap.quickTo(rimLight, 'intensity', { duration: 0.5, ease: 'power2.out' })
     const raycaster = new THREE.Raycaster()
     const pointer = new THREE.Vector2()
-    const hitTargets = [body, lid, lidRim, bottom]
+    const hitTargets = [body, lid, lidRim, mouthRim, bottom, ...flavourMeshes.flatMap(({ canister }) => canister.children)]
     const onPointerMove = (event) => {
       const rect = canvas.getBoundingClientRect()
       pointer.x = ((event.clientX - rect.left) / rect.width) * 2 - 1
@@ -271,13 +306,14 @@ export default function ProductExperience() {
         scrollTrigger: {
           trigger: section,
           start: 'top top',
-          end: '+=2100',
-          scrub: 1,
+          end: '+=2600',
+          scrub: 1.45,
           pin: stage,
           anticipatePin: 1,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
-            stage.classList.toggle('is-flavour-reveal', self.progress > 0.34 && self.progress < 0.78)
+            stage.classList.toggle('is-flavour-reveal', self.progress > 0.31 && self.progress < 0.76)
+            stage.style.setProperty('--story-progress', self.progress.toFixed(3))
           },
           onLeave: () => stage.classList.remove('is-flavour-reveal'),
           onLeaveBack: () => stage.classList.remove('is-flavour-reveal'),
@@ -285,16 +321,16 @@ export default function ProductExperience() {
       })
       timeline
         // The reveal is an additional scroll chapter; existing product rotation and panels remain intact.
-        .to(lidAssembly.position, { y: 2.38, ease: 'power2.inOut' }, 0.28)
-        .to(lidAssembly.rotation, { x: 0.16, z: -0.24, ease: 'power2.inOut' }, 0.28)
-        .to(innerSeal.material, { opacity: 0.92, duration: 0.12 }, 0.29)
-        .to(flavourMeshes[0].canister.position, { x: flavourMeshes[0].x, y: flavourMeshes[0].y, z: flavourMeshes[0].z, ease: 'back.out(1.35)' }, 0.36)
-        .to(flavourMeshes[0].canister.scale, { x: 1, y: 1, z: 1, ease: 'back.out(1.5)' }, 0.36)
+        .to(lidAssembly.position, { y: 2.62, ease: 'power3.inOut' }, 0.25)
+        .to(lidAssembly.rotation, { x: 0.24, z: -0.34, y: -0.16, ease: 'power3.inOut' }, 0.25)
+        .to(innerSeal.scale, { x: 0.82, y: 0.82, z: 0.82, ease: 'power2.out' }, 0.28)
+        .to(flavourMeshes[0].canister.position, { x: flavourMeshes[0].x, y: flavourMeshes[0].y, z: flavourMeshes[0].z, ease: 'power2.out' }, 0.34)
+        .to(flavourMeshes[0].canister.scale, { x: 1, y: 1, z: 1, ease: 'power2.out' }, 0.36)
         .to(flavourMeshes[0].canister.rotation, { z: flavourMeshes[0].rz, y: -0.18, ease: 'power2.out' }, 0.36)
-        .to(flavourMeshes[1].canister.position, { x: flavourMeshes[1].x, y: flavourMeshes[1].y, z: flavourMeshes[1].z, ease: 'back.out(1.35)' }, 0.42)
+        .to(flavourMeshes[1].canister.position, { x: flavourMeshes[1].x, y: flavourMeshes[1].y, z: flavourMeshes[1].z, ease: 'back.out(1.35)' }, 0.43)
         .to(flavourMeshes[1].canister.scale, { x: 1, y: 1, z: 1, ease: 'back.out(1.5)' }, 0.42)
         .to(flavourMeshes[1].canister.rotation, { y: 0.12, ease: 'power2.out' }, 0.42)
-        .to(flavourMeshes[2].canister.position, { x: flavourMeshes[2].x, y: flavourMeshes[2].y, z: flavourMeshes[2].z, ease: 'back.out(1.35)' }, 0.48)
+        .to(flavourMeshes[2].canister.position, { x: flavourMeshes[2].x, y: flavourMeshes[2].y, z: flavourMeshes[2].z, ease: 'back.out(1.35)' }, 0.52)
         .to(flavourMeshes[2].canister.scale, { x: 1, y: 1, z: 1, ease: 'back.out(1.5)' }, 0.48)
         .to(flavourMeshes[2].canister.rotation, { z: flavourMeshes[2].rz, y: 0.18, ease: 'power2.out' }, 0.48)
         .to(product.rotation, { y: Math.PI * 1.05, x: 0.12, z: -0.08, ease: 'none' }, 0)
@@ -318,6 +354,12 @@ export default function ProductExperience() {
       cancelAnimationFrame(frame)
       body.geometry.dispose()
       body.material.dispose()
+      innerWall.geometry.dispose()
+      innerWall.material.dispose()
+      mouthRim.geometry.dispose()
+      mouthRim.material.dispose()
+      innerBase.geometry.dispose()
+      innerBase.material.dispose()
       lid.geometry.dispose()
       lid.material.dispose()
       lidRim.geometry.dispose()
