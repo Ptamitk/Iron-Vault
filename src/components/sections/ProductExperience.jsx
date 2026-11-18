@@ -86,7 +86,13 @@ export default function ProductExperience() {
     const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100)
     camera.position.set(0, 0, 9)
 
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true })
+    let renderer
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: window.devicePixelRatio < 2 })
+    } catch {
+      stage.classList.add('is-3d-unavailable')
+      return () => stage.classList.remove('is-3d-unavailable')
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
     renderer.outputColorSpace = THREE.SRGBColorSpace
     renderer.toneMapping = THREE.ACESFilmicToneMapping
@@ -283,12 +289,22 @@ export default function ProductExperience() {
       canvas.addEventListener('pointerleave', onPointerLeave)
     }
 
-    let frame
+    let frame = null
+    let isVisible = false
     const render = () => {
+      if (!isVisible) return
       renderer.render(scene, camera)
       frame = requestAnimationFrame(render)
     }
-    render()
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting
+      if (isVisible && frame === null) render()
+      if (!isVisible && frame !== null) {
+        cancelAnimationFrame(frame)
+        frame = null
+      }
+    }, { rootMargin: '120px 0px' })
+    visibilityObserver.observe(section)
 
     const mm = gsap.matchMedia()
     mm.add('(prefers-reduced-motion: no-preference)', () => {
@@ -345,7 +361,8 @@ export default function ProductExperience() {
       canvas.removeEventListener('pointermove', onPointerMove)
       canvas.removeEventListener('pointerleave', onPointerLeave)
       observer.disconnect()
-      cancelAnimationFrame(frame)
+      visibilityObserver.disconnect()
+      if (frame !== null) cancelAnimationFrame(frame)
       body.geometry.dispose()
       body.material.dispose()
       innerWall.geometry.dispose()
