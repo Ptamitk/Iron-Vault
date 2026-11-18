@@ -276,6 +276,11 @@ export default function ProductExperience() {
           pin: stage,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            stage.classList.toggle('is-flavour-reveal', self.progress > 0.34 && self.progress < 0.78)
+          },
+          onLeave: () => stage.classList.remove('is-flavour-reveal'),
+          onLeaveBack: () => stage.classList.remove('is-flavour-reveal'),
         },
       })
       timeline
@@ -342,6 +347,7 @@ export default function ProductExperience() {
       <div className="experience-stage" ref={stageRef}>
         <canvas className="experience-canvas" ref={canvasRef} aria-label="Interactive three dimensional whey protein tub" />
         <div className="experience-topline"><span>IRON VAULT / OBJECT 001</span><span>SCROLL-DRIVEN PRODUCT FILM</span></div>
+        <div className="flavour-reveal-note"><span>THE FLAVOUR SERIES</span><strong>THREE BLENDS. ONE STANDARD.</strong></div>
         <div className="experience-panels">
           <article className="experience-panel experience-panel-one"><span>01 — THE FORMULA</span><h2>BUILT FOR<br /><em>THE DAILY.</em></h2><p>Purposeful performance, designed around your everyday training ritual.</p></article>
           <article className="experience-panel experience-panel-two"><span>02 — THE FOCUS</span><h2>NO NOISE.<br /><em>JUST FOCUS.</em></h2><p>Keep your attention on the work. Let consistency do the talking.</p></article>
