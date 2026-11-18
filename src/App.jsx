@@ -39,39 +39,71 @@ const App = () => {
         },
       })
 
-      // Collection title enters first, followed by the two category cards.
+      // A more cinematic collection entrance, tied to scroll progress.
       gsap.fromTo('.collection-section .section-heading', {
         autoAlpha: 0,
-        y: 54,
+        y: 90,
+        clipPath: 'inset(0 0 35% 0)',
       }, {
         autoAlpha: 1,
         y: 0,
-        duration: 0.85,
-        ease: 'power3.out',
+        clipPath: 'inset(0 0 0% 0)',
+        duration: 1.1,
+        ease: 'power4.out',
         scrollTrigger: {
           trigger: '.collection-section',
-          start: 'top 76%',
+          start: 'top 82%',
           toggleActions: 'play none none reverse',
         },
       })
 
       gsap.fromTo('.category-card', {
-        autoAlpha: 0,
-        y: 86,
-        rotate: (index) => index === 0 ? -2 : 2,
-        scale: 0.96,
+        autoAlpha: 0.25,
+        y: 170,
+        rotateX: 13,
+        scale: 0.88,
+        transformPerspective: 1100,
+        transformOrigin: 'center bottom',
       }, {
         autoAlpha: 1,
         y: 0,
-        rotate: 0,
+        rotateX: 0,
         scale: 1,
-        duration: 1,
-        stagger: 0.18,
-        ease: 'power3.out',
-        clearProps: 'transform',
+        stagger: 0.12,
+        ease: 'power2.out',
         scrollTrigger: {
           trigger: '.category-grid',
-          start: 'top 82%',
+          start: 'top 92%',
+          end: 'top 38%',
+          scrub: 1.1,
+        },
+      })
+
+      gsap.to('.category-art', {
+        yPercent: -24,
+        rotate: (index) => index === 0 ? 7 : -7,
+        ease: 'none',
+        stagger: 0.05,
+        scrollTrigger: {
+          trigger: '.category-grid',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1.2,
+        },
+      })
+
+      gsap.fromTo('.category-card .category-number, .category-card .category-title, .category-card .category-cta', {
+        autoAlpha: 0,
+        y: 28,
+      }, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.75,
+        stagger: 0.09,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: '.category-grid',
+          start: 'top 68%',
           toggleActions: 'play none none reverse',
         },
       })
@@ -157,8 +189,18 @@ const App = () => {
           <a className="text-link" href="#standards">EXPLORE THE VAULT <ArrowUpRight size={16} /></a>
         </div>
         <div className="category-grid">
-          <a className="category-card supplements-card" href="#standards"><span className="category-number">01 / PERFORMANCE</span><span className="category-title">FUEL<br />YOUR <em>FOCUS.</em></span><span className="category-cta">EXPLORE SUPPLEMENTS <ArrowUpRight size={16} /></span></a>
-          <a className="category-card apparel-card" href="#standards"><span className="category-number">02 / APPAREL</span><span className="category-title">MADE TO<br /><em>MOVE.</em></span><span className="category-cta">EXPLORE APPAREL <ArrowUpRight size={16} /></span></a>
+          <a className="category-card supplements-card" href="#standards">
+            <span className="category-number">01 / PERFORMANCE</span>
+            <span className="category-art supplement-art" aria-hidden="true"><span className="art-orbit-ring" /><span className="art-glow" /><span className="mini-tub"><i /><b>IRON<br />VAULT</b><small>WHEY<br />PROTEIN</small><em>24G PROTEIN</em></span><span className="art-caption">DAILY FUEL / 001</span></span>
+            <span className="category-title">FUEL<br />YOUR <em>FOCUS.</em></span>
+            <span className="category-cta">EXPLORE SUPPLEMENTS <ArrowUpRight size={16} /></span>
+          </a>
+          <a className="category-card apparel-card" href="#standards">
+            <span className="category-number">02 / APPAREL</span>
+            <span className="category-art apparel-art" aria-hidden="true"><span className="apparel-halo" /><span className="shirt-shape"><i>IV</i></span><span className="art-caption">TRAINING / SERIES 002</span></span>
+            <span className="category-title">MADE TO<br /><em>MOVE.</em></span>
+            <span className="category-cta">EXPLORE APPAREL <ArrowUpRight size={16} /></span>
+          </a>
         </div>
       </section>
 
