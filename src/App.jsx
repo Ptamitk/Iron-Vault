@@ -1,5 +1,5 @@
-import { useRef } from 'react'
-import { ArrowDown, ArrowUpRight, Menu, ShoppingBag, MoveUpRight } from 'lucide-react'
+import { useRef, useState } from 'react'
+import { ArrowDown, ArrowUpRight, Menu, ShoppingBag, MoveUpRight, X, Plus, ChevronDown, Check } from 'lucide-react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
@@ -9,6 +9,12 @@ import './App.css'
 
 const App = () => {
   const pageRef = useRef(null)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [cartOpen, setCartOpen] = useState(false)
+  const [cartCount, setCartCount] = useState(0)
+  const [openFaq, setOpenFaq] = useState(0)
+  const [newsletterSent, setNewsletterSent] = useState(false)
+  const addToBag = () => setCartCount((count) => count + 1)
 
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger)
@@ -97,6 +103,9 @@ const App = () => {
         y: 55, autoAlpha: 0, duration: 0.8, stagger: 0.14, ease: 'power3.out',
         scrollTrigger: { trigger: '.standards-grid', start: 'top 78%', toggleActions: 'play none none reverse' },
       })
+      gsap.from('.flavour-card, .apparel-feature-card', { y: 70, autoAlpha: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: '.flavour-grid', start: 'top 82%', toggleActions: 'play none none reverse' } })
+      gsap.from('.faq-row', { y: 28, autoAlpha: 0, stagger: 0.08, duration: 0.65, ease: 'power3.out', scrollTrigger: { trigger: '.faq-list', start: 'top 82%', toggleActions: 'play none none reverse' } })
+      gsap.to('.scroll-progress', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: '.site-shell', start: 'top top', end: 'bottom bottom', scrub: true } })
       gsap.from('.closing-title', {
         y: 80, autoAlpha: 0, duration: 1, ease: 'power4.out',
         scrollTrigger: { trigger: '.closing-section', start: 'top 75%', toggleActions: 'play none none reverse' },
@@ -124,10 +133,16 @@ const App = () => {
         </nav>
         <div className="header-actions">
           <a className="shop-link" href="#shop">SHOP NOW <ArrowUpRight size={15} /></a>
-          <button className="icon-button" type="button" aria-label="Shopping bag"><ShoppingBag size={19} /></button>
-          <button className="icon-button mobile-menu" type="button" aria-label="Open menu"><Menu size={21} /></button>
+          <button className="icon-button bag-button" type="button" aria-label={'Open shopping bag, ' + cartCount + ' items'} onClick={() => setCartOpen(true)}><ShoppingBag size={19} /><span className="bag-count">{cartCount}</span></button>
+          <button className="icon-button mobile-menu" type="button" aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen} onClick={() => setMobileOpen((open) => !open)}>{mobileOpen ? <X size={21} /> : <Menu size={21} />}</button>
         </div>
       </header>
+      <div className={mobileOpen ? 'mobile-nav is-open' : 'mobile-nav'} aria-hidden={!mobileOpen}>
+        <a href="#shop" onClick={() => setMobileOpen(false)}>SHOP THE COLLECTION <ArrowUpRight size={17} /></a>
+        <a href="#philosophy" onClick={() => setMobileOpen(false)}>OUR PHILOSOPHY <ArrowUpRight size={17} /></a>
+        <a href="#standards" onClick={() => setMobileOpen(false)}>THE STANDARD <ArrowUpRight size={17} /></a>
+      </div>
+      <div className="scroll-progress" aria-hidden="true" />
 
       <section className="hero" id="top">
         <div className="hero-copy">
@@ -210,6 +225,27 @@ const App = () => {
         </div>
       </section>
 
+      <section className="flavour-range-section" id="supplements">
+        <div className="range-heading">
+          <div><p className="eyebrow"><span className="eyebrow-line" /> THE FLAVOUR SERIES / 003</p><h2>FIND YOUR<br /><em>FAVOURITE FUEL.</em></h2></div>
+          <p>Three considered blends. One everyday ritual. Explore the range and choose your starting point.</p>
+        </div>
+        <div className="flavour-grid">
+          <article className="flavour-card flavour-cocoa"><span className="flavour-index">01 / RICH &amp; BOLD</span><div className="flavour-can"><i /><b>IRON<br />VAULT</b><small>WHEY<br />PROTEIN</small><em>DARK COCOA</em></div><div className="flavour-info"><div><h3>DARK COCOA</h3><p>Deep cocoa-inspired flavour</p></div><button type="button" onClick={addToBag} aria-label="Add Dark Cocoa demo product to bag"><Plus size={19} /></button></div></article>
+          <article className="flavour-card flavour-vanilla"><span className="flavour-index">02 / SMOOTH &amp; CLEAN</span><div className="flavour-can"><i /><b>IRON<br />VAULT</b><small>WHEY<br />PROTEIN</small><em>VANILLA</em></div><div className="flavour-info"><div><h3>VANILLA</h3><p>A smooth, mellow blend</p></div><button type="button" onClick={addToBag} aria-label="Add Vanilla demo product to bag"><Plus size={19} /></button></div></article>
+          <article className="flavour-card flavour-strawberry"><span className="flavour-index">03 / FRESH &amp; BRIGHT</span><div className="flavour-can"><i /><b>IRON<br />VAULT</b><small>WHEY<br />PROTEIN</small><em>STRAWBERRY</em></div><div className="flavour-info"><div><h3>STRAWBERRY</h3><p>A bright, fruit-forward blend</p></div><button type="button" onClick={addToBag} aria-label="Add Strawberry demo product to bag"><Plus size={19} /></button></div></article>
+        </div>
+        <p className="demo-disclaimer">Concept product visuals for presentation only. Final flavours, nutrition facts, pricing and pack sizes are subject to brand confirmation.</p>
+      </section>
+
+      <section className="apparel-showcase" id="apparel">
+        <div className="apparel-showcase-copy"><p className="eyebrow"><span className="eyebrow-line" /> PERFORMANCE APPAREL / 004</p><h2>MADE FOR<br /><em>THE MOMENT.</em></h2><p>Training essentials with a considered fit and a no-distraction point of view. Designed for the routine, not the spotlight.</p><a className="button-primary" href="#shop">EXPLORE THE VAULT <ArrowUpRight size={16} /></a></div>
+        <div className="apparel-feature-grid">
+          <article className="apparel-feature-card apparel-feature-one"><span>01 / TRAINING TEE</span><div className="feature-shirt"><i>IV.</i></div><strong>THE EVERYDAY TEE</strong></article>
+          <article className="apparel-feature-card apparel-feature-two"><span>02 / TRAINING LAYER</span><div className="feature-hoodie"><i>IRON VAULT</i></div><strong>THE DAILY LAYER</strong></article>
+        </div>
+      </section>
+
       <section className="standards-section" id="standards">
         <div className="standards-heading"><p className="eyebrow"><span className="eyebrow-line" /> THE IRON VAULT STANDARD</p><h2>LESS, BUT<br /><em>BETTER.</em></h2></div>
         <div className="standards-grid">
@@ -226,11 +262,45 @@ const App = () => {
         <span className="closing-mark">IV.</span>
       </section>
 
+      <section className="faq-section" id="faq">
+        <div className="faq-heading"><p className="eyebrow"><span className="eyebrow-line" /> GOOD TO KNOW / 005</p><h2>THE<br /><em>DETAILS.</em></h2><p>A few quick answers about this Iron Vault concept experience.</p></div>
+        <div className="faq-list">
+          {[
+            ['Can I place a real order on this website?', 'Not yet. This is a front-end demo. Cart interactions are illustrative; checkout, payments, inventory and order processing are not connected.'],
+            ['Are these final product flavours and specifications?', 'No. The flavour names and product visuals are concept content. Final product details, ingredients, nutrition information, sizes and prices must be confirmed by the brand.'],
+            ['Will the apparel collection be available here?', 'The page includes a visual apparel concept. Final styles, size charts, colours, stock and product photography can be added once the collection is confirmed.'],
+            ['How can I get support or ask a question?', 'Use the brand’s confirmed contact details once they are supplied. This demo intentionally does not invent an email address or support channel.'],
+          ].map(([question, answer], index) => (
+            <article className={openFaq === index ? 'faq-row is-open' : 'faq-row'} key={question}>
+              <button type="button" aria-expanded={openFaq === index} onClick={() => setOpenFaq(openFaq === index ? -1 : index)}><span>0{index + 1}</span><strong>{question}</strong><ChevronDown size={19} /></button>
+              <div className="faq-answer"><p>{answer}</p></div>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section className="newsletter-section">
+        <p className="eyebrow"><span className="eyebrow-line" /> STAY IN THE LOOP</p><h2>KEEP YOUR<br /><em>EDGE.</em></h2>
+        <p>Updates, collection news and notes from the Iron Vault world.</p>
+        <form className="newsletter-form" onSubmit={(event) => { event.preventDefault(); setNewsletterSent(true) }}>
+          <label className="sr-only" htmlFor="newsletter-email">Email address</label><input id="newsletter-email" type="email" placeholder="YOUR EMAIL ADDRESS" required />
+          <button type="submit" aria-label="Submit email"><ArrowUpRight size={19} /></button>
+        </form>
+        <small>{newsletterSent ? 'Thanks — this demo form is not connected to an email service yet.' : 'Demo form only. No email is collected or sent.'}</small>
+      </section>
+
       <footer className="site-footer">
         <a className="wordmark footer-wordmark" href="#top">IRON<span>VAULT</span><i>.</i></a>
         <span>BUILT WITH INTENT. WORN WITH PURPOSE.</span><a href="#top">BACK TO TOP ↑</a>
         <small>© 2026 IRON VAULT. DEMO EXPERIENCE.</small>
       </footer>
+      <div className={cartOpen ? 'drawer-backdrop is-visible' : 'drawer-backdrop'} onClick={() => setCartOpen(false)} aria-hidden={!cartOpen} />
+      <aside className={cartOpen ? 'cart-drawer is-open' : 'cart-drawer'} role="dialog" aria-modal="true" aria-label="Demo shopping bag" aria-hidden={!cartOpen}>
+        <div className="drawer-heading"><div><span>IRON VAULT / BAG</span><h2>YOUR SELECTION.</h2></div><button type="button" className="icon-button" onClick={() => setCartOpen(false)} aria-label="Close shopping bag"><X size={21} /></button></div>
+        <div className="drawer-empty">{cartCount > 0 ? <><span className="drawer-check"><Check size={23} /></span><h3>{cartCount} DEMO {cartCount === 1 ? 'ITEM' : 'ITEMS'} ADDED</h3><p>Your selection is only stored in this page preview. No order has been created.</p></> : <><ShoppingBag size={35} /><h3>YOUR BAG IS WAITING.</h3><p>Explore the flavour range and add a concept product to see how the bag interaction works.</p></>}</div>
+        <button type="button" className="button-primary drawer-continue" onClick={() => setCartOpen(false)}>CONTINUE EXPLORING <ArrowUpRight size={16} /></button>
+        <p className="drawer-note">DEMO EXPERIENCE · CHECKOUT DISABLED</p>
+      </aside>
+      <button className="back-to-top" type="button" aria-label="Back to top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}><ArrowUpRight size={18} /></button>
     </main>
   )
 }
