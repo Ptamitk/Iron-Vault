@@ -34,21 +34,29 @@ const App = () => {
   useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger)
 
+    // Respect the operating-system accessibility preference for reduced motion.
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
     // One smooth-scroll engine drives both the page and GSAP ScrollTrigger.
-    const lenis = new Lenis({
+    // It is intentionally disabled when reduced motion is requested.
+    const lenis = prefersReducedMotion ? null : new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
       wheelMultiplier: 0.9,
       touchMultiplier: 1.35,
     })
-    const syncScroll = (time) => lenis.raf(time * 1000)
-    lenis.on('scroll', ScrollTrigger.update)
-    gsap.ticker.add(syncScroll)
-    gsap.ticker.lagSmoothing(0)
+    const syncScroll = (time) => lenis?.raf(time * 1000)
+    if (lenis) {
+      lenis.on('scroll', ScrollTrigger.update)
+      gsap.ticker.add(syncScroll)
+      gsap.ticker.lagSmoothing(0)
+    }
 
-    // Pointer-responsive depth for the hero object and collection cards.
-    const tiltTargets = pageRef.current?.querySelectorAll('.category-card, .hero-art, .standard-item') ?? []
+    // Pointer-responsive depth is also disabled for reduced-motion users.
+    const tiltTargets = prefersReducedMotion
+      ? []
+      : pageRef.current?.querySelectorAll('.category-card, .hero-art, .standard-item') ?? []
     const cleanups = []
     tiltTargets.forEach((element) => {
       const move = (event) => {
@@ -151,9 +159,11 @@ const App = () => {
     return () => {
       motion.revert()
       cleanups.forEach((cleanup) => cleanup())
-      lenis.off('scroll', ScrollTrigger.update)
-      gsap.ticker.remove(syncScroll)
-      lenis.destroy()
+      if (lenis) {
+        lenis.off('scroll', ScrollTrigger.update)
+        gsap.ticker.remove(syncScroll)
+        lenis.destroy()
+      }
     }
   }, { scope: pageRef })
 
