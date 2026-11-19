@@ -292,8 +292,16 @@ export default function ProductExperience() {
 
     let frame = null
     let isVisible = false
+    const ambientClock = new THREE.Clock()
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     const render = () => {
       if (!isVisible) return
+      // A restrained idle float and moving rim light keep the product alive between scroll inputs.
+      if (!reduceMotion) {
+        const elapsed = ambientClock.getElapsedTime()
+        productModel.position.y = Math.sin(elapsed * 0.82) * 0.024
+        rimLight.intensity = 30 + Math.sin(elapsed * 0.65) * 1.8
+      }
       renderer.render(scene, camera)
       frame = requestAnimationFrame(render)
     }
