@@ -141,22 +141,10 @@ const App = () => {
         y: 0, rotate: 0, scale: 1, filter: 'blur(0px)', stagger: 0.13, duration: 1.25, ease: 'power4.out',
         scrollTrigger: { trigger: '.flavour-grid', start: 'top 78%', toggleActions: 'play none none reverse' },
       })
-      gsap.to('.flavour-can', {
-        yPercent: -7, ease: 'none', stagger: 0.08,
-        scrollTrigger: { trigger: '.flavour-range-section', start: 'top bottom', end: 'bottom top', scrub: 1.5 },
-      })
       gsap.from('.apparel-feature-card', { y: 70, autoAlpha: 0, stagger: 0.14, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: '.apparel-feature-grid', start: 'top 82%', toggleActions: 'play none none reverse' } })
       gsap.fromTo('.feature-shirt, .feature-hoodie', { y: 65, rotate: -7, scale: 0.88 }, {
         y: 0, rotate: 0, scale: 1, stagger: 0.16, duration: 1.15, ease: 'power4.out',
         scrollTrigger: { trigger: '.apparel-feature-grid', start: 'top 78%', toggleActions: 'play none none reverse' },
-      })
-      gsap.to('.feature-shirt', {
-        yPercent: -8, rotate: 3, ease: 'none',
-        scrollTrigger: { trigger: '.apparel-showcase', start: 'top bottom', end: 'bottom top', scrub: 1.3 },
-      })
-      gsap.to('.feature-hoodie', {
-        yPercent: 7, rotate: -3, ease: 'none',
-        scrollTrigger: { trigger: '.apparel-showcase', start: 'top bottom', end: 'bottom top', scrub: 1.3 },
       })
       gsap.from('.faq-row', { y: 28, autoAlpha: 0, stagger: 0.08, duration: 0.65, ease: 'power3.out', scrollTrigger: { trigger: '.faq-list', start: 'top 82%', toggleActions: 'play none none reverse' } })
       gsap.to('.scroll-progress', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: '.site-shell', start: 'top top', end: 'bottom bottom', scrub: true } })
