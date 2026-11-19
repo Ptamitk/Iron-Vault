@@ -141,10 +141,43 @@ const App = () => {
         y: 0, rotate: 0, scale: 1, filter: 'blur(0px)', stagger: 0.13, duration: 1.25, ease: 'power4.out',
         scrollTrigger: { trigger: '.flavour-grid', start: 'top 78%', toggleActions: 'play none none reverse' },
       })
-      gsap.from('.apparel-feature-card', { y: 70, autoAlpha: 0, stagger: 0.14, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: '.apparel-feature-grid', start: 'top 82%', toggleActions: 'play none none reverse' } })
-      gsap.fromTo('.feature-shirt, .feature-hoodie', { y: 65, rotate: -7, scale: 0.88 }, {
-        y: 0, rotate: 0, scale: 1, stagger: 0.16, duration: 1.15, ease: 'power4.out',
-        scrollTrigger: { trigger: '.apparel-feature-grid', start: 'top 78%', toggleActions: 'play none none reverse' },
+      // Apparel reveal: garments begin as one compact stack, then fan out into a clear outfit lineup.
+      const outfitCards = gsap.utils.toArray('.apparel-feature-card')
+      const outfitReveal = gsap.timeline({
+        scrollTrigger: {
+          trigger: '.apparel-feature-grid',
+          start: 'top 82%',
+          end: 'bottom 28%',
+          scrub: 1.15,
+        },
+      })
+      outfitCards.forEach((card, index) => {
+        const offset = index - 1
+        outfitReveal.fromTo(card, {
+          xPercent: offset === 0 ? 0 : -offset * 105,
+          y: 78 + Math.abs(offset) * 24,
+          rotateY: offset * -18,
+          rotateZ: offset * -7,
+          scale: 0.72,
+          autoAlpha: 0.35,
+          transformOrigin: '50% 75%',
+        }, {
+          xPercent: 0,
+          y: 0,
+          rotateY: 0,
+          rotateZ: 0,
+          scale: 1,
+          autoAlpha: 1,
+          duration: 1,
+          ease: 'power3.out',
+        }, 0)
+      })
+      gsap.fromTo('.feature-shirt, .feature-hoodie, .feature-joggers', {
+        y: 72, rotate: -10, scale: 0.82, filter: 'blur(5px)',
+      }, {
+        y: 0, rotate: 0, scale: 1, filter: 'blur(0px)', stagger: 0.12, duration: 1,
+        ease: 'power4.out',
+        scrollTrigger: { trigger: '.apparel-feature-grid', start: 'top 76%', toggleActions: 'play none none reverse' },
       })
       gsap.from('.faq-row', { y: 28, autoAlpha: 0, stagger: 0.08, duration: 0.65, ease: 'power3.out', scrollTrigger: { trigger: '.faq-list', start: 'top 82%', toggleActions: 'play none none reverse' } })
       gsap.to('.scroll-progress', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: '.site-shell', start: 'top top', end: 'bottom bottom', scrub: true } })
@@ -283,8 +316,9 @@ const App = () => {
       <section className="apparel-showcase" id="apparel">
         <div className="apparel-showcase-copy"><p className="eyebrow"><span className="eyebrow-line" /> PERFORMANCE APPAREL / 004</p><h2>MADE FOR<br /><em>THE MOMENT.</em></h2><p>Training essentials with a considered fit and a no-distraction point of view. Designed for the routine, not the spotlight.</p><a className="button-primary" href="#shop">EXPLORE THE VAULT <ArrowUpRight size={16} /></a></div>
         <div className="apparel-feature-grid">
-          <article className="apparel-feature-card apparel-feature-one"><span>01 / TRAINING TEE</span><div className="feature-shirt"><i>IV.</i></div><strong>THE EVERYDAY TEE</strong></article>
-          <article className="apparel-feature-card apparel-feature-two"><span>02 / TRAINING LAYER</span><div className="feature-hoodie"><i>IRON VAULT</i></div><strong>THE DAILY LAYER</strong></article>
+          <article className="apparel-feature-card apparel-feature-one"><span>01 / TRAINING TEE</span><div className="feature-shirt"><i>IV.</i></div><strong>THE EVERYDAY TEE</strong><small>LIGHT / MOVE / REPEAT</small></article>
+          <article className="apparel-feature-card apparel-feature-two"><span>02 / TRAINING LAYER</span><div className="feature-hoodie"><i>IRON VAULT</i></div><strong>THE DAILY LAYER</strong><small>FOCUS / WARMTH / FORM</small></article>
+          <article className="apparel-feature-card apparel-feature-three"><span>03 / TRAINING BOTTOM</span><div className="feature-joggers"><i>IV.</i></div><strong>THE TRAINING JOGGER</strong><small>FLEX / COMFORT / CONTROL</small></article>
         </div>
       </section>
 
