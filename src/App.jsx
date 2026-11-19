@@ -291,7 +291,7 @@ const App = () => {
             <span className="category-title">FUEL<br />YOUR <em>FOCUS.</em></span>
             <span className="category-cta">EXPLORE SUPPLEMENTS <ArrowUpRight size={16} /></span>
           </a>
-          <a className="category-card apparel-card" href="#apparel">
+          <a className="category-card apparel-card" href="/apparel">
             <span className="category-number">02 / TRAINING APPAREL</span>
             <span className="category-art apparel-art" aria-hidden="true"><span className="apparel-halo" /><span className="shirt-shape"><i>IV</i></span><span className="art-caption">TRAINING / SERIES 002</span></span>
             <span className="category-title">MADE TO<br /><em>MOVE.</em></span>
@@ -314,7 +314,7 @@ const App = () => {
       </section>
 
       <section className="apparel-showcase" id="apparel">
-        <div className="apparel-showcase-copy"><p className="eyebrow"><span className="eyebrow-line" /> PERFORMANCE APPAREL / 004</p><h2>MADE FOR<br /><em>THE MOMENT.</em></h2><p>Training essentials with a considered fit and a no-distraction point of view. Designed for the routine, not the spotlight.</p><a className="button-primary" href="#shop">EXPLORE THE VAULT <ArrowUpRight size={16} /></a></div>
+        <div className="apparel-showcase-copy"><p className="eyebrow"><span className="eyebrow-line" /> PERFORMANCE APPAREL / 004</p><h2>MADE FOR<br /><em>THE MOMENT.</em></h2><p>Training essentials with a considered fit and a no-distraction point of view. Designed for the routine, not the spotlight.</p><a className="button-primary" href="/apparel">EXPLORE APPAREL <ArrowUpRight size={16} /></a></div>
         <div className="apparel-feature-grid">
           <article className="apparel-feature-card apparel-feature-one"><span>01 / TRAINING TEE</span><div className="feature-shirt"><i>IV.</i></div><strong>THE EVERYDAY TEE</strong><small>LIGHT / MOVE / REPEAT</small></article>
           <article className="apparel-feature-card apparel-feature-two"><span>02 / TRAINING LAYER</span><div className="feature-hoodie"><i>IRON VAULT</i></div><strong>THE DAILY LAYER</strong><small>FOCUS / WARMTH / FORM</small></article>
