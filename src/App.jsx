@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import Lenis from 'lenis'
 import ProductExperience from './components/sections/ProductExperience.jsx'
+import ProductCatalogue from './components/sections/ProductCatalogue.jsx'
 import './App.css'
 
 const App = () => {
@@ -279,6 +280,8 @@ const App = () => {
         </div>
         <p className="demo-disclaimer">Concept product visuals for presentation only. Final flavours, nutrition facts, pricing and pack sizes are subject to brand confirmation.</p>
       </section>
+
+      <ProductCatalogue />
 
 
       <section className="standards-section" id="standards">

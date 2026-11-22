@@ -1,0 +1,44 @@
+.catalogue-section{padding:132px 8% 120px;background:var(--color-iv-black);color:var(--color-iv-cream);overflow:hidden}
+.catalogue-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:35px;margin-bottom:44px}
+.catalogue-heading h2{font-family:var(--font-heading);font-size:clamp(68px,9vw,128px);font-weight:800;line-height:.78;letter-spacing:-.045em;margin-top:34px}
+.catalogue-heading h2 em{font-style:normal;color:var(--color-iv-accent)}
+.catalogue-heading>p{max-width:320px;color:var(--color-iv-muted);font-size:13px;line-height:1.9;padding-bottom:5px}
+
+.catalogue-filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:34px}
+.catalogue-filters button{font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--color-iv-cream);background:transparent;border:1px solid #ffffff30;padding:12px 20px;cursor:pointer;transition:background .35s,color .35s,border-color .35s}
+.catalogue-filters button:hover{border-color:var(--color-iv-accent)}
+.catalogue-filters button.is-active{background:var(--color-iv-accent);border-color:var(--color-iv-accent);color:var(--color-iv-black)}
+.catalogue-filters button:focus-visible,.catalogue-details summary:focus-visible{outline:2px solid var(--color-iv-accent);outline-offset:4px}
+
+.catalogue-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:start}
+.catalogue-card{position:relative;padding:26px;background:var(--color-iv-dark);border:1px solid #ffffff14;display:flex;flex-direction:column;gap:16px;transition:transform .5s cubic-bezier(.2,.75,.25,1),border-color .5s,box-shadow .5s}
+.catalogue-card:hover{transform:translateY(-8px);border-color:#b5c49a66;box-shadow:0 26px 50px #00000055}
+.catalogue-card-head{display:flex;justify-content:space-between;gap:12px;font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.catalogue-brand{color:var(--color-iv-accent)}
+.catalogue-category{color:#c9cbbd;text-align:right}
+.catalogue-card h3{font-family:var(--font-heading);font-size:clamp(38px,3.4vw,52px);font-weight:800;line-height:.9;letter-spacing:-.02em}
+.catalogue-summary{color:var(--color-iv-muted);font-size:12px;line-height:1.8}
+
+.catalogue-meta{display:grid;gap:10px;border-top:1px solid #ffffff1c;padding-top:16px}
+.catalogue-meta div{display:grid;grid-template-columns:78px 1fr;gap:12px;font-size:11px;line-height:1.6}
+.catalogue-meta dt{color:#8c8b80;letter-spacing:.12em;text-transform:uppercase;font-size:8px;font-weight:700;padding-top:3px}
+.catalogue-meta dd{color:var(--color-iv-cream)}
+
+.catalogue-details{border-top:1px solid #ffffff1c;padding-top:14px}
+.catalogue-details summary{cursor:pointer;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--color-iv-cream);list-style:none;display:flex;justify-content:space-between}
+.catalogue-details summary::-webkit-details-marker{display:none}
+.catalogue-details summary::after{content:"+";color:var(--color-iv-accent);font-size:15px;line-height:1}
+.catalogue-details[open] summary::after{content:"−"}
+.catalogue-details ul{list-style:none;margin-top:14px;display:grid;gap:8px}
+.catalogue-details li{display:flex;justify-content:space-between;gap:14px;font-size:11px;line-height:1.55;color:#c3c4b8}
+.catalogue-details li b{font-weight:600;color:var(--color-iv-cream);white-space:nowrap}
+.catalogue-details p{margin-top:14px;font-size:11px;line-height:1.75;color:#c3c4b8}
+.catalogue-details .catalogue-warnings{margin-top:12px}
+.catalogue-details .catalogue-warnings li{display:block;color:#b5b3a6;border-left:2px solid var(--color-iv-accent);padding-left:10px}
+
+.catalogue-disclaimer{max-width:760px;margin-top:44px;font-size:10px;line-height:1.85;color:#8c8b80}
+
+@media(max-width:1000px){.catalogue-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:800px){.catalogue-section{padding:95px 6%}.catalogue-heading{flex-direction:column;align-items:flex-start}}
+@media(max-width:560px){.catalogue-grid{grid-template-columns:1fr}.catalogue-card{padding:22px}.catalogue-heading h2{font-size:clamp(70px,17vw,100px)}}
+@media(prefers-reduced-motion:reduce){.catalogue-card,.catalogue-filters button{transition:none!important}.catalogue-card:hover{transform:none;box-shadow:none}}
