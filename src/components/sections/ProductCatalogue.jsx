@@ -5,7 +5,7 @@ import './ProductCatalogue.css'
 const groupOf = (category) => (category.startsWith('Pre-Workout') ? 'Pre-Workout' : category)
 
 function ProductCard({ product }) {
-  const { brand, name, category, flavours, servingSize, facts, usage, warnings, summary, sizes, priceINR } = product
+  const { brand, name, category, flavours, servingSize, facts, usage, warnings, summary, sizes, priceINR, priceFrom } = product
   const knownFacts = facts.filter((fact) => fact.ingredient)
 
   return (
@@ -22,7 +22,7 @@ function ProductCard({ product }) {
         {servingSize && (<div><dt>Serving</dt><dd>{servingSize}</dd></div>)}
         {sizes.length > 0 && (<div><dt>Sizes</dt><dd>{sizes.map((size) => size.label).join(' / ')}</dd></div>)}
         {flavours.length > 0 && (<div><dt>Flavours</dt><dd>{flavours.join(', ')}</dd></div>)}
-        {priceINR != null && (<div><dt>Price</dt><dd>₹{priceINR.toLocaleString('en-IN')}</dd></div>)}
+        {priceINR != null && (<div><dt>Price</dt><dd>{priceFrom ? 'From ' : ''}₹{priceINR.toLocaleString('en-IN')}</dd></div>)}
       </dl>
 
       {knownFacts.length > 0 && (
@@ -30,7 +30,7 @@ function ProductCard({ product }) {
           <summary>Ingredients &amp; amounts</summary>
           <ul>
             {knownFacts.map((fact) => (
-              <li key={fact.ingredient}><span>{fact.ingredient}</span><b>{fact.amount ?? '—'}</b></li>
+              <li key={fact.ingredient}><span>{fact.ingredient}</span><b>{fact.amount ?? 'Per label'}</b></li>
             ))}
           </ul>
         </details>
