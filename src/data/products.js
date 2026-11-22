@@ -1,7 +1,8 @@
 // IRON VAULT product catalogue data.
 // Only factual details taken from the brands' public product pages; descriptions are written fresh.
 // TODO before launch (null = missing):
-//  - priceINR: set your own INR selling prices
+//  - priceINR: PLACEHOLDERS = brand's listed price converted at 1 USD=94.85 INR, 1 GBP=121.45 INR (22 Nov 2026), rounded.
+//    Replace with your own INR selling prices (add import duty, GST, margin).
 //  - servings / servingSize / full facts: confirm from the supplier's actual label
 //  - images: use only images you have written permission for (or your own photos)
 
@@ -21,7 +22,7 @@ export const products = [
     usage: 'One 5 g serving per day, mixed into 12-16 oz of water or non-acidic juice.',
     warnings: [],
     summary: 'Single-ingredient creatine monohydrate powder, unflavoured, in two tub sizes.',
-    priceINR: null,
+    priceINR: 5690,
   },
   {
     id: 'bl-hype-reloaded',
@@ -45,7 +46,7 @@ export const products = [
       'Not for anyone under 18, or for pregnant or nursing women.',
     ],
     summary: 'Stimulant-free pre-workout powder built around citrulline malate and glycerol.',
-    priceINR: null,
+    priceINR: 4740,
   },
   {
     id: 'bl-glycolog',
@@ -71,7 +72,7 @@ export const products = [
       'Not for anyone under 18, or for pregnant or nursing women.',
     ],
     summary: 'Multi-ingredient capsule supplement taken with meals. Amounts shown as listed by the brand; confirm per-capsule vs per-serving on the label.',
-    priceINR: null,
+    priceINR: 5690,
   },
   {
     id: 'dna-thank-pump-for-that',
@@ -92,7 +93,7 @@ export const products = [
     usage: null,
     warnings: [],
     summary: 'Non-stimulant pre-workout powder. Amounts, directions and warnings must come from the supplier label.',
-    priceINR: null,
+    priceINR: 4010,
   },
   {
     id: 'dna-h8',
@@ -108,7 +109,7 @@ export const products = [
       'High-stimulant product: add the full ingredient list, caffeine amount and warnings from the supplier label before publishing.',
     ],
     summary: 'High-stimulant pre-workout powder. The brand page does not publish a full ingredient list, so this entry stays incomplete until you have the label.',
-    priceINR: null,
+    priceINR: 4130,
   },
   {
     id: 'dna-vibe-v2',
@@ -142,7 +143,7 @@ export const products = [
       'High-caffeine product: add the serving size, directions and warnings from the supplier label before publishing.',
     ],
     summary: 'High-stimulant pre-workout powder with a long flavour list. Key ingredients only; full panel needed from the label.',
-    priceINR: null,
+    priceINR: 2910,
   },
   {
     id: 'dna-og-swell-500',
@@ -160,7 +161,7 @@ export const products = [
     usage: 'Can be taken before or during training, alone or alongside other supplements. Add exact directions from the label.',
     warnings: [],
     summary: 'Liquid glycerol serum in 500 ml bottles and multipacks.',
-    priceINR: null,
+    priceINR: 3040,
   },
 ];
 
