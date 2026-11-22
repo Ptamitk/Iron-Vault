@@ -4,6 +4,7 @@ import { Check, Minus, Plus } from 'lucide-react'
 import ShopLayout from '../components/shop/ShopLayout.jsx'
 import ProductCard from '../components/shop/ProductCard.jsx'
 import NotFoundPage from './NotFoundPage.jsx'
+import ProductImage from '../components/shop/ProductImage.jsx'
 import { useCart } from '../lib/cart.jsx'
 import { byId, formatINR, groupOf, isBuyable } from '../lib/catalog.js'
 import { products } from '../data/products.js'
@@ -38,11 +39,7 @@ function ProductView({ product }) {
       </nav>
 
       <div className="pdp">
-        <div className="pdp-visual" aria-hidden="true">
-          <span>{product.brand}</span>
-          <strong>{product.name}</strong>
-          <small>{product.category}</small>
-        </div>
+        <div className="pdp-visual"><ProductImage product={product} eager className="pimg-large" /></div>
 
         <div className="pdp-info">
           <p className="eyebrow"><span className="eyebrow-line" /> {product.brand.toUpperCase()}</p>

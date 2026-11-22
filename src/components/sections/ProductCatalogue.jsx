@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { products } from '../../data/products.js'
+import ProductImage from '../shop/ProductImage.jsx'
 import './ProductCatalogue.css'
 
 const groupOf = (category) => (category.startsWith('Pre-Workout') ? 'Pre-Workout' : category)
@@ -11,6 +12,7 @@ function ProductCard({ product }) {
 
   return (
     <article className="catalogue-card">
+      <ProductImage product={product} />
       <header className="catalogue-card-head">
         <span className="catalogue-brand">{brand}</span>
         <span className="catalogue-category">{category}</span>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { Check, Plus } from 'lucide-react'
 import { useCart } from '../../lib/cart.jsx'
 import { formatINR, isBuyable } from '../../lib/catalog.js'
+import ProductImage from './ProductImage.jsx'
 
 export default function ProductCard({ product }) {
   const { add } = useCart()
@@ -23,6 +24,7 @@ export default function ProductCard({ product }) {
 
   return (
     <article className="shop-card">
+      <Link className="shop-card-media" to={href} tabIndex={-1} aria-hidden="true"><ProductImage product={product} /></Link>
       <Link className="shop-card-body" to={href}>
         <span className="shop-card-top"><b>{product.brand}</b><span>{product.category}</span></span>
         <h3>{product.name}</h3>

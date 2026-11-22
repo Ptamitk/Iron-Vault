@@ -6,7 +6,8 @@
 //  - priceINR: PLACEHOLDERS = brand's listed price converted at 1 USD=94.85 INR, 1 GBP=121.45 INR (22 Nov 2026), rounded.
 //    Replace with your own INR selling prices (add import duty, GST, margin).
 //  - servings / servingSize / full facts: confirm from the supplier's actual label
-//  - images: use only images you have written permission for (or your own photos)
+//  - image: currently links to the brands' own CDN (hotlinked). Run `node scripts/download-product-images.mjs`
+//    to save copies into /public/products and switch to local files. Keep written permission from the brands.
 
 const f = (ingredient, amount = null) => ({ ingredient, amount })
 
@@ -14,6 +15,7 @@ export const products = [
   {
     id: 'bl-creatine-monohydrate',
     brand: 'Blackstone Labs',
+    image: 'https://blackstonelabs.com/cdn/shop/files/Creatine_1000g_Cannister_1200x1200_9261cf68-f36d-45d1-9a0b-39a27500a167.png?v=1741977482&width=800',
     name: 'Creatine Monohydrate',
     category: 'Creatine',
     sizes: [
@@ -31,6 +33,7 @@ export const products = [
   {
     id: 'bl-hype-reloaded',
     brand: 'Blackstone Labs',
+    image: 'https://blackstonelabs.com/cdn/shop/files/HYPERL-CHI_1200x1200_7190596e-90c7-44a6-abe4-6936ad624a68.png?v=1786116974&width=800',
     name: 'Hype Reloaded',
     category: 'Pre-Workout (stimulant-free)',
     sizes: [],
@@ -55,6 +58,7 @@ export const products = [
   {
     id: 'bl-glycolog',
     brand: 'Blackstone Labs',
+    image: 'https://blackstonelabs.com/cdn/shop/files/blackstone-labs-glycolog-GLYC_d74b49dd-2546-43f9-9d26-39163ee0a64a.png?v=1735841251&width=800',
     name: 'Glycolog',
     category: 'Herbal & Wellness',
     sizes: [],
@@ -81,6 +85,7 @@ export const products = [
   {
     id: 'dna-thank-pump-for-that',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/TPFT-FIZZY.jpg?v=1784041985&width=800',
     name: 'Thank Pump for That',
     category: 'Pre-Workout (non-stim)',
     sizes: [],
@@ -102,6 +107,7 @@ export const products = [
   {
     id: 'dna-h8',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/H8-BBG.jpg?v=1782403117&width=800',
     name: 'H8',
     category: 'Pre-Workout (high stimulant)',
     sizes: [],
@@ -117,6 +123,7 @@ export const products = [
   {
     id: 'dna-vibe-v2',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/VIBE-V2-BLUE-ICE-BLAST.jpg?v=1765198316&width=800',
     name: 'VIBE V2',
     category: 'Pre-Workout (high stimulant)',
     sizes: [],
@@ -150,6 +157,7 @@ export const products = [
   {
     id: 'dna-og-swell-500',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/OG_SWELL_500.jpg?v=1774956608&width=800',
     name: 'OG Swell 500',
     category: 'Pre-Workout (liquid glycerol)',
     sizes: [
@@ -172,6 +180,7 @@ export const products = [
   {
     id: 'bl-eaas',
     brand: 'Blackstone Labs',
+    image: 'https://blackstonelabs.com/cdn/shop/files/EAA-Blue-Lollipop-EAA-BLP.png?v=1738349988&width=800',
     name: 'EAAs - Essential Amino Acids',
     category: 'Amino Acids',
     sizes: [],
@@ -192,6 +201,7 @@ export const products = [
   {
     id: 'bl-glutamine',
     brand: 'Blackstone Labs',
+    image: 'https://blackstonelabs.com/cdn/shop/files/blackstone-labs-glutamine-GLUT.png?v=1735837090&width=800',
     name: 'Glutamine',
     category: 'Amino Acids',
     sizes: [],
@@ -207,6 +217,7 @@ export const products = [
   {
     id: 'bl-instantized-collagen',
     brand: 'Blackstone Labs',
+    image: 'https://blackstonelabs.com/cdn/shop/files/new_collagen_1200x1200_d7fadf7d-aff0-4f7e-84da-cafc90279d3d.png?v=1742923999&width=800',
     name: 'Instantized Collagen',
     category: 'Protein',
     sizes: [],
@@ -222,6 +233,7 @@ export const products = [
   {
     id: 'bl-isolation-2lb',
     brand: 'Blackstone Labs',
+    image: 'https://blackstonelabs.com/cdn/shop/files/blackstone-labs-isolation-2lb-cinammon-cereal-ISO-CNC2.png?v=1751381781&width=800',
     name: 'Isolation (2 lb)',
     category: 'Protein',
     sizes: [{ label: '2 lb', servings: null }],
@@ -237,6 +249,7 @@ export const products = [
   {
     id: 'bl-vitamin-d3',
     brand: 'Blackstone Labs',
+    image: 'https://blackstonelabs.com/cdn/shop/files/blackstone-labs-vitamin-d3-VIT-D3_86bf9c9e-d96f-463e-a5c3-8efcd17976ed.png?v=1735843483&width=800',
     name: 'Vitamin D3',
     category: 'Vitamins & Minerals',
     sizes: [],
@@ -252,6 +265,7 @@ export const products = [
   {
     id: 'bl-carnitrim',
     brand: 'Blackstone Labs',
+    image: 'https://blackstonelabs.com/cdn/shop/files/blackstone-labs-carnitrim-CARNI_82a2cc33-8214-43a4-bc6d-964158332480.png?v=1734550834&width=800',
     name: 'Carnitrim',
     category: 'Weight Management',
     sizes: [],
@@ -274,6 +288,7 @@ export const products = [
   {
     id: 'dna-hydra-1',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/HYDRA-V3-CHERRY.jpg?v=1786014095&width=800',
     name: 'Hydra 1',
     category: 'Hydration',
     sizes: [{ label: '30 servings', servings: 30 }],
@@ -289,6 +304,7 @@ export const products = [
   {
     id: 'dna-cream-of-rice',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/CORBAG-BANANACARAMELWAFFLE.jpg?v=1778598994&width=800',
     name: 'Cream of Rice (2 kg)',
     category: 'Nutrition',
     sizes: [{ label: '2 kg', servings: null }],
@@ -304,6 +320,7 @@ export const products = [
   {
     id: 'dna-creatine-monohydrate',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/CREATINE-1kG.jpg?v=1762853498&width=800',
     name: 'Creatine Monohydrate',
     category: 'Creatine',
     sizes: [{ label: '150 g', servings: null }, { label: '300 g', servings: null }, { label: '1 kg', servings: null }],
@@ -320,6 +337,7 @@ export const products = [
   {
     id: 'dna-creatine-sticks',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/CREATINE-STICKS-LEMON_d2a6d533-bb64-4037-867e-0cc4362cf6bd.jpg?v=1786117886&width=800',
     name: 'Creatine Monohydrate - 30 Sticks',
     category: 'Creatine',
     sizes: [{ label: '30 sticks', servings: 30 }],
@@ -334,6 +352,7 @@ export const products = [
   {
     id: 'dna-ashwagandha-ksm66',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/ksm66.webp?v=1702552836&width=800',
     name: 'Ashwagandha KSM-66',
     category: 'Herbal & Wellness',
     sizes: [],
@@ -349,6 +368,7 @@ export const products = [
   {
     id: 'dna-supernova',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/SUPERNOVA-V2-FRONT.jpg?v=1734366802&width=800',
     name: 'SuperNova',
     category: 'Weight Management',
     sizes: [{ label: '60 capsules', servings: 60 }],
@@ -364,6 +384,7 @@ export const products = [
   {
     id: 'dna-vitamin-d3-k2',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/vit-d3-k2.webp?v=1702553962&width=800',
     name: 'Vitamin D3 & K2',
     category: 'Vitamins & Minerals',
     sizes: [{ label: '60 capsules', servings: 60 }],
@@ -379,6 +400,7 @@ export const products = [
   {
     id: 'dna-glutamine-300g',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/GLUTAMINE-300G.jpg?v=1738585014&width=800',
     name: 'Glutamine (300 g)',
     category: 'Amino Acids',
     sizes: [{ label: '300 g', servings: null }],
@@ -394,6 +416,7 @@ export const products = [
   {
     id: 'dna-lions-mane',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/lions-mane.webp?v=1702553238&width=800',
     name: "Lion's Mane",
     category: 'Herbal & Wellness',
     sizes: [{ label: '60 capsules', servings: 60 }],
@@ -409,6 +432,7 @@ export const products = [
   {
     id: 'dna-zmxtra',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/ZM-XTRA.jpg?v=1737028947&width=800',
     name: 'ZMXTRA',
     category: 'Vitamins & Minerals',
     sizes: [],
@@ -424,6 +448,7 @@ export const products = [
   {
     id: 'dna-magpak',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/MAGPAK.jpg?v=1791388017&width=800',
     name: 'MagPak Magnesium Complex',
     category: 'Vitamins & Minerals',
     sizes: [],
@@ -439,6 +464,7 @@ export const products = [
   {
     id: 'dna-beta-alanine',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/BETA-ALANINE-192G.jpg?v=1738585970&width=800',
     name: 'Beta Alanine (192 g)',
     category: 'Amino Acids',
     sizes: [{ label: '192 g', servings: null }],
@@ -454,6 +480,7 @@ export const products = [
   {
     id: 'dna-artichoke-complex',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/artichoke-complex.webp?v=1702552814&width=800',
     name: 'Artichoke Complex',
     category: 'Herbal & Wellness',
     sizes: [],
@@ -469,6 +496,7 @@ export const products = [
   {
     id: 'dna-vitamin-c',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/vit-c.jpg?v=1785152621&width=800',
     name: 'Vitamin C',
     category: 'Vitamins & Minerals',
     sizes: [{ label: '60 capsules', servings: 60 }],
@@ -484,6 +512,7 @@ export const products = [
   {
     id: 'dna-shilajit',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/SHILAJIT.jpg?v=1728549038&width=800',
     name: 'Shilajit 10:1 Extract',
     category: 'Herbal & Wellness',
     sizes: [{ label: '60 capsules', servings: 60 }],
@@ -499,6 +528,7 @@ export const products = [
   {
     id: 'dna-nmn',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/nmn.jpg?v=1778511303&width=800',
     name: 'NMN',
     category: 'Herbal & Wellness',
     sizes: [],
@@ -514,6 +544,7 @@ export const products = [
   {
     id: 'dna-casein',
     brand: 'DNA Sports',
+    image: 'https://dnasports.uk/cdn/shop/files/CASEIN-CHOCOLATE-MILKSHAKE.jpg?v=1738947029&width=800',
     name: 'Casein Protein',
     category: 'Protein',
     sizes: [],
