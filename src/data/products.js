@@ -56,7 +56,7 @@ export const products = [
     id: 'bl-glycolog',
     brand: 'Blackstone Labs',
     name: 'Glycolog',
-    category: 'Wellness',
+    category: 'Herbal & Wellness',
     sizes: [],
     servingSize: '3 capsules',
     flavours: [],
