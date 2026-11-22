@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { products } from '../../data/products.js'
 import './ProductCatalogue.css'
 
@@ -83,6 +84,8 @@ export default function ProductCatalogue() {
       <div className="catalogue-grid">
         {visible.map((product) => (<ProductCard key={product.id} product={product} />))}
       </div>
+
+      <p className="catalogue-cta"><Link to="/shop">SHOP ALL PRODUCTS →</Link></p>
 
       <p className="catalogue-disclaimer">
         Details are summarised from the brands&apos; public product pages and must be checked against the label on the pack. Prices and availability to be confirmed. These products are not intended to diagnose, treat, cure or prevent any disease. Not for under-18s, pregnant or nursing women. Consult a physician if you have a medical condition or take medication.

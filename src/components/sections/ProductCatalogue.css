@@ -42,3 +42,4 @@
 @media(max-width:800px){.catalogue-section{padding:95px 6%}.catalogue-heading{flex-direction:column;align-items:flex-start}}
 @media(max-width:560px){.catalogue-grid{grid-template-columns:1fr}.catalogue-card{padding:22px}.catalogue-heading h2{font-size:clamp(70px,17vw,100px)}}
 @media(prefers-reduced-motion:reduce){.catalogue-card,.catalogue-filters button{transition:none!important}.catalogue-card:hover{transform:none;box-shadow:none}}
+.catalogue-cta{margin-top:40px}.catalogue-cta a{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.18em;color:var(--color-iv-black);background:var(--color-iv-accent);padding:16px 26px;text-decoration:none}.catalogue-cta a:focus-visible{outline:2px solid var(--color-iv-cream);outline-offset:4px}

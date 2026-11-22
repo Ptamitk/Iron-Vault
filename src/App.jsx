@@ -4,6 +4,9 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import Lenis from 'lenis'
+import { Link, useNavigate } from 'react-router-dom'
+import { useCart } from './lib/cart.jsx'
+import { formatINR } from './lib/catalog.js'
 import ProductExperience from './components/sections/ProductExperience.jsx'
 import ProductCatalogue from './components/sections/ProductCatalogue.jsx'
 import './App.css'
@@ -12,10 +15,11 @@ const App = () => {
   const pageRef = useRef(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [cartOpen, setCartOpen] = useState(false)
-  const [cartCount, setCartCount] = useState(0)
+  const { lines: cartLines, count: cartCount, subtotal: cartSubtotal } = useCart()
+  const navigate = useNavigate()
   const [openFaq, setOpenFaq] = useState(0)
   const [newsletterSent, setNewsletterSent] = useState(false)
-  const addToBag = () => setCartCount((count) => count + 1)
+  const browseShop = () => navigate('/shop')
 
   useEffect(() => {
     document.body.style.overflow = cartOpen || mobileOpen ? 'hidden' : ''
@@ -177,16 +181,16 @@ const App = () => {
       <header className="site-header">
         <a className="wordmark" href="#top" aria-label="Iron Vault home">IRON<span>VAULT</span><i>.</i></a>
         <nav className="desktop-nav" aria-label="Main navigation">
-          <a href="#shop">SHOP ALL</a><a href="#philosophy">OUR PHILOSOPHY</a><a href="#standards">THE STANDARD</a>
+          <Link to="/shop">SHOP ALL</Link><a href="#philosophy">OUR PHILOSOPHY</a><a href="#standards">THE STANDARD</a>
         </nav>
         <div className="header-actions">
-          <a className="shop-link" href="#shop">SHOP NOW <ArrowUpRight size={15} /></a>
+          <Link className="shop-link" to="/shop">SHOP NOW <ArrowUpRight size={15} /></Link>
           <button className="icon-button bag-button" type="button" aria-label={'Open shopping bag, ' + cartCount + ' items'} onClick={() => setCartOpen(true)}><ShoppingBag size={19} /><span className="bag-count">{cartCount}</span></button>
           <button className="icon-button mobile-menu" type="button" aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen} onClick={() => setMobileOpen((open) => !open)}>{mobileOpen ? <X size={21} /> : <Menu size={21} />}</button>
         </div>
       </header>
       <div className={mobileOpen ? 'mobile-nav is-open' : 'mobile-nav'} aria-hidden={!mobileOpen}>
-        <a href="#shop" onClick={() => setMobileOpen(false)}>SHOP THE COLLECTION <ArrowUpRight size={17} /></a>
+        <Link to="/shop" onClick={() => setMobileOpen(false)}>SHOP THE COLLECTION <ArrowUpRight size={17} /></Link>
         <a href="#philosophy" onClick={() => setMobileOpen(false)}>OUR PHILOSOPHY <ArrowUpRight size={17} /></a>
         <a href="#standards" onClick={() => setMobileOpen(false)}>THE STANDARD <ArrowUpRight size={17} /></a>
       </div>
@@ -274,9 +278,9 @@ const App = () => {
           <p>Three considered blends. One everyday ritual. Explore the range and choose your starting point.</p>
         </div>
         <div className="flavour-grid">
-          <article className="flavour-card flavour-cocoa"><span className="flavour-index">01 / RICH &amp; BOLD</span><div className="flavour-can"><i /><b>IRON<br />VAULT</b><small>WHEY<br />PROTEIN</small><em>DARK COCOA</em></div><div className="flavour-info"><div><h3>DARK COCOA</h3><p>Deep cocoa-inspired flavour</p></div><button type="button" onClick={addToBag} aria-label="Add Dark Cocoa demo product to bag"><Plus size={19} /></button></div></article>
-          <article className="flavour-card flavour-vanilla"><span className="flavour-index">02 / SMOOTH &amp; CLEAN</span><div className="flavour-can"><i /><b>IRON<br />VAULT</b><small>WHEY<br />PROTEIN</small><em>VANILLA</em></div><div className="flavour-info"><div><h3>VANILLA</h3><p>A smooth, mellow blend</p></div><button type="button" onClick={addToBag} aria-label="Add Vanilla demo product to bag"><Plus size={19} /></button></div></article>
-          <article className="flavour-card flavour-strawberry"><span className="flavour-index">03 / FRESH &amp; BRIGHT</span><div className="flavour-can"><i /><b>IRON<br />VAULT</b><small>WHEY<br />PROTEIN</small><em>STRAWBERRY</em></div><div className="flavour-info"><div><h3>STRAWBERRY</h3><p>A bright, fruit-forward blend</p></div><button type="button" onClick={addToBag} aria-label="Add Strawberry demo product to bag"><Plus size={19} /></button></div></article>
+          <article className="flavour-card flavour-cocoa"><span className="flavour-index">01 / RICH &amp; BOLD</span><div className="flavour-can"><i /><b>IRON<br />VAULT</b><small>WHEY<br />PROTEIN</small><em>DARK COCOA</em></div><div className="flavour-info"><div><h3>DARK COCOA</h3><p>Deep cocoa-inspired flavour</p></div><button type="button" onClick={browseShop} aria-label="Browse the shop"><Plus size={19} /></button></div></article>
+          <article className="flavour-card flavour-vanilla"><span className="flavour-index">02 / SMOOTH &amp; CLEAN</span><div className="flavour-can"><i /><b>IRON<br />VAULT</b><small>WHEY<br />PROTEIN</small><em>VANILLA</em></div><div className="flavour-info"><div><h3>VANILLA</h3><p>A smooth, mellow blend</p></div><button type="button" onClick={browseShop} aria-label="Browse the shop"><Plus size={19} /></button></div></article>
+          <article className="flavour-card flavour-strawberry"><span className="flavour-index">03 / FRESH &amp; BRIGHT</span><div className="flavour-can"><i /><b>IRON<br />VAULT</b><small>WHEY<br />PROTEIN</small><em>STRAWBERRY</em></div><div className="flavour-info"><div><h3>STRAWBERRY</h3><p>A bright, fruit-forward blend</p></div><button type="button" onClick={browseShop} aria-label="Browse the shop"><Plus size={19} /></button></div></article>
         </div>
         <p className="demo-disclaimer">Concept product visuals for presentation only. Final flavours, nutrition facts, pricing and pack sizes are subject to brand confirmation.</p>
       </section>
@@ -328,14 +332,14 @@ const App = () => {
       <footer className="site-footer">
         <a className="wordmark footer-wordmark" href="#top">IRON<span>VAULT</span><i>.</i></a>
         <span>BUILT WITH INTENT. WORN WITH PURPOSE.</span><a href="#top">BACK TO TOP ↑</a>
-        <small>© 2026 IRON VAULT. DEMO EXPERIENCE.</small>
+        <small>© 2026 IRON VAULT. <Link to="/policy/shipping">SHIPPING</Link> · <Link to="/policy/returns">RETURNS</Link> · <Link to="/policy/privacy">PRIVACY</Link> · <Link to="/policy/terms">TERMS</Link></small>
       </footer>
       <div className={cartOpen ? 'drawer-backdrop is-visible' : 'drawer-backdrop'} onClick={() => setCartOpen(false)} aria-hidden={!cartOpen} />
-      <aside className={cartOpen ? 'cart-drawer is-open' : 'cart-drawer'} role="dialog" aria-modal="true" aria-label="Demo shopping bag" aria-hidden={!cartOpen}>
+      <aside className={cartOpen ? 'cart-drawer is-open' : 'cart-drawer'} role="dialog" aria-modal="true" aria-label="Shopping bag" aria-hidden={!cartOpen}>
         <div className="drawer-heading"><div><span>IRON VAULT / BAG</span><h2>YOUR SELECTION.</h2></div><button type="button" className="icon-button" onClick={() => setCartOpen(false)} aria-label="Close shopping bag"><X size={21} /></button></div>
-        <div className="drawer-empty">{cartCount > 0 ? <><span className="drawer-check"><Check size={23} /></span><h3>{cartCount} DEMO {cartCount === 1 ? 'ITEM' : 'ITEMS'} ADDED</h3><p>Your selection is only stored in this page preview. No order has been created.</p></> : <><ShoppingBag size={35} /><h3>YOUR BAG IS WAITING.</h3><p>Explore the flavour range and add a concept product to see how the bag interaction works.</p></>}</div>
-        <button type="button" className="button-primary drawer-continue" onClick={() => setCartOpen(false)}>CONTINUE EXPLORING <ArrowUpRight size={16} /></button>
-        <p className="drawer-note">DEMO EXPERIENCE · CHECKOUT DISABLED</p>
+        <div className="drawer-empty">{cartCount > 0 ? <><span className="drawer-check"><Check size={23} /></span><h3>{cartCount} {cartCount === 1 ? 'ITEM' : 'ITEMS'} IN YOUR BAG</h3><p>{cartLines.map((line) => line.qty + ' × ' + line.product.name).join(', ')}</p><p>Subtotal {formatINR(cartSubtotal)}</p></> : <><ShoppingBag size={35} /><h3>YOUR BAG IS WAITING.</h3><p>Browse the shop and add something to your bag.</p></>}</div>
+        {cartCount > 0 ? <Link to="/checkout" className="button-primary drawer-continue" onClick={() => setCartOpen(false)}>CHECKOUT <ArrowUpRight size={16} /></Link> : <Link to="/shop" className="button-primary drawer-continue" onClick={() => setCartOpen(false)}>GO TO THE SHOP <ArrowUpRight size={16} /></Link>}
+        <p className="drawer-note"><Link to="/cart" onClick={() => setCartOpen(false)}>VIEW FULL BAG</Link></p>
       </aside>
       <button className="back-to-top" type="button" aria-label="Back to top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}><ArrowUpRight size={18} /></button>
     </main>
