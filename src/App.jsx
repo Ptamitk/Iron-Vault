@@ -1,25 +1,28 @@
 import { useEffect, useRef, useState } from 'react'
-import { ArrowDown, ArrowUpRight, Menu, ShoppingBag, MoveUpRight, X, Plus, ChevronDown, Check } from 'lucide-react'
+import { ArrowDown, ArrowUpRight, Menu, ShoppingBag, MoveUpRight, X, ChevronDown, Check } from 'lucide-react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
 import Lenis from 'lenis'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { useCart } from './lib/cart.jsx'
-import { formatINR } from './lib/catalog.js'
-import ProductExperience from './components/sections/ProductExperience.jsx'
+import { byId, formatINR } from './lib/catalog.js'
+import ProductShowcase from './components/sections/ProductShowcase.jsx'
+import FeaturedSupplements from './components/sections/FeaturedSupplements.jsx'
+import ProductImage from './components/shop/ProductImage.jsx'
 import ProductCatalogue from './components/sections/ProductCatalogue.jsx'
 import './App.css'
+
+const heroProduct = byId['bl-isolation-2lb']
+const tileProduct = byId['bl-creatine-monohydrate']
 
 const App = () => {
   const pageRef = useRef(null)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [cartOpen, setCartOpen] = useState(false)
   const { lines: cartLines, count: cartCount, subtotal: cartSubtotal } = useCart()
-  const navigate = useNavigate()
   const [openFaq, setOpenFaq] = useState(0)
   const [newsletterSent, setNewsletterSent] = useState(false)
-  const browseShop = () => navigate('/shop')
 
   useEffect(() => {
     document.body.style.overflow = cartOpen || mobileOpen ? 'hidden' : ''
@@ -97,7 +100,7 @@ const App = () => {
       gsap.from('.hero-art', {
         y: 90, scale: 0.88, rotate: 4, autoAlpha: 0, duration: 1.35, ease: 'power4.out', delay: 0.25,
       })
-      gsap.to('.hero-art .protein-tub', {
+      gsap.to('.hero-art .hero-product', {
         y: 85, rotate: 7, scale: 0.9, ease: 'none',
         scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 },
       })
@@ -149,11 +152,8 @@ const App = () => {
         y: 55, autoAlpha: 0, duration: 0.8, stagger: 0.14, ease: 'power3.out',
         scrollTrigger: { trigger: '.standards-grid', start: 'top 78%', toggleActions: 'play none none reverse' },
       })
-      gsap.from('.flavour-card', { y: 70, autoAlpha: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: '.flavour-grid', start: 'top 82%', toggleActions: 'play none none reverse' } })
-      gsap.fromTo('.flavour-can', { y: 85, rotate: -9, scale: 0.82, filter: 'blur(7px)' }, {
-        y: 0, rotate: 0, scale: 1, filter: 'blur(0px)', stagger: 0.13, duration: 1.25, ease: 'power4.out',
-        scrollTrigger: { trigger: '.flavour-grid', start: 'top 78%', toggleActions: 'play none none reverse' },
-      })
+      gsap.from('.feat-card', { y: 70, autoAlpha: 0, stagger: 0.12, duration: 0.9, ease: 'power3.out', scrollTrigger: { trigger: '.featured-grid', start: 'top 82%', toggleActions: 'play none none reverse' } })
+      gsap.from('.feat-media', { y: 40, scale: 0.9, stagger: 0.13, duration: 1.1, ease: 'power4.out', scrollTrigger: { trigger: '.featured-grid', start: 'top 78%', toggleActions: 'play none none reverse' } })
       gsap.from('.faq-row', { y: 28, autoAlpha: 0, stagger: 0.08, duration: 0.65, ease: 'power3.out', scrollTrigger: { trigger: '.faq-list', start: 'top 82%', toggleActions: 'play none none reverse' } })
       gsap.to('.scroll-progress', { scaleX: 1, ease: 'none', scrollTrigger: { trigger: '.site-shell', start: 'top top', end: 'bottom bottom', scrub: true } })
       gsap.from('.closing-title', {
@@ -207,18 +207,16 @@ const App = () => {
           </div>
         </div>
 
-        <div className="hero-art" aria-label="Iron Vault performance protein product illustration">
+        <div className="hero-art" aria-label="Featured performance supplement">
           <div className="hero-art-label hero-art-label-top"><span>OBJECT / 001</span><span>PERFORMANCE SERIES</span></div>
           <div className="art-orbit orbit-one" /><div className="art-orbit orbit-two" />
           <div className="product-glow" /><div className="product-shadow" />
-          <div className="protein-tub">
-            <div className="tub-lid" /><div className="tub-body">
-              <div className="tub-topline">IRON VAULT / PERFORMANCE SERIES</div>
-              <div className="tub-brand">IRON<br /><b>VAULT</b></div><div className="tub-divider" />
-              <div className="tub-product">WHEY<br />PROTEIN</div><div className="tub-flavour">DARK COCOA · PREMIUM BLEND</div>
-              <div className="tub-footer"><span>24G<br />PROTEIN</span><span>01<br />KG</span></div>
+          {heroProduct && (
+            <div className="hero-product">
+              <ProductImage product={heroProduct} eager />
+              <div className="hero-product-meta"><span>{heroProduct.brand.toUpperCase()}</span><b>{heroProduct.name.replace(/\s*\(.*\)/, '')}</b></div>
             </div>
-          </div>
+          )}
           <div className="hero-art-label hero-art-label-bottom"><span>01 — DAILY FUEL</span><span>FORM FOLLOWS FUNCTION</span></div>
           <span className="vertical-note">NO SHORTCUTS. JUST SHOW UP.</span>
         </div>
@@ -238,7 +236,7 @@ const App = () => {
         <div className="manifesto-foot"><span>BUILT ON CONSISTENCY.</span><p>For the early starts, the last reps, and every quiet decision to keep going. This is for the work behind the result.</p></div>
       </section>
 
-      <ProductExperience />
+      <ProductShowcase />
 
       <section className="editorial-section">
         <div className="editorial-visual">
@@ -264,7 +262,7 @@ const App = () => {
         <div className="category-grid">
           <a className="category-card supplements-card" href="#supplements">
             <span className="category-number">01 / PERFORMANCE NUTRITION</span>
-            <span className="category-art supplement-art" aria-hidden="true"><span className="art-orbit-ring" /><span className="art-glow" /><span className="mini-tub"><i /><b>IRON<br />VAULT</b><small>WHEY<br />PROTEIN</small><em>24G PROTEIN</em></span><span className="art-caption">DAILY FUEL / 001</span></span>
+            <span className="category-art supplement-art" aria-hidden="true"><span className="art-orbit-ring" /><span className="art-glow" />{tileProduct && <span className="mini-box"><ProductImage product={tileProduct} /></span>}<span className="art-caption">DAILY FUEL / 001</span></span>
             <span className="category-title">FUEL<br />YOUR <em>FOCUS.</em></span>
             <span className="category-cta">EXPLORE SUPPLEMENTS <ArrowUpRight size={16} /></span>
           </a>
@@ -272,18 +270,7 @@ const App = () => {
         </div>
       </section>
 
-      <section className="flavour-range-section" id="supplements">
-        <div className="range-heading">
-          <div><p className="eyebrow"><span className="eyebrow-line" /> THE FLAVOUR SERIES / 003</p><h2>FIND YOUR<br /><em>FAVOURITE FUEL.</em></h2></div>
-          <p>Three considered blends. One everyday ritual. Explore the range and choose your starting point.</p>
-        </div>
-        <div className="flavour-grid">
-          <article className="flavour-card flavour-cocoa"><span className="flavour-index">01 / RICH &amp; BOLD</span><div className="flavour-can"><i /><b>IRON<br />VAULT</b><small>WHEY<br />PROTEIN</small><em>DARK COCOA</em></div><div className="flavour-info"><div><h3>DARK COCOA</h3><p>Deep cocoa-inspired flavour</p></div><button type="button" onClick={browseShop} aria-label="Browse the shop"><Plus size={19} /></button></div></article>
-          <article className="flavour-card flavour-vanilla"><span className="flavour-index">02 / SMOOTH &amp; CLEAN</span><div className="flavour-can"><i /><b>IRON<br />VAULT</b><small>WHEY<br />PROTEIN</small><em>VANILLA</em></div><div className="flavour-info"><div><h3>VANILLA</h3><p>A smooth, mellow blend</p></div><button type="button" onClick={browseShop} aria-label="Browse the shop"><Plus size={19} /></button></div></article>
-          <article className="flavour-card flavour-strawberry"><span className="flavour-index">03 / FRESH &amp; BRIGHT</span><div className="flavour-can"><i /><b>IRON<br />VAULT</b><small>WHEY<br />PROTEIN</small><em>STRAWBERRY</em></div><div className="flavour-info"><div><h3>STRAWBERRY</h3><p>A bright, fruit-forward blend</p></div><button type="button" onClick={browseShop} aria-label="Browse the shop"><Plus size={19} /></button></div></article>
-        </div>
-        <p className="demo-disclaimer">Concept product visuals for presentation only. Final flavours, nutrition facts, pricing and pack sizes are subject to brand confirmation.</p>
-      </section>
+      <FeaturedSupplements />
 
       <ProductCatalogue />
 
@@ -305,12 +292,12 @@ const App = () => {
       </section>
 
       <section className="faq-section" id="faq">
-        <div className="faq-heading"><p className="eyebrow"><span className="eyebrow-line" /> GOOD TO KNOW / 005</p><h2>THE<br /><em>DETAILS.</em></h2><p>A few quick answers about this Iron Vault concept experience.</p></div>
+        <div className="faq-heading"><p className="eyebrow"><span className="eyebrow-line" /> GOOD TO KNOW / 005</p><h2>THE<br /><em>DETAILS.</em></h2><p>A few quick answers before you order.</p></div>
         <div className="faq-list">
           {[
-            ['Can I place a real order on this website?', 'Not yet. This is a front-end demo. Cart interactions are illustrative; checkout, payments, inventory and order processing are not connected.'],
-            ['Are these final product flavours and specifications?', 'No. The flavour names and product visuals are concept content. Final product details, ingredients, nutrition information, sizes and prices must be confirmed by the brand.'],
-            ['How can I get support or ask a question?', 'Use the brand’s confirmed contact details once they are supplied. This demo intentionally does not invent an email address or support channel.'],
+            ['Can I place an order on this website?', 'Yes. Add products to your bag and check out with online payment or, where offered, cash on delivery. Prices include taxes and shipping is shown before you pay.'],
+            ['Are the product details final?', 'Product details are summarised from the brands’ public information. Always check the label on your pack for the final ingredients, nutrition information and directions.'],
+            ['How can I get support or ask a question?', 'Use the contact details shown on our shop pages and keep your order number handy when you get in touch.'],
           ].map(([question, answer], index) => (
             <article className={openFaq === index ? 'faq-row is-open' : 'faq-row'} key={question}>
               <button type="button" aria-expanded={openFaq === index} onClick={() => setOpenFaq(openFaq === index ? -1 : index)}><span>0{index + 1}</span><strong>{question}</strong><ChevronDown size={19} /></button>

@@ -13,7 +13,7 @@ You are being given an existing React/Vite project named IRON VAULT. Do not scaf
 - Main frontend entry: `src/main.jsx`
 - Root page: `src/App.jsx`
 - Main stylesheet: `src/App.css`
-- 3D section: `src/components/sections/ProductExperience.jsx`
+- Scroll showcase: `src/components/sections/ProductShowcase.jsx` (replaced the old Three.js section)
 - Vite config: `vite.config.js`
 - Package manifest: `package.json`
 
@@ -33,7 +33,7 @@ The main page is composed in `src/App.jsx`. Current source inspection shows thes
 2. Hero section with large headline, explanatory copy, calls to action, and CSS-built hero illustration.
 3. Moving brand-values ticker.
 4. Brand philosophy / manifesto section.
-5. `ProductExperience` 3D scroll experience.
+5. `ProductShowcase` pinned scroll showcase of real products.
 6. Editorial visual and text section.
 7. Collection/category presentation area.
 8. Additional themed sections, FAQ interaction, and footer (inspect the remainder of `App.jsx` for exact current markup).
@@ -62,7 +62,7 @@ Observed motion patterns include:
 
 The page also contains responsive navigation, an overlay/drawer state, Escape-key dismissal, FAQ state, and a newsletter UI state. Inspect whether each interaction is demo-only before treating it as connected to any service.
 
-`src/components/sections/ProductExperience.jsx` uses Three.js and CanvasTexture to create procedural 3D artwork. It creates a container-like model, lighting, a lid assembly, and smaller canister visuals; it also uses a ResizeObserver and GSAP/ScrollTrigger for the scroll sequence. It is not a downloaded GLB model and is not proof of real product assets or a commerce integration.
+The old Three.js procedural 3D section (`ProductExperience`) and the generated whey tub / flavour cards were removed; the landing page now uses real product photos (`ProductShowcase`, `FeaturedSupplements`). It creates a container-like model, lighting, a lid assembly, and smaller canister visuals; it also uses a ResizeObserver and GSAP/ScrollTrigger for the scroll sequence. It is not a downloaded GLB model and is not proof of real product assets or a commerce integration.
 
 ## 5. Accessibility already present
 
@@ -135,8 +135,8 @@ npm run dev
 Then inspect:
 - `src/App.jsx`
 - `src/App.css`
-- `src/components/sections/ProductExperience.jsx`
-- `src/components/sections/ProductExperience.css`
+- `src/components/sections/ProductShowcase.jsx` / `.css`
+- `src/components/sections/FeaturedSupplements.jsx` / `.css`
 - `src/index.css`
 - `package.json`
 - `vite.config.js`

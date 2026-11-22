@@ -52,7 +52,7 @@ On Windows PowerShell, if script execution blocks `npm`, use `npm.cmd` (for exam
 - `src/main.jsx` — application entry point
 - `src/App.jsx` — primary page composition and global interaction setup
 - `src/App.css` — primary page styling
-- `src/components/sections/ProductExperience.jsx` — Three.js visual experience component
+- `src/components/sections/ProductShowcase.jsx` — GSAP pinned scroll showcase of real products
 - Related component styles are stored alongside their components.
 
 The former apparel page and its route files were removed from the current working branch. The app entry now renders the main `App` component directly.
