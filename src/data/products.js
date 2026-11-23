@@ -580,7 +580,7 @@ export const products = [
   {
     id: 'force-fundamentals-horny-goat-weed',
     brand: 'Force Fundamentals',
-    image: null,
+    image: '/products/force-fundamentals-horny-goat-weed.jpg',
     name: 'Horny Goat Weed',
     category: 'Herbal & Wellness',
     sizes: [],
@@ -644,7 +644,7 @@ export const products = [
   {
     id: 'l-arginine-bottle',
     brand: 'Brand to verify',
-    image: null,
+    image: '/products/l-arginine-bottle.jpg',
     name: 'L-Arginine',
     category: 'Amino Acids',
     sizes: [],
@@ -660,7 +660,7 @@ export const products = [
   {
     id: 'l-arginine-5000',
     brand: 'Brand to verify',
-    image: null,
+    image: '/products/l-arginine-5000-client.jpg',
     name: 'L-Arginine 5000',
     category: 'Amino Acids',
     sizes: [],
@@ -740,7 +740,7 @@ export const products = [
   {
     id: 'pump-energizer-client-photo',
     brand: 'Brand to verify',
-    image: null,
+    image: '/products/pump-energizer-client.jpg',
     name: 'Pump Energizer',
     category: 'Pre-Workout (non-stim)',
     sizes: [],
@@ -820,7 +820,7 @@ export const products = [
   {
     id: 'hyperzone-pre-workout',
     brand: 'Brand to verify',
-    image: null,
+    image: '/products/hyperzone-client.jpg',
     name: 'Hyperzone',
     category: 'Pre-Workout',
     sizes: [],
@@ -852,7 +852,7 @@ export const products = [
   {
     id: 'osteo-biflex',
     brand: 'Osteo Bi-Flex',
-    image: null,
+    image: '/products/osteo-biflex-client.jpg',
     name: 'Osteo Bi-Flex',
     category: 'Joint Support',
     sizes: [],
