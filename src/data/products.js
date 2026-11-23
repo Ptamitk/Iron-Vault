@@ -995,5 +995,3 @@ export const products = [
   },
 
 ];
- prohormone / anabolic / PCT / aromatase-inhibitor products, products with
-// DMHA, higenamine or phenibut, and testosterone/libido-claim products (see conversation notes).
