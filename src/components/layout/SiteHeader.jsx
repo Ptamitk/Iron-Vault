@@ -35,6 +35,7 @@ export default function SiteHeader({ variant = 'solid' }) {
   const openRef = useRef(false)
   const menuButton = useRef(null)
   const closeButton = useRef(null)
+  const mobileMenu = useRef(null)
 
   useEffect(() => {
     let last = window.scrollY
@@ -67,6 +68,20 @@ export default function SiteHeader({ variant = 'solid' }) {
       if (event.key === 'Escape' && openRef.current) {
         setOpen(false)
         menuButton.current?.focus()
+        return
+      }
+      if (event.key === 'Tab' && openRef.current) {
+        const focusable = mobileMenu.current?.querySelectorAll('a[href], button:not([disabled])')
+        if (!focusable?.length) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault()
+          last.focus()
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault()
+          first.focus()
+        }
       }
     }
     window.addEventListener('keydown', onKey)
@@ -113,7 +128,7 @@ export default function SiteHeader({ variant = 'solid' }) {
         </div>
       </header>
 
-      <div id="mobile-menu" className={open ? 'mobile-menu is-open' : 'mobile-menu'} role="dialog" aria-modal="true" aria-label="Menu" inert={!open}>
+      <div ref={mobileMenu} id="mobile-menu" className={open ? 'mobile-menu is-open' : 'mobile-menu'} role="dialog" aria-modal="true" aria-label="Menu" inert={!open}>
         <nav aria-label="Mobile">
           {MENU_LINKS.map(([label, to]) => (
             <Link key={label} to={to} onClick={() => setOpen(false)}>{label}<ArrowUpRight size={30} aria-hidden="true" /></Link>
