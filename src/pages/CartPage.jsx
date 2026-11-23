@@ -13,7 +13,7 @@ export default function CartPage() {
     <ShopLayout noindex title="Your bag">
       <section className="shop-hero shop-hero--cart">
         <p className="eyebrow"><span className="eyebrow-line" /> YOUR BAG</p>
-        <h1>YOUR <em>SELECTION.</em></h1>\n        <a className="shop-hero-credit" href="https://commons.wikimedia.org/wiki/File:Rita_Jairath.jpg" target="_blank" rel="noreferrer">Athlete photo: Rita Jairath · Wikimedia Commons</a>
+        <h1>YOUR <em>SELECTION.</em></h1>\n        <a className="shop-hero-credit" href="https://commons.wikimedia.org/wiki/File:Female_bodybuilder_Aleesha_Young_flexing.jpg" target="_blank" rel="noreferrer">Athlete photo: Aleesha Young · Wikimedia Commons</a>
       </section>
 
       {lines.length === 0 ? (
