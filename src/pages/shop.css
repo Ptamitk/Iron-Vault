@@ -158,3 +158,57 @@ input[type=checkbox],input[type=radio]{width:auto;min-height:0}
   .pdp-related .shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(prefers-reduced-motion:reduce){.shop-card,.shop-btn,.shop-link-btn,.shop-icon-btn,.pay-option,.shop-chips button,.pdp-options button,.shop-add{transition:none!important}.shop-card:hover{transform:none}}
+
+
+/* Campaign-inspired retail refinements */
+.shop-hero{position:relative;padding:64px 0 42px;border-bottom:1px solid var(--color-iv-line);margin-bottom:32px}
+.shop-hero h1{font-size:clamp(68px,11vw,156px);font-weight:800;letter-spacing:-.025em}
+.shop-hero h1 em{color:var(--color-iv-accent);-webkit-text-stroke:0}
+.shop-lede{max-width:520px;color:#c7c7c3;font-size:15px}
+.shop-controls{align-items:start}
+.shop-search{background:#151515;border-color:#ffffff32;min-height:54px}
+.shop-search:focus-within{border-color:var(--color-iv-accent)}
+.shop-sort select{background:#151515;border-color:#ffffff32}
+.shop-chips button{min-height:42px;padding:0 17px;font-size:10px;font-weight:800;letter-spacing:.1em}
+.shop-grid{gap:16px}
+.shop-card{background:#f1f1ed;color:#111;border:1px solid #f1f1ed;overflow:hidden}
+.shop-card:hover{transform:translateY(-5px);border-color:var(--color-iv-accent)}
+.shop-card-media-wrap{position:relative;background:#e8e8e4}
+.shop-card-media{display:block;overflow:hidden}
+.shop-card-media .pimg{aspect-ratio:1/1.03;background:#e8e8e4}
+.shop-card-media .pimg img{mix-blend-mode:multiply;transition:transform .65s cubic-bezier(.2,.75,.25,1)}
+.shop-card:hover .shop-card-media .pimg img{transform:scale(1.055)}
+.shop-wishlist{position:absolute;top:12px;right:12px;display:grid;place-items:center;width:40px;height:40px;border:1px solid #1112;background:#f8f8f5;color:#111;transition:background .25s,color .25s,border-color .25s}
+.shop-wishlist:hover,.shop-wishlist.is-saved{background:var(--color-iv-accent);border-color:var(--color-iv-accent);color:#fff}
+.shop-card-body{gap:9px;padding:17px 18px 8px}
+.shop-card-top{font-size:9px;letter-spacing:.12em}
+.shop-card-top b{color:var(--color-iv-accent)}
+.shop-card-top span{color:#666}
+.shop-card h3{font-size:clamp(25px,2.25vw,35px);font-weight:800;letter-spacing:-.015em}
+.shop-card-body p{color:#666;font-size:12px;line-height:1.6}
+.shop-card-foot{padding:14px 18px 18px}
+.shop-card-foot strong{font-family:var(--font-body);font-size:16px;font-weight:800}
+.shop-add{min-height:42px;min-width:92px;font-size:10px;font-weight:800;letter-spacing:.12em}
+.shop-crumbs{font-size:10px;letter-spacing:.15em}
+.pdp{gap:clamp(34px,6vw,92px);padding-top:28px}
+.pdp-visual{background:#ecece8;padding:clamp(12px,3vw,34px)}
+.pdp-visual .pimg{background:transparent}
+.pdp-visual .pimg img{mix-blend-mode:multiply}
+.pdp-info h1{font-size:clamp(54px,7vw,108px);font-weight:800;letter-spacing:-.025em}
+.pdp-price{font-family:var(--font-body);font-size:26px;font-weight:800}
+.pdp-options button{font-size:10px;font-weight:800;letter-spacing:.1em}
+.pdp-buy .shop-btn{font-weight:800;letter-spacing:.12em}
+.summary{background:#f1f1ed;color:#111;border:0}
+.summary h2,.summary dt{color:#666}
+.summary .summary-total dt{color:#111}
+.summary-note{color:#666}
+.cart-line-info a{font-size:30px;font-weight:800}
+@media(max-width:640px){
+ .shop-hero h1{font-size:clamp(62px,17vw,100px)}
+ .shop-card-body{padding:13px 12px 5px}
+ .shop-card h3{font-size:22px}
+ .shop-card-foot{padding:10px 12px 13px}
+ .shop-card-foot strong{font-size:14px}
+ .shop-add{min-height:40px}
+ .pdp-info h1{font-size:54px}
+}
