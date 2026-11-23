@@ -738,10 +738,10 @@ export const products = [
     todo: 'Confirm exact flavour/variant, serving size, caffeine and other stimulant amounts, warnings and product image.',
   },
   {
-    id: 'redcon1-pump-powder',
+    id: 'pump-energizer-client-photo',
     brand: 'Brand to verify',
     image: null,
-    name: 'Pump Powder',
+    name: 'Pump Energizer',
     category: 'Pre-Workout (non-stim)',
     sizes: [],
     servingSize: null,
@@ -772,7 +772,7 @@ export const products = [
   {
     id: 'ronnie-coleman-glutamine-xs',
     brand: 'Ronnie Coleman Signature Series',
-    image: null,
+    image: 'https://www.bodybuildingindia.com/cdn/shop/files/Ronnie-Coleman-Glutamine-300-g_-Unflavored-Ronnie-Coleman-42556720.jpg?v=1734691425',
     name: 'Glutamine XS',
     category: 'Amino Acids',
     sizes: [],
