@@ -268,3 +268,22 @@ input[type=checkbox],input[type=radio]{width:auto;min-height:0}
 @media(max-width:760px){.shop-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pdp{grid-template-columns:1fr}.pdp-visual{position:relative;top:auto}.pdp-visual .pimg{min-height:260px}.cart-line{grid-template-columns:minmax(0,1fr) auto;gap:14px}.cart-line-total{grid-column:1;text-align:left}.cart-line>.shop-icon-btn{grid-column:2;grid-row:2}.cart-line .qty{grid-column:2;grid-row:1}.checkout-fields{padding:20px}.success-card{padding:20px}}
 @media(max-width:480px){.shop-main{padding-bottom:72px}.shop-grid{gap:10px}.shop-card h3{font-size:20px}.shop-card-body p{display:none}.shop-card-foot{align-items:flex-start;flex-direction:column}.shop-add{width:100%}.field-row{grid-template-columns:1fr}.shop-hero{padding-top:40px}.shop-hero h1{font-size:clamp(54px,16vw,76px)}.summary{padding:20px}.pdp-buy{grid-template-columns:1fr}.qty{width:max-content}.pdp-buy .shop-btn{min-height:56px}}
 @media(prefers-reduced-motion:reduce){.shop-main{animation:none}}
+
+
+/* Motivational athlete photography on the major shopping journey pages.
+   Keep imagery to the right so headings, filters and forms remain readable. */
+.shop-hero[class*="shop-hero--"]{isolation:isolate;overflow:hidden;min-height:250px;display:flex;flex-direction:column;justify-content:center}
+.shop-hero[class*="shop-hero--"]::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-repeat:no-repeat;background-position:center,right center;background-size:100% 100%,auto 150%;opacity:.72}
+.shop-hero[class*="shop-hero--"]>*{position:relative;z-index:1}
+.shop-hero--shop::after{background-image:linear-gradient(90deg,#080808 0%,#080808ed 38%,#08080865 72%,#080808b8 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/Arnold_Schwarzenegger_1984.jpg")}
+.shop-hero--cart::after{background-image:linear-gradient(90deg,#080808 0%,#080808e8 38%,#08080855 72%,#080808a8 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/Rita_Jairath.jpg")}
+.shop-hero--checkout::after{background-image:linear-gradient(90deg,#080808 0%,#080808e8 38%,#08080855 72%,#080808a8 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/Lenda_Murray,_cropped.jpg")}
+.shop-hero--wishlist::after{background-image:linear-gradient(90deg,#080808 0%,#080808e8 38%,#08080855 72%,#080808a8 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/Female_bodybuilder_2016_Women_bodybuilding.jpg")}
+.shop-hero-credit{align-self:flex-start;margin-top:18px;color:#bdbdb7;font-size:9px;letter-spacing:.04em;text-decoration:underline;text-underline-offset:3px}
+.shop-hero-credit:hover{color:#fff}
+@media(max-width:640px){
+ .shop-hero[class*="shop-hero--"]{min-height:210px;padding-right:8px}
+ .shop-hero[class*="shop-hero--"]::after{background-size:100% 100%,auto 115%;background-position:center,right -28px center;opacity:.58}
+ .shop-hero-credit{font-size:8px;margin-top:12px}
+}
+@media(prefers-reduced-motion:reduce){.shop-hero[class*="shop-hero--"]::after{transition:none}}
