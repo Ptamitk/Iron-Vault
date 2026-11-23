@@ -91,7 +91,8 @@ export default function SiteHeader({ variant = 'solid' }) {
           <nav className="site-nav" aria-label="Main">
             {NAV.map(([label, to]) => (<Link key={label} to={to}>{label}</Link>))}
           </nav>
-          <div className="site-actions">\n            <Link className="bag-btn wishlist-nav" to="/wishlist" aria-label={`Wishlist, ${ids.length} saved products`}><Heart size={21} aria-hidden="true" /><span className="bag-label">SAVED</span>{ids.length > 0 && <i className="bag-count">{ids.length}</i>}</Link>
+          <div className="site-actions">
+            <Link className="bag-btn wishlist-nav" to="/wishlist" aria-label={`Wishlist, ${ids.length} saved products`}><Heart size={21} aria-hidden="true" /><span className="bag-label">SAVED</span>{ids.length > 0 && <i className="bag-count">{ids.length}</i>}</Link>
             <Link className="bag-btn" to="/cart" aria-label={`Shopping bag, ${count} ${count === 1 ? 'item' : 'items'}`}>
               <ShoppingBag size={22} aria-hidden="true" />
               <span className="bag-label">BAG</span>
