@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowUpRight, Plus } from 'lucide-react'
 import { gsap } from 'gsap'
