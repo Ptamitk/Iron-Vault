@@ -192,7 +192,7 @@ export default function App() {
               <div className="hero-stat"><dt>FREE SHIPPING</dt><dd>{formatINR(store.freeShippingAbove)}+</dd></div>
             </dl>
           </div>
-          <p className="hero-photo-credit">Athlete photos: <a href="https://commons.wikimedia.org/wiki/File:Arnold_Schwarzenegger_1971.jpg" target="_blank" rel="noreferrer">Arnold Schwarzenegger</a> · <a href="https://commons.wikimedia.org/wiki/File:Rita_Jairath.jpg" target="_blank" rel="noreferrer">Rita Jairath</a> · Wikimedia Commons</p>
+          <p className="hero-photo-credit">Athlete photos: <a href="https://commons.wikimedia.org/wiki/File:Arnold_Schwarzenegger_1974.jpg" target="_blank" rel="noreferrer">Arnold Schwarzenegger</a> · <a href="https://commons.wikimedia.org/wiki/File:Female_bodybuilder_Aleesha_Young_flexing.jpg" target="_blank" rel="noreferrer" >Aleesha Young</a> · Wikimedia Commons</p>
         </section>
 
         <div className="marquee" aria-hidden="true">
