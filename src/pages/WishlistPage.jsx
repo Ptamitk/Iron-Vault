@@ -14,7 +14,7 @@ export default function WishlistPage() {
       <section className="shop-hero shop-hero--wishlist">
         <p className="eyebrow"><span className="eyebrow-line" /> SAVED FOR LATER</p>
         <h1>YOUR <em>WISHLIST.</em></h1>
-        <p className="shop-lede">Your saved products, all in one place.</p>\n        <a className="shop-hero-credit" href="https://commons.wikimedia.org/wiki/File:Female_bodybuilder_2016_Women_bodybuilding.jpg" target="_blank" rel="noreferrer">Athlete photo: Wikimedia Commons · CC0</a>
+        <p className="shop-lede">Your saved products, all in one place.</p>\n        <a className="shop-hero-credit" href="https://commons.wikimedia.org/wiki/File:Female_bodybuilder_2016_Women_bodybuilding.jpg" target="_blank" rel="noreferrer">Athlete photo: Wikimedia Commons · attribution required</a>
       </section>
       {saved.length ? (
         <div className="shop-grid">{saved.map((product) => <ProductCard key={product.id} product={product} />)}</div>
