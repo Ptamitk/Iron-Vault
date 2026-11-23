@@ -2,12 +2,12 @@ import { StrictMode, Suspense, lazy, useEffect } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import './index.css'
-import App from './App.jsx'
 import { CartProvider } from './lib/cart.jsx'
 import SmoothScroll from './components/SmoothScroll.jsx'
 import RouteFallback from './components/ui/RouteFallback.jsx'
 
-// Shop pages are loaded on demand so the landing page bundle stays as light as before.
+// Every route is lazy-loaded so the branded loader is available consistently.
+const HomePage = lazy(() => import('./App.jsx'))
 const ShopPage = lazy(() => import('./pages/ShopPage.jsx'))
 const ProductPage = lazy(() => import('./pages/ProductPage.jsx'))
 const CartPage = lazy(() => import('./pages/CartPage.jsx'))
@@ -34,7 +34,7 @@ createRoot(document.getElementById('root')).render(
         <ScrollToTop />
         <Suspense fallback={<RouteFallback />}>
           <Routes>
-            <Route path="/" element={<App />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/product/:id" element={<ProductPage />} />
             <Route path="/cart" element={<CartPage />} />
