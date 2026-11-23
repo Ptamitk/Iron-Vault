@@ -5,6 +5,7 @@ import './index.css'
 import App from './App.jsx'
 import { CartProvider } from './lib/cart.jsx'
 import SmoothScroll from './components/SmoothScroll.jsx'
+import RouteFallback from './components/ui/RouteFallback.jsx'
 
 // Shop pages are loaded on demand so the landing page bundle stays as light as before.
 const ShopPage = lazy(() => import('./pages/ShopPage.jsx'))
@@ -29,7 +30,7 @@ createRoot(document.getElementById('root')).render(
       <CartProvider>
         <SmoothScroll />
         <ScrollToTop />
-        <Suspense fallback={<div className="route-loading" role="status">LOADING…</div>}>
+        <Suspense fallback={<RouteFallback />}>
           <Routes>
             <Route path="/" element={<App />} />
             <Route path="/shop" element={<ShopPage />} />
