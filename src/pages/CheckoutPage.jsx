@@ -61,7 +61,7 @@ export default function CheckoutPage() {
   }
 
   const fieldProps = (key) => ({
-    id: `field-${key}`,
+    id: key === 'adult' ? 'field-adult' : `field-${key}`,
     value: form[key],
     onChange: set(key),
     'aria-invalid': errors[key] ? 'true' : undefined,
