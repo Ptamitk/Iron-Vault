@@ -756,7 +756,7 @@ export const products = [
   {
     id: 'cndmnd-bcaa',
     brand: 'CNDMND',
-    image: null,
+    image: '/products/cndmnd-bcaa-client.jpg',
     name: 'Branch Chain Amino Acids',
     category: 'Amino Acids',
     sizes: [],
