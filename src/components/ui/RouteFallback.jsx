@@ -1,4 +1,4 @@
-import PageLoader from './components/ui/PageLoader.jsx'
+import PageLoader from './PageLoader.jsx'
 
 export default function RouteFallback() {
   return <PageLoader label="PREPARING YOUR EXPERIENCE" />
