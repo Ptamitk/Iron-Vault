@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowUpRight, Menu, ShoppingBag, X } from 'lucide-react'
+import { ArrowUpRight, Heart, Menu, ShoppingBag, X } from 'lucide-react'
 import { useCart } from '../../lib/cart.jsx'
 import { formatINR, shopLink } from '../../lib/catalog.js'
 import { store } from '../../config/store.js'
+import { useWishlist } from '../../features/wishlist/useWishlist.js'
 import { getLenis } from '../SmoothScroll.jsx'
 import './layout.css'
 
@@ -27,6 +28,7 @@ const MENU_LINKS = [
 // variant: 'overlay' (transparent over the hero until you scroll) or 'solid' (shop pages)
 export default function SiteHeader({ variant = 'solid' }) {
   const { count } = useCart()
+  const { ids } = useWishlist()
   const [scrolled, setScrolled] = useState(false)
   const [hidden, setHidden] = useState(false)
   const [open, setOpen] = useState(false)
@@ -90,7 +92,7 @@ export default function SiteHeader({ variant = 'solid' }) {
           <nav className="site-nav" aria-label="Main">
             {NAV.map(([label, to]) => (<Link key={label} to={to}>{label}</Link>))}
           </nav>
-          <div className="site-actions">
+          <div className="site-actions">\n            <Link className="bag-btn wishlist-nav" to="/wishlist" aria-label={`Wishlist, ${ids.length} saved products`}><Heart size={21} aria-hidden="true" /><span className="bag-label">SAVED</span>{ids.length > 0 && <i className="bag-count">{ids.length}</i>}</Link>
             <Link className="bag-btn" to="/cart" aria-label={`Shopping bag, ${count} ${count === 1 ? 'item' : 'items'}`}>
               <ShoppingBag size={22} aria-hidden="true" />
               <span className="bag-label">BAG</span>
