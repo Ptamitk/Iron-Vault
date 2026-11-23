@@ -105,7 +105,7 @@ export default function CheckoutPage() {
   const payLabel = 'CONTINUE TO PAYMENT'
 
   return (
-    <ShopLayout title="Checkout">
+    <ShopLayout noindex title="Checkout">
       <section className="shop-hero">
         <p className="eyebrow"><span className="eyebrow-line" /> CHECKOUT</p>
         <h1>ALMOST <em>THERE.</em></h1>
