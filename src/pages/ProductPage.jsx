@@ -36,7 +36,7 @@ function ProductView({ product }) {
   }
 
   return (
-    <ShopLayout title={product.name} description={product.summary} seoPath={"/product/" + product.id} seoImage={product.image}>
+    <ShopLayout title={product.name} description={product.summary} seoPath={"/product/" + product.id} seoImage={product.image} seoType="product">
       <nav className="shop-crumbs" aria-label="Breadcrumb">
         <Link to="/shop">Shop</Link><span aria-hidden="true">/</span><span>{product.name}</span>
       </nav>
