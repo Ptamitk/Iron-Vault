@@ -56,7 +56,6 @@ export default function SiteHeader({ variant = 'solid' }) {
     openRef.current = open
     const lenis = getLenis()
     if (open) {
-      setHidden(false)
       lenis?.stop()
       document.documentElement.style.overflow = 'hidden'
       closeButton.current?.focus()
@@ -105,7 +104,7 @@ export default function SiteHeader({ variant = 'solid' }) {
               aria-expanded={open}
               aria-controls="mobile-menu"
               aria-label={open ? 'Close menu' : 'Open menu'}
-              onClick={() => setOpen((value) => !value)}
+              onClick={() => { if (!open) setHidden(false); setOpen((value) => !value) }}
             >
               {open ? <X size={26} aria-hidden="true" /> : <Menu size={26} aria-hidden="true" />}
             </button>
