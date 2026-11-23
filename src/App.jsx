@@ -173,6 +173,7 @@ export default function App() {
               <span className={index % 2 ? 'hero-word is-outline' : 'hero-word'} key={word}><span>{word}</span></span>
             ))}
           </div>
+          <div className="hero-athletes" aria-label="Full-body male and female bodybuilding athlete photography" role="img" />
           {hero && (
             <Link className="hero-media" to={`/product/${hero.id}`} aria-label={`View ${hero.name}`}>
               <ProductImage product={hero} eager />
