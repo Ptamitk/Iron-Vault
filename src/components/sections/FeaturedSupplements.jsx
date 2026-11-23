@@ -11,30 +11,31 @@ export default function FeaturedSupplements() {
   const featured = FEATURED_IDS.map((id) => byId[id]).filter(Boolean)
 
   return (
-    <section className="featured-section" id="supplements" aria-labelledby="featured-title">
-      <div className="range-heading">
-        <div><p className="eyebrow"><span className="eyebrow-line" /> THE SUPPLEMENTS / 003</p><h2 id="featured-title">FIND YOUR<br /><em>FAVOURITE FUEL.</em></h2></div>
-        <p>Hand-picked performance essentials from our partner brands. Start with a favourite, or browse the full range.</p>
-      </div>
+    <section className="featured" id="supplements" aria-labelledby="featured-title">
+      <header className="featured-head" data-reveal>
+        <p className="eyebrow"><span className="eyebrow-line" />HAND-PICKED</p>
+        <h2 id="featured-title" className="display">FIND YOUR<br /><span className="outline">FAVOURITE FUEL</span></h2>
+      </header>
 
-      <div className="featured-grid">
-        {featured.map((product, index) => (
-          <article className="feat-card" key={product.id}>
-            <Link className="feat-media" to={`/product/${product.id}`} tabIndex={-1} aria-hidden="true"><ProductImage product={product} /></Link>
-            <span className="feat-index">{String(index + 1).padStart(2, '0')} / {product.category.toUpperCase()}</span>
-            <div className="feat-info">
-              <div>
-                <h3>{product.name}</h3>
-                <p>{product.brand} · {product.priceINR != null ? `${product.priceFrom ? 'From ' : ''}${formatINR(product.priceINR)}` : 'Unavailable'}</p>
-              </div>
-              <Link className="feat-btn" to={`/product/${product.id}`} aria-label={`View ${product.name}`}><ArrowUpRight size={19} /></Link>
+      {featured.map((product, index) => (
+        <article className={index % 2 ? 'feat-row is-flip' : 'feat-row'} key={product.id}>
+          <Link className="feat-media" to={`/product/${product.id}`} tabIndex={-1} aria-hidden="true" data-parallax>
+            <ProductImage product={product} />
+          </Link>
+          <div className="feat-copy" data-reveal>
+            <span className="feat-num">{String(index + 1).padStart(2, '0')}</span>
+            <p className="eyebrow">{product.brand} / {product.category}</p>
+            <h3 className="display">{product.name}</h3>
+            <p className="feat-text">{product.summary}</p>
+            <div className="feat-meta">
+              <strong>{product.priceINR != null ? `${product.priceFrom ? 'From ' : ''}${formatINR(product.priceINR)}` : 'Unavailable'}</strong>
+              <Link className="btn" to={`/product/${product.id}`}>VIEW PRODUCT <ArrowUpRight size={18} aria-hidden="true" /></Link>
             </div>
-          </article>
-        ))}
-      </div>
+          </div>
+        </article>
+      ))}
 
-      <p className="featured-cta"><Link to="/shop">SHOP ALL PRODUCTS <ArrowUpRight size={15} /></Link></p>
-      <p className="demo-disclaimer">Product details are summarised from the brands&apos; public information. Always check the label on your pack. Prices include taxes.</p>
+      <p className="featured-cta" data-reveal><Link className="text-link" to="/shop">SHOP ALL PRODUCTS <ArrowUpRight size={16} aria-hidden="true" /></Link></p>
     </section>
   )
 }

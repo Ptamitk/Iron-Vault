@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
 import { CartProvider } from './lib/cart.jsx'
+import SmoothScroll from './components/SmoothScroll.jsx'
 
 // Shop pages are loaded on demand so the landing page bundle stays as light as before.
 const ShopPage = lazy(() => import('./pages/ShopPage.jsx'))
@@ -26,6 +27,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
       <CartProvider>
+        <SmoothScroll />
         <ScrollToTop />
         <Suspense fallback={<div className="route-loading" role="status">LOADING…</div>}>
           <Routes>

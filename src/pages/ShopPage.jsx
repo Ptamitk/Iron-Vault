@@ -71,11 +71,14 @@ export default function ShopPage() {
         </div>
       </section>
 
-      <p className="shop-count" role="status">{visible.length} {visible.length === 1 ? 'product' : 'products'}</p>
+      <p className="shop-count" role="status">{visible.length} {visible.length === 1 ? 'product' : 'products'}{(query || category !== 'All') && <> · <button type="button" className="shop-link-btn" style={{ display: 'inline-flex', minHeight: 0, border: 0, background: 'none', textDecoration: 'underline' }} onClick={() => setParams({}, { replace: true })}>Clear filters</button></>}</p>
       {visible.length > 0 ? (
         <div className="shop-grid">{visible.map((product) => (<ProductCard key={product.id} product={product} />))}</div>
       ) : (
-        <p className="shop-empty">No products match your search. Try a different keyword or category.</p>
+        <div className="shop-empty">
+          <p>No products match your search. Try a different keyword or category.</p>
+          <button type="button" className="shop-btn" style={{ width: 'auto' }} onClick={() => setParams({}, { replace: true })}>CLEAR FILTERS</button>
+        </div>
       )}
     </ShopLayout>
   )

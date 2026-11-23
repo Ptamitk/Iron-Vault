@@ -10,6 +10,8 @@ export const groupOf = (category) => (category.startsWith('Pre-Workout') ? 'Pre-
 
 export const isBuyable = (product) => Boolean(product) && product.priceINR != null && product.inStock !== false
 
+export const shopLink = (category) => (category ? '/shop?cat=' + encodeURIComponent(category) : '/shop')
+
 export const lineKey = (id, flavour, size) => [id, flavour || '', size || ''].join('|')
 
 export const formatINR = (amount) => '₹' + Number(amount).toLocaleString('en-IN')
