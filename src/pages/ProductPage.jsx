@@ -10,7 +10,6 @@ import { byId, formatINR, groupOf, isBuyable } from '../lib/catalog.js'
 import { products } from '../data/products.js'
 import { store } from '../config/store.js'
 import { useWishlist } from '../features/wishlist/useWishlist.js'
-import SEO from '../components/seo/SEO.jsx'
 
 function ProductView({ product }) {
   const { add } = useCart()
@@ -37,8 +36,7 @@ function ProductView({ product }) {
   }
 
   return (
-    <ShopLayout title={product.name}>
-      <SEO title={product.name} description={product.summary} path={'/product/' + product.id} image={product.image} type="product" />
+    <ShopLayout title={product.name} description={product.summary} seoPath={"/product/" + product.id} seoImage={product.image}>
       <nav className="shop-crumbs" aria-label="Breadcrumb">
         <Link to="/shop">Shop</Link><span aria-hidden="true">/</span><span>{product.name}</span>
       </nav>
