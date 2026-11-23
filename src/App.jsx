@@ -100,10 +100,6 @@ export default function App() {
   const hero = byId[HERO_PRODUCT]
   const brands = new Set(products.map((product) => product.brand)).size
 
-  useEffect(() => {
-    document.title = `${store.name} | Performance supplements`
-  }, [])
-
   useGSAP(
     () => {
       const motion = gsap.matchMedia()
