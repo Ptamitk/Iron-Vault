@@ -24,6 +24,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Commit generated npm lockfile
+        if: github.event_name == 'push'
         run: |
           if ! git diff --quiet -- package-lock.json; then
             git config user.name "github-actions[bot]"
