@@ -564,7 +564,7 @@ export const products = [
   {
     id: 'bsn-amino-x-eaas',
     brand: 'BSN',
-    image: null,
+    image: 'https://www.gobsn.com/cdn/shop/files/bsn-amino-xr-eaas_Image_01.png?v=1761215093&width=800',
     name: 'Amino X EAA',
     category: 'Amino Acids',
     sizes: [],
@@ -596,7 +596,7 @@ export const products = [
   {
     id: 'now-foods-tribulus',
     brand: 'NOW Foods',
-    image: null,
+    image: 'https://www.nowfoods.com/sites/default/files/styles/cloudzoom_image/public/2024-12/2170_v10.png?itok=kSYfzVy5',
     name: 'Tribulus',
     category: 'Herbal & Wellness',
     sizes: [],
@@ -628,7 +628,7 @@ export const products = [
   {
     id: 'ronnie-coleman-creatine-adventure',
     brand: 'Ronnie Coleman Signature Series',
-    image: null,
+    image: 'https://www.nutritionsystems.com.au/media/Product%20Images/Ronnie%20Coleman%20Signature%20Series/Creatine_Adventure/RCSS_Creatine_Adventure_45_Servings_Dragonfruit_Front.png',
     name: 'Creatine Adventure',
     category: 'Creatine',
     sizes: [],
@@ -676,7 +676,7 @@ export const products = [
   {
     id: 'ronnie-coleman-yeah-buddy',
     brand: 'Ronnie Coleman Signature Series',
-    image: null,
+    image: 'https://www.nutritionsystems.com.au/media/Product%20Images/Ronnie%20Coleman%20Signature%20Series/Yeah%20Buddy%20Xtreme/RCSS_Yeah-Buddy-Xtreme_30Serve_BlueRazz_Front.png',
     name: 'Yeah Buddy (variant to verify)',
     category: 'Pre-Workout',
     sizes: [],
@@ -724,7 +724,7 @@ export const products = [
   {
     id: 'redcon1-total-war',
     brand: 'Redcon1',
-    image: null,
+    image: 'https://fulfillment.redcon1.com/cdn/shop/files/TW_VICECITY_30SERV_FLV-2023_0c3f2479-1693-4f27-9b00-4b5e77e28b2a.png?v=1730912197&width=1200',
     name: 'Total War',
     category: 'Pre-Workout',
     sizes: [],
@@ -868,7 +868,7 @@ export const products = [
   {
     id: 'bsn-syntha-6',
     brand: 'BSN',
-    image: null,
+    image: 'https://www.gobsn.com/cdn/shop/files/S6_Blueberry_FR.png?v=1778595085&width=1200',
     name: 'Syntha-6',
     category: 'Protein',
     sizes: [],
@@ -998,7 +998,7 @@ export const products = [
   {
     id: 'now-foods-l-arginine',
     brand: 'NOW Foods',
-    image: null,
+    image: 'https://www.nowfoods.com/sites/default/files/styles/cloudzoom_image/public/2023-07/0030_mainimage.png?itok=O8CHjqWZ',
     name: 'L-Arginine',
     category: 'Amino Acids',
     sizes: [],
