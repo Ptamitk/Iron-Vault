@@ -22,14 +22,18 @@ export default function PaymentPage() {
     setBusy(true)
     setError('')
     try {
+      let completedOrder
       if (order.method === 'online') {
         const result = await payOnline(order)
-        order.status = result.status === 'demo' ? 'demo-paid' : 'paid'
-        order.paymentId = result.paymentId
+        completedOrder = {
+          ...order,
+          status: result.status === 'demo' ? 'demo-paid' : 'paid',
+          paymentId: result.paymentId,
+        }
       } else {
-        order.status = 'cod-pending'
+        completedOrder = { ...order, status: 'cod-pending' }
       }
-      saveOrder(order)
+      saveOrder(completedOrder)
       clearPendingOrder()
       clear()
       navigate('/order/success', { replace: true })
