@@ -37,3 +37,14 @@
   .showcase.is-animated .showcase-copy p{font-size:14px;line-height:1.55;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   .showcase-meta strong{font-size:28px}
 }
+
+/* Campaign-grade pinned product chapter */
+.showcase{padding-block:clamp(80px,10vw,130px)}
+.showcase-top{font-size:10px;letter-spacing:.22em}
+.showcase-copy h2{font-weight:800;letter-spacing:-.025em}
+.showcase-visual .pimg{background:#ededE9;box-shadow:0 30px 70px #0007}
+.showcase-visual .pimg img{mix-blend-mode:multiply}
+.showcase-meta strong{font-family:var(--font-body);font-size:18px;font-weight:800}
+.showcase-meta a{font-size:10px;font-weight:800;letter-spacing:.14em}
+.showcase.is-animated .showcase-item{gap:clamp(24px,5vw,76px)}
+@media(max-width:800px){.showcase{padding-block:70px}.showcase-copy h2{font-size:clamp(42px,12vw,70px)}}
