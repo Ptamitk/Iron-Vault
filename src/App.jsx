@@ -13,6 +13,7 @@ import { products } from './data/products.js'
 import { byId, formatINR, groupOf, shopLink } from './lib/catalog.js'
 import { store } from './config/store.js'
 import './App.css'
+import SEO from './components/seo/SEO.jsx'
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)
 
@@ -166,6 +167,7 @@ export default function App() {
 
   return (
     <div className="landing" ref={rootRef}>
+      <SEO title="Performance Supplements" description="Shop international performance nutrition brands at Iron Vault. Explore pre-workout, protein, creatine and training essentials." path="/" />
       <SiteHeader variant="overlay" />
       <main>
         <section className="hero" aria-labelledby="hero-title">
