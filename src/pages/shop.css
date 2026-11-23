@@ -275,9 +275,9 @@ input[type=checkbox],input[type=radio]{width:auto;min-height:0}
 .shop-hero[class*="shop-hero--"]{isolation:isolate;overflow:hidden;min-height:250px;display:flex;flex-direction:column;justify-content:center}
 .shop-hero[class*="shop-hero--"]::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background-repeat:no-repeat;background-position:center,right center;background-size:100% 100%,auto 150%;opacity:.72}
 .shop-hero[class*="shop-hero--"]>*{position:relative;z-index:1}
-.shop-hero--shop::after{background-image:linear-gradient(90deg,#080808 0%,#080808ed 38%,#08080865 72%,#080808b8 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/Arnold_Schwarzenegger_1984.jpg")}
-.shop-hero--cart::after{background-image:linear-gradient(90deg,#080808 0%,#080808e8 38%,#08080855 72%,#080808a8 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/Rita_Jairath.jpg")}
-.shop-hero--checkout::after{background-image:linear-gradient(90deg,#080808 0%,#080808e8 38%,#08080855 72%,#080808a8 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/Lenda_Murray,_cropped.jpg")}
+.shop-hero--shop::after{background-image:linear-gradient(90deg,#080808 0%,#080808ed 38%,#08080865 72%,#080808b8 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/Arnold_Schwarzenegger_1974.jpg")}
+.shop-hero--cart::after{background-image:linear-gradient(90deg,#080808 0%,#080808e8 38%,#08080855 72%,#080808a8 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/Female_bodybuilder_Aleesha_Young_flexing.jpg")}
+.shop-hero--checkout::after{background-image:linear-gradient(90deg,#080808 0%,#080808e8 38%,#08080855 72%,#080808a8 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/Erin_Stern_IFBB_Pro.jpg")}
 .shop-hero--wishlist::after{background-image:linear-gradient(90deg,#080808 0%,#080808e8 38%,#08080855 72%,#080808a8 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/Female_bodybuilder_2016_Women_bodybuilding.jpg")}
 .shop-hero-credit{align-self:flex-start;margin-top:18px;color:#bdbdb7;font-size:9px;letter-spacing:.04em;text-decoration:underline;text-underline-offset:3px}
 .shop-hero-credit:hover{color:#fff}
