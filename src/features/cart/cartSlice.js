@@ -8,7 +8,7 @@ function readCart() {
   try {
     const parsed = JSON.parse(window.localStorage.getItem(STORAGE_KEY) || '[]')
     return Array.isArray(parsed)
-      ? parsed.filter((line) => line && typeof line.id === 'string' && Number.isFinite(Number(line.qty)))
+      ? parsed.filter((line) => line && typeof line.id === 'string' && Number.isFinite(Number(line.qty))).map((line) => ({ ...line, qty: Math.min(shopConfig.maxQtyPerItem, Math.max(1, Math.floor(Number(line.qty)))) }))
       : []
   } catch {
     return []
