@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { Check, Minus, Plus } from 'lucide-react'
+import { Check, Heart, Minus, Plus } from 'lucide-react'
 import ShopLayout from '../components/shop/ShopLayout.jsx'
 import ProductCard from '../components/shop/ProductCard.jsx'
 import NotFoundPage from './NotFoundPage.jsx'
@@ -9,9 +9,13 @@ import { useCart } from '../lib/cart.jsx'
 import { byId, formatINR, groupOf, isBuyable } from '../lib/catalog.js'
 import { products } from '../data/products.js'
 import { store } from '../config/store.js'
+import { useWishlist } from '../features/wishlist/useWishlist.js'
+import SEO from '../components/seo/SEO.jsx'
 
 function ProductView({ product }) {
   const { add } = useCart()
+  const { has, toggle } = useWishlist()
+  const isSaved = has(product.id)
   const [flavour, setFlavour] = useState(product.flavours[0] || null)
   const [size, setSize] = useState(product.sizes[0]?.label || null)
   const [qty, setQty] = useState(1)
@@ -34,6 +38,7 @@ function ProductView({ product }) {
 
   return (
     <ShopLayout title={product.name}>
+      <SEO title={product.name} description={product.summary} path={'/product/' + product.id} image={product.image} type="product" />
       <nav className="shop-crumbs" aria-label="Breadcrumb">
         <Link to="/shop">Shop</Link><span aria-hidden="true">/</span><span>{product.name}</span>
       </nav>
@@ -44,6 +49,7 @@ function ProductView({ product }) {
         <div className="pdp-info">
           <p className="eyebrow"><span className="eyebrow-line" /> {product.brand.toUpperCase()}</p>
           <h1>{product.name}</h1>
+          <button type="button" className={isSaved ? 'pdp-save is-saved' : 'pdp-save'} onClick={() => toggle(product.id)} aria-pressed={isSaved}><Heart size={17} fill={isSaved ? 'currentColor' : 'none'} /> {isSaved ? 'SAVED TO WISHLIST' : 'SAVE TO WISHLIST'}</button>
           <p className="pdp-price">{buyable ? `${product.priceFrom ? 'From ' : ''}${formatINR(product.priceINR)}` : 'Currently unavailable'}<small> incl. taxes</small></p>
           <p className="pdp-summary">{product.summary}</p>
 
