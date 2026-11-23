@@ -916,7 +916,7 @@ export const products = [
   {
     id: 'muscletech-nitro-tech',
     brand: 'MuscleTech',
-    image: null,
+    image: 'https://www.muscletech.com/cdn/shop/files/mt-nitro-tech-milk-chocolate-1lb.png?v=1764974667&width=1200',
     name: 'Nitro-Tech',
     category: 'Protein',
     sizes: [],
@@ -948,7 +948,7 @@ export const products = [
   {
     id: 'rule-1-whey-protein',
     brand: 'Rule 1',
-    image: null,
+    image: 'https://www.ruleoneproteins.com/cdn/shop/files/wp_2lb_chocolate-fudge-front.png?v=1778100173&width=1200',
     name: 'R1 Whey Protein',
     category: 'Protein',
     sizes: [],
