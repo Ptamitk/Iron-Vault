@@ -40,7 +40,7 @@ export default function PaymentPage() {
   }
 
   return (
-    <ShopLayout title="Secure payment" description="Review your Iron Vault order and continue to secure payment.">
+    <ShopLayout noindex title="Secure payment" description="Review your Iron Vault order and continue to secure payment.">
       <section className="shop-hero">
         <p className="eyebrow"><span className="eyebrow-line" /> FINAL STEP</p>
         <h1>SECURE <em>PAYMENT.</em></h1>
