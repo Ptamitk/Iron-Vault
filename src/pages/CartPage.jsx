@@ -11,9 +11,9 @@ export default function CartPage() {
 
   return (
     <ShopLayout noindex title="Your bag">
-      <section className="shop-hero">
+      <section className="shop-hero shop-hero--cart">
         <p className="eyebrow"><span className="eyebrow-line" /> YOUR BAG</p>
-        <h1>YOUR <em>SELECTION.</em></h1>
+        <h1>YOUR <em>SELECTION.</em></h1>\n        <a className="shop-hero-credit" href="https://commons.wikimedia.org/wiki/File:Rita_Jairath.jpg" target="_blank" rel="noreferrer">Athlete photo: Rita Jairath · Wikimedia Commons</a>
       </section>
 
       {lines.length === 0 ? (
