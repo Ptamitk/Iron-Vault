@@ -21,3 +21,19 @@
   .feat-num{font-size:84px}
 }
 @media(prefers-reduced-motion:reduce){.feat-media .pimg{transition:none!important}.feat-row:hover .feat-media .pimg{transform:none}}
+
+/* Refined alternating editorial product stories */
+.featured{padding-top:clamp(80px,10vw,145px);padding-bottom:clamp(70px,9vw,120px)}
+.featured-head{margin-bottom:clamp(42px,7vw,96px)}
+.featured-head h2{font-weight:800;letter-spacing:-.025em}
+.feat-row{gap:clamp(26px,6vw,100px);padding:clamp(34px,5vw,70px) 0}
+.feat-media{background:#efefeb;position:relative}
+.feat-media .pimg{aspect-ratio:1.12/1}
+.feat-media .pimg img{mix-blend-mode:multiply}
+.feat-copy{gap:clamp(12px,2vw,22px)}
+.feat-num{font-weight:900;-webkit-text-stroke:1px #ffffff30}
+.feat-copy h3{font-weight:800;letter-spacing:-.02em}
+.feat-copy .eyebrow{font-size:10px}
+.feat-meta strong{font-family:var(--font-body);font-size:18px;font-weight:800}
+.feat-meta .btn{min-height:50px}
+@media(max-width:800px){.feat-media .pimg{aspect-ratio:1.2/1}.feat-copy h3{font-size:clamp(40px,11vw,68px)}}
