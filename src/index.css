@@ -1,32 +1,32 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-heading: "Anton", "Impact", "Arial Narrow", sans-serif;
-  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --color-iv-black: #060606;
-  --color-iv-dark: #101010;
-  --color-iv-panel: #171717;
-  --color-iv-cream: #F4F1EC;
-  --color-iv-muted: #A9A9A3;
-  --color-iv-accent: #E4231F;
-  --color-iv-accent-text: #FF5B54;
+  --font-heading: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --color-iv-black: #080808;
+  --color-iv-dark: #111111;
+  --color-iv-panel: #191919;
+  --color-iv-cream: #F7F7F5;
+  --color-iv-muted: #A6A6A3;
+  --color-iv-accent: #E51E26;
+  --color-iv-accent-text: #FF454B;
 }
 
 :root {
-  --font-heading: "Anton", "Impact", "Arial Narrow", sans-serif;
-  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --color-iv-black: #060606;
-  --color-iv-dark: #101010;
-  --color-iv-panel: #171717;
-  --color-iv-cream: #F4F1EC;
-  --color-iv-muted: #A9A9A3;
-  --color-iv-accent: #E4231F;
-  --color-iv-accent-text: #FF5B54;
-  --color-iv-line: #ffffff1f;
-  --gutter: clamp(20px, 4vw, 56px);
-  --bar-h: 36px;
-  --head-h: 72px;
+  --font-heading: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --color-iv-black: #080808;
+  --color-iv-dark: #111111;
+  --color-iv-panel: #191919;
+  --color-iv-cream: #F7F7F5;
+  --color-iv-muted: #A6A6A3;
+  --color-iv-accent: #E51E26;
+  --color-iv-accent-text: #FF454B;
+  --color-iv-line: #ffffff24;
+  --gutter: clamp(20px, 4.5vw, 72px);
+  --bar-h: 34px;
+  --head-h: 76px;
   font-family: var(--font-body);
   color: var(--color-iv-cream);
   background: var(--color-iv-black);
@@ -47,27 +47,19 @@ button { cursor: pointer; }
 a { color: inherit; text-decoration: none; }
 img, video { display: block; max-width: 100%; }
 ::selection { background: var(--color-iv-accent); color: #fff; }
-
 :focus-visible { outline: 2px solid var(--color-iv-accent-text); outline-offset: 3px; }
-
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
 
-/* Shared UI */
-.btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 0 30px; font-family: var(--font-body); font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #fff; background: var(--color-iv-accent); border: 2px solid var(--color-iv-accent); cursor: pointer; transition: background .3s, color .3s, border-color .3s, transform .3s; }
-.btn:hover:not(:disabled) { background: #fff; border-color: #fff; color: var(--color-iv-black); }
+.btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 54px; padding: 0 30px; font-family: var(--font-body); font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--color-iv-accent); border: 2px solid var(--color-iv-accent); cursor: pointer; transition: background .3s, color .3s, border-color .3s, transform .3s; }
+.btn:hover:not(:disabled) { background: #fff; border-color: #fff; color: var(--color-iv-black); transform: translateY(-2px); }
 .btn:disabled { opacity: .5; cursor: not-allowed; }
 .btn-ghost { background: transparent; border-color: #ffffff55; color: var(--color-iv-cream); }
 .btn-ghost:hover:not(:disabled) { background: var(--color-iv-cream); border-color: var(--color-iv-cream); color: var(--color-iv-black); }
 .btn-block { width: 100%; }
-.text-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; border-bottom: 2px solid var(--color-iv-accent); padding-bottom: 6px; transition: color .3s, border-color .3s; }
+.text-link { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; border-bottom: 2px solid var(--color-iv-accent); padding-bottom: 6px; transition: color .3s, border-color .3s; }
 .text-link:hover { color: var(--color-iv-accent-text); }
-
-.eyebrow { display: flex; align-items: center; gap: 14px; font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--color-iv-accent-text); }
+.eyebrow { display: flex; align-items: center; gap: 14px; font-size: 11px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--color-iv-accent-text); }
 .eyebrow-line { display: block; width: 34px; height: 2px; background: currentColor; flex: none; }
-
-.display { font-family: var(--font-heading); font-weight: 400; text-transform: uppercase; line-height: .9; letter-spacing: .005em; }
-.outline { color: transparent; -webkit-text-stroke: 2px var(--color-iv-cream); }
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; }
-}
+.display { font-family: var(--font-heading); font-weight: 800; text-transform: uppercase; line-height: .84; letter-spacing: -.015em; }
+.outline { color: transparent; -webkit-text-stroke: 1.5px var(--color-iv-cream); }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
