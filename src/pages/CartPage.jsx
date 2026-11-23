@@ -10,7 +10,7 @@ export default function CartPage() {
   const toFree = Math.max(0, store.freeShippingAbove - subtotal)
 
   return (
-    <ShopLayout title="Your bag">
+    <ShopLayout noindex title="Your bag">
       <section className="shop-hero">
         <p className="eyebrow"><span className="eyebrow-line" /> YOUR BAG</p>
         <h1>YOUR <em>SELECTION.</em></h1>
