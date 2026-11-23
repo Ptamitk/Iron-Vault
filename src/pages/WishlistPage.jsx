@@ -10,7 +10,7 @@ export default function WishlistPage() {
   const saved = products.filter((product) => ids.includes(product.id))
 
   return (
-    <ShopLayout title="Your wishlist">
+    <ShopLayout noindex title="Your wishlist">
       <section className="shop-hero">
         <p className="eyebrow"><span className="eyebrow-line" /> SAVED FOR LATER</p>
         <h1>YOUR <em>WISHLIST.</em></h1>
