@@ -19,7 +19,7 @@ export default function OrderSuccessPage() {
   const isDemo = order.status === 'demo-paid'
 
   return (
-    <ShopLayout title="Order confirmed">
+    <ShopLayout noindex title="Order confirmed">
       <section className="shop-hero shop-center">
         <CheckCircle2 size={44} className="success-icon" aria-hidden="true" />
         <p className="eyebrow"><span className="eyebrow-line" /> ORDER {order.id}</p>
