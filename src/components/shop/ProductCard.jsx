@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Check, Plus } from 'lucide-react'
+import { Check, Heart, Plus } from 'lucide-react'
 import { useCart } from '../../lib/cart.jsx'
 import { formatINR, groupOf, isBuyable } from '../../lib/catalog.js'
 import ProductImage from './ProductImage.jsx'
+import { useWishlist } from '../../features/wishlist/useWishlist.js'
 
 export default function ProductCard({ product }) {
   const { add } = useCart()
+  const { has, toggle } = useWishlist()
+  const isSaved = has(product.id)
   const [added, setAdded] = useState(false)
   const timer = useRef(null)
   const buyable = isBuyable(product)
@@ -24,7 +27,7 @@ export default function ProductCard({ product }) {
 
   return (
     <article className="shop-card">
-      <Link className="shop-card-media" to={href} tabIndex={-1} aria-hidden="true"><ProductImage product={product} /></Link>
+      <div className="shop-card-media-wrap"><Link className="shop-card-media" to={href} tabIndex={-1} aria-hidden="true"><ProductImage product={product} /></Link><button type="button" className={isSaved ? "shop-wishlist is-saved" : "shop-wishlist"} onClick={() => toggle(product.id)} aria-label={isSaved ? `Remove ${product.name} from wishlist` : `Save ${product.name} to wishlist`} aria-pressed={isSaved}><Heart size={18} fill={isSaved ? "currentColor" : "none"} /></button></div>
       <Link className="shop-card-body" to={href}>
         <span className="shop-card-top"><b>{product.brand}</b><span>{groupOf(product.category)}</span></span>
         <h3>{product.name}</h3>
