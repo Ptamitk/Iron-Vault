@@ -22,7 +22,7 @@ jobs:
           node-version: 22
           cache: npm
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: Commit generated npm lockfile
         if: github.event_name == 'push'
         run: |
