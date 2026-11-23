@@ -2,10 +2,11 @@ import { formatINR } from './catalog.js'
 import { store } from '../config/store.js'
 
 const ORDER_KEY = 'iv-last-order-v1'
+const PENDING_ORDER_KEY = 'iv-pending-order-v1'
 
 export const newOrderId = () => 'IV-' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).slice(2, 5).toUpperCase()
 
-export function saveOrder(order) {
+export function savePendingOrder(order) {\n  try {\n    window.sessionStorage.setItem(PENDING_ORDER_KEY, JSON.stringify(order))\n    return true\n  } catch {\n    return false\n  }\n}\n\nexport function loadPendingOrder() {\n  try { return JSON.parse(window.sessionStorage.getItem(PENDING_ORDER_KEY) || 'null') } catch { return null }\n}\n\nexport function clearPendingOrder() {\n  try { window.sessionStorage.removeItem(PENDING_ORDER_KEY) } catch { /* ignore */ }\n}\n\nexport function saveOrder(order) {
   try {
     window.localStorage.setItem(ORDER_KEY, JSON.stringify(order))
   } catch {
