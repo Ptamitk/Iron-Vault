@@ -103,25 +103,13 @@
  .fuel-card .pimg,.faq-item button svg,.faq-body{transition:none!important}
 }
 
-/* Athlete motivation feature — licensed Wikimedia Commons photography. */
-.motivation{padding:clamp(76px,9vw,128px) var(--gutter);background:#0b0b0b;color:#f3f3f0;border-top:1px solid var(--color-iv-line)}
-.motivation-head{display:grid;gap:18px;margin-bottom:42px;max-width:900px}
-.motivation-head .eyebrow{color:var(--color-iv-accent)}
-.motivation-head h2{font-size:clamp(58px,9vw,142px);line-height:.86;letter-spacing:-.03em}
-.motivation-head h2 .outline{-webkit-text-stroke-color:#f3f3f0}
-.motivation-head>p:last-child{max-width:520px;color:#bdbdb7;font-size:15px;line-height:1.7}
-.motivation-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
-.motivation-card{position:relative;min-height:clamp(430px,52vw,680px);display:flex;align-items:flex-end;overflow:hidden;isolation:isolate;background-color:#171717;background-size:cover;background-position:center;transition:transform .5s cubic-bezier(.2,.75,.25,1)}
-.motivation-card::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,#0001 15%,#0005 48%,#000e 100%);transition:opacity .35s}
-.motivation-card:hover{transform:translateY(-5px)}
-.motivation-card:hover::before{opacity:.82}
-.motivation-card--arnold{background-image:url("https://upload.wikimedia.org/wikipedia/commons/8/80/Arnold_Schwarzenegger_1971.jpg")}
-.motivation-card--rita{background-image:url("https://upload.wikimedia.org/wikipedia/commons/b/b6/Rita_Jairath.jpg");background-position:center 28%}
-.motivation-card-copy{position:relative;z-index:1;padding:clamp(24px,4vw,52px);max-width:620px}
-.motivation-card-copy>span{font-size:10px;font-weight:800;letter-spacing:.2em;color:#ff454b}
-.motivation-card-copy h3{margin:12px 0;font-family:var(--font-heading);font-size:clamp(42px,6vw,86px);line-height:.82;letter-spacing:-.025em}
-.motivation-card-copy p{font-size:14px;color:#e2e2df}
-.motivation-credit{position:absolute;right:12px;bottom:12px;z-index:2;max-width:calc(100% - 24px);padding:7px 9px;background:#080808bd;color:#d4d4d0;font-size:9px;line-height:1.4;text-decoration:underline;text-underline-offset:2px}
-.motivation-credit:hover{color:#fff}
-@media(max-width:700px){.motivation-grid{grid-template-columns:1fr}.motivation-card{min-height:540px}.motivation-card--arnold{background-position:center 35%}.motivation-card--rita{background-position:center 22%}}
-@media(prefers-reduced-motion:reduce){.motivation-card{transition:none}}
+
+
+/* Full-bleed athlete photography behind the homepage hero. */
+.hero{isolation:isolate;background:#080808}
+.hero::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(90deg,#080808e8 0%,#080808a8 43%,#08080855 70%,#080808a8 100%),linear-gradient(0deg,#080808 0%,#08080810 55%,#08080855 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/Arnold_Schwarzenegger_1974.jpg"),url("https://commons.wikimedia.org/wiki/Special:FilePath/Rita_Jairath.jpg");background-size:100% 100%,100% 100%,50% 100%,50% 100%;background-position:center,center,left center,right center;background-repeat:no-repeat;opacity:.88}
+.hero::before{z-index:0;opacity:.12}
+.hero-photo-credit{position:absolute;right:var(--gutter);bottom:8px;z-index:3;color:#aaa;font-size:9px;text-decoration:underline;text-underline-offset:2px}
+.hero-photo-credit:hover{color:#fff}
+@media(max-width:980px){.hero::after{background-image:linear-gradient(90deg,#080808d8 0%,#08080872 55%,#080808a8 100%),linear-gradient(0deg,#080808 0%,#08080815 60%,#08080875 100%),url("https://commons.wikimedia.org/wiki/Special:FilePath/Arnold_Schwarzenegger_1974.jpg"),url("https://commons.wikimedia.org/wiki/Special:FilePath/Rita_Jairath.jpg");background-size:100% 100%,100% 100%,50% 72%,50% 72%;background-position:center,center,left top,right top}}
+@media(max-width:600px){.hero::after{background-size:100% 100%,100% 100%,50% 58%,50% 58%;background-position:center,center,left top,right top;opacity:.72}.hero-photo-credit{bottom:5px;font-size:8px}}
