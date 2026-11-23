@@ -206,6 +206,32 @@ export default function App() {
 
         <FeaturedSupplements />
         <ProductShowcase />
+
+        <section className="motivation" aria-labelledby="motivation-title">
+          <div className="motivation-head" data-reveal>
+            <p className="eyebrow"><span className="eyebrow-line" />BUILT BY DISCIPLINE</p>
+            <h2 id="motivation-title" className="display">NO SHORTCUTS.<br /><span className="outline">JUST WORK.</span></h2>
+            <p>Different journeys. One mindset: show up, stay consistent, earn your progress.</p>
+          </div>
+          <div className="motivation-grid">
+            <article className="motivation-card motivation-card--arnold" aria-label="Arnold Schwarzenegger, legendary bodybuilder">
+              <div className="motivation-card-copy">
+                <span>THE LEGACY</span>
+                <h3>ARNOLD<br />SCHWARZENEGGER</h3>
+                <p>Dream big. Train with purpose.</p>
+              </div>
+              <a className="motivation-credit" href="https://commons.wikimedia.org/wiki/File:Arnold_Schwarzenegger_1971.jpg" target="_blank" rel="noreferrer">Photo: John E. Biever / Wikimedia Commons · Public domain (US)</a>
+            </article>
+            <article className="motivation-card motivation-card--rita" aria-label="Rita Jairath, Indian women bodybuilder">
+              <div className="motivation-card-copy">
+                <span>BREAK THE LIMIT</span>
+                <h3>RITA<br />JAIRATH</h3>
+                <p>Strength has no gender.</p>
+              </div>
+              <a className="motivation-credit" href="https://commons.wikimedia.org/wiki/File:Rita_Jairath.jpg" target="_blank" rel="noreferrer">Photo: Say Kin Lee / Wikimedia Commons · CC BY-SA 4.0</a>
+            </article>
+          </div>
+        </section>
         <Fuel />
 
         <section className="trust" aria-label="Why Iron Vault">
