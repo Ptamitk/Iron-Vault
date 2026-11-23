@@ -23,7 +23,9 @@ export default function SEO({ title, description, path, image, type = 'website',
     setMeta('meta[property="og:type"]', 'property', 'og:type', type)
     setMeta('meta[property="og:url"]', 'property', 'og:url', canonical)
     setMeta('meta[name="twitter:card"]', 'name', 'twitter:card', image ? 'summary_large_image' : 'summary')
-    if (image) setMeta('meta[property="og:image"]', 'property', 'og:image', image)\n    else document.head.querySelector('meta[property="og:image"]')?.remove()\n    setMeta('meta[name="robots"]', 'name', 'robots', noindex ? 'noindex,nofollow' : 'index,follow')
+    if (image) setMeta('meta[property="og:image"]', 'property', 'og:image', image)
+    else document.head.querySelector('meta[property="og:image"]')?.remove()
+    setMeta('meta[name="robots"]', 'name', 'robots', noindex ? 'noindex,nofollow' : 'index,follow')
 
     let link = document.head.querySelector('link[rel="canonical"]')
     if (!link) {
