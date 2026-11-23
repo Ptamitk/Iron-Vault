@@ -106,9 +106,9 @@ export default function CheckoutPage() {
 
   return (
     <ShopLayout noindex title="Checkout">
-      <section className="shop-hero">
+      <section className="shop-hero shop-hero--checkout">
         <p className="eyebrow"><span className="eyebrow-line" /> CHECKOUT</p>
-        <h1>ALMOST <em>THERE.</em></h1>
+        <h1>ALMOST <em>THERE.</em></h1>\n        <a className="shop-hero-credit" href="https://commons.wikimedia.org/wiki/File:Lenda_Murray,_cropped.jpg" target="_blank" rel="noreferrer">Athlete photo: Lenda Murray · Wikimedia Commons</a>
       </section>
 
       <form className="cart-layout checkout" onSubmit={onSubmit} noValidate>
