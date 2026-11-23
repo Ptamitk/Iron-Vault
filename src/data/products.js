@@ -692,7 +692,7 @@ export const products = [
   {
     id: 'musclemeds-carnivor',
     brand: 'MuscleMeds',
-    image: null,
+    image: 'https://musclemedsrx.com/cdn/shop/files/Carnivor-Renders-4lb-Chocolate-PB_1800x.png?v=1759470660',
     name: 'Carnivor',
     category: 'Protein',
     sizes: [],
@@ -804,7 +804,7 @@ export const products = [
   {
     id: 'psychotic-pre-workout',
     brand: 'Insane Labz',
-    image: null,
+    image: 'https://insanelabz.com/cdn/shop/files/IL_Psychotic_Crystal_Lake_Front_Render.722_6a786fda-9c54-4aab-af09-004f1b98a7a0.png?v=1792085792&width=1200',
     name: 'Psychotic',
     category: 'Pre-Workout',
     sizes: [],
