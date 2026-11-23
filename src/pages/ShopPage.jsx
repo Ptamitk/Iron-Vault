@@ -46,10 +46,10 @@ export default function ShopPage() {
 
   return (
     <ShopLayout title="Shop">
-      <section className="shop-hero">
+      <section className="shop-hero shop-hero--shop">
         <p className="eyebrow"><span className="eyebrow-line" /> THE SHOP</p>
         <h1>ALL <em>PRODUCTS.</em></h1>
-        <p className="shop-lede">Performance essentials from our partner brands. Prices include taxes.</p>
+        <p className="shop-lede">Performance essentials from our partner brands. Prices include taxes.</p>\n        <a className="shop-hero-credit" href="https://commons.wikimedia.org/wiki/File:Arnold_Schwarzenegger_1984.jpg" target="_blank" rel="noreferrer">Athlete photo: Arnold Schwarzenegger · Wikimedia Commons</a>
       </section>
 
       <section className="shop-controls" aria-label="Filter and sort products">
