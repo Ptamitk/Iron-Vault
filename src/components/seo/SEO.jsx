@@ -1,13 +1,11 @@
 import { useEffect } from 'react'
 import { store } from '../../config/store.js'
 
-const SITE_ORIGIN = 'https://ironvault.in'
-
 export default function SEO({ title, description, path, image, type = 'website' }) {
   useEffect(() => {
     const pageTitle = title ? `${title} | ${store.name}` : `${store.name} | Performance Nutrition`
     const summary = description || 'Explore performance nutrition and training essentials at Iron Vault.'
-    const canonical = `${SITE_ORIGIN}${path || window.location.pathname}`
+    const canonical = `${window.location.origin}${path || window.location.pathname}`
     document.title = pageTitle
 
     const setMeta = (selector, attribute, value, content) => {
