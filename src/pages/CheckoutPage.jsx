@@ -1,10 +1,10 @@
-import { useRef, useState } from 'react'
+import { useState } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 import ShopLayout from '../components/shop/ShopLayout.jsx'
 import { useCart } from '../lib/cart.jsx'
 import { computeTotals, formatINR } from '../lib/catalog.js'
-import { codEnabled, onlineEnabled, paymentMode, payOnline } from '../lib/payment.js'
-import { newOrderId, saveOrder } from '../lib/orders.js'
+import { codEnabled, onlineEnabled, paymentMode } from '../lib/payment.js'
+import { newOrderId, savePendingOrder } from '../lib/orders.js'
 import { store } from '../config/store.js'
 
 const STATES = [
@@ -43,18 +43,16 @@ function Field({ id, label, error, children }) {
 }
 
 export default function CheckoutPage() {
-  const { lines, clear } = useCart()
+  const { lines } = useCart()
   const navigate = useNavigate()
-  const placed = useRef(false)
   const [form, setForm] = useState(EMPTY)
   const [errors, setErrors] = useState({})
   const [method, setMethod] = useState(onlineEnabled ? 'online' : codEnabled ? 'cod' : null)
-  const [busy, setBusy] = useState(false)
   const [payError, setPayError] = useState('')
 
   const totals = computeTotals(lines, method === 'cod' ? 'cod' : 'online')
 
-  if (!placed.current && totals.lines.length === 0) return <Navigate to="/cart" replace />
+  if (totals.lines.length === 0) return <Navigate to="/cart" replace />
 
   const set = (key) => (event) => {
     const value = event.target.type === 'checkbox' ? event.target.checked : event.target.value
@@ -70,9 +68,8 @@ export default function CheckoutPage() {
     'aria-describedby': errors[key] ? `error-${key}` : undefined,
   })
 
-  async function onSubmit(event) {
+  function onSubmit(event) {
     event.preventDefault()
-    if (busy) return
     const found = validate(form)
     setErrors(found)
     const first = Object.keys(found)[0]
@@ -85,8 +82,6 @@ export default function CheckoutPage() {
       return
     }
 
-    setBusy(true)
-    setPayError('')
     const order = {
       id: newOrderId(),
       createdAt: new Date().toISOString(),
@@ -100,25 +95,14 @@ export default function CheckoutPage() {
       totals: { subtotal: totals.subtotal, shipping: totals.shipping, codFee: totals.codFee, total: totals.total },
     }
 
-    try {
-      if (method === 'online') {
-        const result = await payOnline(order)
-        order.status = result.status === 'demo' ? 'demo-paid' : 'paid'
-        order.paymentId = result.paymentId
-      } else {
-        order.status = 'cod-pending'
-      }
-      saveOrder(order)
-      placed.current = true
-      clear()
-      navigate('/order/success', { replace: true })
-    } catch (error) {
-      setPayError(error.message || 'Something went wrong. Please try again.')
-      setBusy(false)
+    if (!savePendingOrder(order)) {
+      setPayError('Your browser could not save this checkout. Please enable site storage and try again.')
+      return
     }
+    navigate('/payment')
   }
 
-  const payLabel = busy ? 'PROCESSING...' : method === 'cod' ? `PLACE ORDER · ${formatINR(totals.total)}` : `PAY ${formatINR(totals.total)}`
+  const payLabel = 'CONTINUE TO PAYMENT'
 
   return (
     <ShopLayout title="Checkout">
@@ -199,7 +183,7 @@ export default function CheckoutPage() {
           </dl>
           <p className="summary-note">Prices include taxes.</p>
           {payError && <p className="field-error" role="alert">{payError}</p>}
-          <button type="submit" className="shop-btn" disabled={busy || !method}>{payLabel}</button>
+          <button type="submit" className="shop-btn" disabled={!method}>{payLabel}</button>
           <Link className="shop-link-btn" to="/cart">BACK TO BAG</Link>
         </aside>
       </form>
