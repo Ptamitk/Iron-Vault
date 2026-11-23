@@ -18,4 +18,9 @@ export default defineConfig([
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
   },
+  {
+    // These files intentionally export app wiring or hooks alongside components.
+    files: ['src/main.jsx', 'src/lib/cart.jsx', 'src/components/SmoothScroll.jsx'],
+    rules: { 'react-refresh/only-export-components': 'off' },
+  },
 ])
