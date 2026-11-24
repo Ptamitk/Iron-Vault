@@ -4,7 +4,7 @@
     {% if section.settings.athlete_image != blank %}
       {{ section.settings.athlete_image | image_url: width: 1600 | image_tag: class: 'iv-hero__athlete', loading: 'eager', fetchpriority: 'high', widths: '480, 720, 960, 1200, 1600', sizes: '(min-width: 981px) 50vw, 100vw', alt: section.settings.athlete_image.alt | default: 'IRON VAULT athlete' }}
     {% else %}
-      <img class="iv-hero__athlete" src="{{ 'hero.png' | asset_url }}" alt="IRON VAULT athlete" width="343" height="361" fetchpriority="high">
+      <img class="iv-hero__athlete" src="{{ 'iv-athlete.jpg' | asset_url }}" alt="IRON VAULT athlete" width="280" height="230" fetchpriority="high">
     {% endif %}
     <span class="iv-hero__photo-shade" aria-hidden="true"></span>
     <span class="iv-hero__photo-index" aria-hidden="true">IV / 01</span>
@@ -13,10 +13,6 @@
   <div class="iv-hero__content">
     <div class="iv-hero__content-inner">
       <p class="iv-hero__eyebrow"><span></span>{{ section.settings.eyebrow | escape }}</p>
-      <div class="iv-hero__wordmark" aria-label="IRON VAULT">
-        <span>IRON<span class="iv-hero__wordmark-accent">VAULT</span></span>
-        <small>SPORTS NUTRITION MARKETPLACE</small>
-      </div>
       <h1 id="HeroHeading-{{ section.id }}" class="display iv-hero__heading">
         {% assign heading_lines = section.settings.heading | newline_to_br | split: '<br />' %}
         {% for line in heading_lines %}
