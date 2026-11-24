@@ -3,7 +3,8 @@
     "name": "theme_info",
     "theme_name": "IRON VAULT",
     "theme_version": "1.0.0",
-    "theme_author": "IRON VAULT"
+    "theme_author": "IRON VAULT",
+    "theme_documentation_url": "https://github.com/Ptamitk/Iron-Vault/tree/feature/frontend-completion-redux/shopify-theme"
   },
   {
     "name": "Brand settings",
