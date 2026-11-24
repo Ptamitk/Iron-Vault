@@ -1,1 +1,64 @@
-<div class="announcement">{{ settings.announcement_text | escape }}</div><header class="site-header"><a class="brand-mark" href="{{ routes.root_url }}">IRON<span>VAULT</span><i></i></a><nav class="desktop-nav"><a href="{{ routes.all_products_collection_url }}">SHOP ALL</a>{% for link in linklists.main-menu.links %}<a href="{{ link.url }}">{{ link.title | escape }}</a>{% endfor %}</nav><div class="header-actions"><a href="{{ routes.search_url }}">SEARCH</a><a href="{{ routes.account_url }}">ACCOUNT</a><a class="cart-link" href="{{ routes.cart_url }}">BAG <span>{{ cart.item_count }}</span></a><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="MobileNav">MENU</button></div></header><nav id="MobileNav" class="mobile-nav" hidden><a href="{{ routes.all_products_collection_url }}">SHOP ALL</a>{% for link in linklists.main-menu.links %}<a href="{{ link.url }}">{{ link.title | escape }}</a>{% endfor %}<a href="{{ routes.search_url }}">SEARCH</a></nav>{% schema %}{"name":"Header","settings":[]} {% endschema %}
+<div class="announcement">{{ settings.announcement_text | escape }}</div>
+{% assign main_menu = linklists['main-menu'] %}
+{% assign has_shop_all = false %}
+{% for link in main_menu.links %}
+  {% assign normalized_link_title = link.title | downcase | strip %}
+  {% if link.url == routes.all_products_collection_url or normalized_link_title == 'shop all' %}
+    {% assign has_shop_all = true %}
+  {% endif %}
+{% endfor %}
+
+<header class="site-header">
+  <a class="brand-mark" href="{{ routes.root_url }}">IRON<span>VAULT</span><i></i></a>
+
+  <nav class="desktop-nav" aria-label="Main navigation">
+    {% unless has_shop_all %}
+      <a href="{{ routes.all_products_collection_url }}">SHOP ALL</a>
+    {% endunless %}
+    {% assign rendered_shop_all = false %}
+    {% for link in main_menu.links %}
+      {% assign normalized_link_title = link.title | downcase | strip %}
+      {% if link.url == routes.all_products_collection_url or normalized_link_title == 'shop all' %}
+        {% unless rendered_shop_all %}
+          <a href="{{ link.url }}">{{ link.title | escape }}</a>
+          {% assign rendered_shop_all = true %}
+        {% endunless %}
+      {% else %}
+        <a href="{{ link.url }}">{{ link.title | escape }}</a>
+      {% endif %}
+    {% endfor %}
+  </nav>
+
+  <div class="header-actions">
+    <a href="{{ routes.search_url }}">SEARCH</a>
+    <a href="{{ routes.account_url }}">ACCOUNT</a>
+    <a class="cart-link" href="{{ routes.cart_url }}">BAG <span>{{ cart.item_count }}</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="MobileNav">MENU</button>
+  </div>
+</header>
+
+<nav id="MobileNav" class="mobile-nav" aria-label="Mobile navigation" hidden>
+  {% unless has_shop_all %}
+    <a href="{{ routes.all_products_collection_url }}">SHOP ALL</a>
+  {% endunless %}
+  {% assign rendered_mobile_shop_all = false %}
+  {% for link in main_menu.links %}
+    {% assign normalized_link_title = link.title | downcase | strip %}
+    {% if link.url == routes.all_products_collection_url or normalized_link_title == 'shop all' %}
+      {% unless rendered_mobile_shop_all %}
+        <a href="{{ link.url }}">{{ link.title | escape }}</a>
+        {% assign rendered_mobile_shop_all = true %}
+      {% endunless %}
+    {% else %}
+      <a href="{{ link.url }}">{{ link.title | escape }}</a>
+    {% endif %}
+  {% endfor %}
+  <a href="{{ routes.search_url }}">SEARCH</a>
+</nav>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": []
+}
+{% endschema %}
