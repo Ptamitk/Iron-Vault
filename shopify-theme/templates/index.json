@@ -1,0 +1,76 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "eyebrow": "PERFORMANCE NUTRITION",
+        "heading": "TRAIN.\\nFUEL.\\nRECOVER.\\nREPEAT.",
+        "subheading": "Performance supplements from trusted international brands, with every ingredient listed up front. Pick your goal and shop it in a minute.",
+        "button_label": "SHOP NOW",
+        "button_link": "/collections/all",
+        "secondary_label": "SHOP PROTEIN",
+        "secondary_link": "/collections/protein"
+      }
+    },
+    "marquee": {
+      "type": "marquee",
+      "settings": {}
+    },
+    "featured": {
+      "type": "featured-collection",
+      "settings": {
+        "heading": "BUILT FOR EVERY GOAL",
+        "products_to_show": 8,
+        "show_view_all": true
+      }
+    },
+    "trust": {
+      "type": "trust-strip",
+      "settings": {}
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "question": "Are the products genuine?",
+            "answer": "<p>Product sourcing and authenticity information should be confirmed with the store before launch.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "question": "How long does delivery take?",
+            "answer": "<p>Delivery estimates are shown at checkout based on your shipping address.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "question": "What payment options are available?",
+            "answer": "<p>Available payment methods are shown during Shopify checkout.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {}
+    },
+    "cta": {
+      "type": "closing-cta",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "marquee",
+    "featured",
+    "trust",
+    "faq",
+    "cta"
+  ]
+}

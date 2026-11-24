@@ -1,0 +1,38 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "IRON VAULT",
+    "theme_version": "1.0.0",
+    "theme_author": "IRON VAULT"
+  },
+  {
+    "name": "brand",
+    "title": "Brand settings",
+    "settings": [
+      {
+        "type": "text",
+        "id": "announcement_text",
+        "label": "Announcement bar text",
+        "default": "PERFORMANCE NUTRITION. DELIVERED ACROSS INDIA."
+      },
+      {
+        "type": "color",
+        "id": "accent_color",
+        "label": "Accent colour",
+        "default": "#e51e26"
+      },
+      {
+        "type": "color",
+        "id": "ink_color",
+        "label": "Dark background",
+        "default": "#080808"
+      },
+      {
+        "type": "color",
+        "id": "paper_color",
+        "label": "Light background",
+        "default": "#f3f3f0"
+      }
+    ]
+  }
+]
