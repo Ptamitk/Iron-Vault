@@ -1,1 +1,66 @@
-<section class="iv-hero"><div class="hero-copy"><p class="eyebrow"><span></span>{{ section.settings.eyebrow | escape }}</p><h1 class="display hero-heading">{% assign words = section.settings.heading | split: '|' %}{% for word in words %}<span class="{% cycle 'solid','outline','accent','solid' %}">{{ word | escape }}</span>{% endfor %}</h1></div><div class="hero-visual">{% if section.settings.athlete_image != blank %}<div class="hero-athlete">{{ section.settings.athlete_image | image_url: width: 1200 | image_tag: loading: 'eager', alt: section.settings.athlete_image.alt }}</div>{% endif %}{% assign hero_product = section.settings.hero_product %}{% if hero_product != blank %}<a class="hero-product" href="{{ hero_product.url }}">{{ hero_product.featured_image | image_url: width: 1000 | image_tag: loading: 'eager', alt: hero_product.title }}<span class="hero-product-tag">{{ hero_product.vendor | escape }}<b>{{ hero_product.title | escape }}</b></span></a>{% elsif section.settings.product_image != blank %}<div class="hero-product">{{ section.settings.product_image | image_url: width: 1000 | image_tag: loading: 'eager' }}</div>{% else %}<div class="hero-product hero-placeholder">IRON<br>VAULT</div>{% endif %}</div><div class="hero-bottom"><div><p class="hero-sub">{{ section.settings.subheading | escape }}</p><div class="hero-buttons"><a class="iv-button" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }} ↗</a>{% if section.settings.secondary_label != blank %}<a class="iv-button iv-button-ghost" href="{{ section.settings.secondary_link }}">{{ section.settings.secondary_label | escape }}</a>{% endif %}</div></div><dl class="hero-stats"><div><dt>{{ section.settings.stat_one_label }}</dt><dd>{{ section.settings.stat_one_value }}</dd></div><div><dt>{{ section.settings.stat_two_label }}</dt><dd>{{ section.settings.stat_two_value }}</dd></div><div><dt>{{ section.settings.stat_three_label }}</dt><dd>{{ section.settings.stat_three_value }}</dd></div></dl></div></section>{% schema %}{"name":"IRON VAULT hero","settings":[{"type":"text","id":"eyebrow","label":"Eyebrow","default":"PERFORMANCE NUTRITION"},{"type":"textarea","id":"heading","label":"Heading (separate lines with |)","default":"TRAIN.\nFUEL.\nRECOVER.\nREPEAT."},{"type":"image_picker","id":"athlete_image","label":"Athlete image"},{"type":"product","id":"hero_product","label":"Featured product"},{"type":"image_picker","id":"product_image","label":"Fallback product image"},{"type":"textarea","id":"subheading","label":"Description","default":"Performance supplements from trusted international brands, with every ingredient listed up front. Pick your goal and shop it in a minute."},{"type":"text","id":"button_label","label":"Primary button","default":"SHOP NOW"},{"type":"url","id":"button_link","label":"Primary link"},{"type":"text","id":"secondary_label","label":"Secondary button","default":"SHOP PROTEIN"},{"type":"url","id":"secondary_link","label":"Secondary link"},{"type":"text","id":"stat_one_label","label":"Stat 1 label","default":"PRODUCTS"},{"type":"text","id":"stat_one_value","label":"Stat 1 value","default":"50+"},{"type":"text","id":"stat_two_label","label":"Stat 2 label","default":"PARTNER BRANDS"},{"type":"text","id":"stat_two_value","label":"Stat 2 value","default":"10+"},{"type":"text","id":"stat_three_label","label":"Stat 3 label","default":"FREE SHIPPING"},{"type":"text","id":"stat_three_value","label":"Stat 3 value","default":"₹4,999+"}],"presets":[{"name":"IRON VAULT hero"}]}{% endschema %}
+{% comment %}IRON VAULT split-screen launch hero. Athlete photo is selected in the Shopify theme editor.{% endcomment %}
+<section class="iv-hero iv-hero--split" aria-labelledby="HeroHeading-{{ section.id }}">
+  <div class="iv-hero__photo">
+    {% if section.settings.athlete_image != blank %}
+      {{ section.settings.athlete_image | image_url: width: 1600 | image_tag: class: 'iv-hero__athlete', loading: 'eager', fetchpriority: 'high', widths: '480, 720, 960, 1200, 1600', sizes: '(min-width: 981px) 50vw, 100vw', alt: section.settings.athlete_image.alt | default: 'IRON VAULT athlete' }}
+    {% else %}
+      <div class="iv-hero__photo-placeholder" aria-hidden="true"><span>IRON VAULT</span></div>
+    {% endif %}
+    <span class="iv-hero__photo-shade" aria-hidden="true"></span>
+    <span class="iv-hero__photo-index" aria-hidden="true">IV / 01</span>
+  </div>
+
+  <div class="iv-hero__content">
+    <div class="iv-hero__content-inner">
+      <p class="iv-hero__eyebrow"><span></span>{{ section.settings.eyebrow | escape }}</p>
+      <div class="iv-hero__wordmark" aria-label="IRON VAULT">
+        <span>IRON<span class="iv-hero__wordmark-accent">VAULT</span></span>
+        <small>SPORTS NUTRITION MARKETPLACE</small>
+      </div>
+      <h1 id="HeroHeading-{{ section.id }}" class="display iv-hero__heading">
+        {% assign heading_lines = section.settings.heading | newline_to_br | split: '<br />' %}
+        {% for line in heading_lines %}
+          <span class="iv-hero__heading-line{% if forloop.last %} iv-hero__heading-line--accent{% endif %}">{{ line | strip | escape }}</span>
+        {% endfor %}
+      </h1>
+      {% if section.settings.subheading != blank %}
+        <p class="iv-hero__subheading">{{ section.settings.subheading | escape }}</p>
+      {% endif %}
+      <div class="iv-hero__actions">
+        <a class="iv-button" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }} <span aria-hidden="true">↗</span></a>
+        {% if section.settings.secondary_label != blank %}
+          <a class="iv-hero__secondary" href="{{ section.settings.secondary_link | default: routes.all_products_collection_url }}">{{ section.settings.secondary_label | escape }}</a>
+        {% endif %}
+      </div>
+      <div class="iv-hero__proof">
+        <div><span class="iv-hero__proof-icon">◇</span><b>{{ section.settings.proof_one_title | escape }}</b><small>{{ section.settings.proof_one_text | escape }}</small></div>
+        <div><span class="iv-hero__proof-icon">⬡</span><b>{{ section.settings.proof_two_title | escape }}</b><small>{{ section.settings.proof_two_text | escape }}</small></div>
+        <div><span class="iv-hero__proof-icon">↠</span><b>{{ section.settings.proof_three_title | escape }}</b><small>{{ section.settings.proof_three_text | escape }}</small></div>
+      </div>
+    </div>
+    <span class="iv-hero__corner-mark" aria-hidden="true">IV.</span>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "IRON VAULT hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "PERFORMANCE. PRECISION. POWER." },
+    { "type": "image_picker", "id": "athlete_image", "label": "Athlete photograph" },
+    { "type": "textarea", "id": "heading", "label": "Main heading (one line per row)", "default": "THE VAULT IS OPEN\nBUILT FOR MORE" },
+    { "type": "textarea", "id": "subheading", "label": "Description", "default": "India's premium sports nutrition marketplace. Discover trusted international brands, authentic products and performance-focused essentials." },
+    { "type": "text", "id": "button_label", "label": "Primary button", "default": "EXPLORE THE VAULT" },
+    { "type": "url", "id": "button_link", "label": "Primary link" },
+    { "type": "text", "id": "secondary_label", "label": "Secondary link label", "default": "DISCOVER OUR STORY" },
+    { "type": "url", "id": "secondary_link", "label": "Secondary link" },
+    { "type": "text", "id": "proof_one_title", "label": "Proof point 1 title", "default": "AUTHENTICITY" },
+    { "type": "text", "id": "proof_one_text", "label": "Proof point 1 text", "default": "FIRST SOURCING" },
+    { "type": "text", "id": "proof_two_title", "label": "Proof point 2 title", "default": "MULTI-BRAND" },
+    { "type": "text", "id": "proof_two_text", "label": "Proof point 2 text", "default": "ONE DESTINATION" },
+    { "type": "text", "id": "proof_three_title", "label": "Proof point 3 title", "default": "PAN-INDIA" },
+    { "type": "text", "id": "proof_three_text", "label": "Proof point 3 text", "default": "DELIVERY" }
+  ],
+  "presets": [{ "name": "IRON VAULT hero" }]
+}
+{% endschema %}
