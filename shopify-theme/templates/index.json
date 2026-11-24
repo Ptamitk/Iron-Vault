@@ -4,12 +4,19 @@
       "type": "hero",
       "settings": {
         "eyebrow": "PERFORMANCE. PRECISION. POWER.",
+        "athlete_image": "shopify://shop_images/iron-vault-athlete-hero.jpg",
         "heading": "TRAIN WITH PURPOSE\nFUEL YOUR POTENTIAL",
         "subheading": "Performance supplements from trusted international brands, with every ingredient listed up front. Pick your goal and shop it in a minute.",
         "button_label": "SHOP THE COLLECTION",
         "button_link": "/collections/all",
         "secondary_label": "",
-        "secondary_link": "/collections/protein"
+        "secondary_link": "/collections/protein",
+        "proof_one_title": "AUTHENTICITY",
+        "proof_one_text": "FIRST SOURCING",
+        "proof_two_title": "MULTI-BRAND",
+        "proof_two_text": "ONE DESTINATION",
+        "proof_three_title": "PAN-INDIA",
+        "proof_three_text": "DELIVERY"
       }
     },
     "marquee": {

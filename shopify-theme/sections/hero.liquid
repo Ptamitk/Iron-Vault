@@ -1,15 +1,11 @@
-{% comment %}IRON VAULT split-screen launch hero. The approved athlete photo is loaded from the theme assets for consistent rendering.{% endcomment %}
+{% comment %}IRON VAULT split-screen launch hero. The selected Shopify Files image is the persistent source for the athlete photograph.{% endcomment %}
 <section class="iv-hero iv-hero--split" aria-labelledby="HeroHeading-{{ section.id }}">
   <div class="iv-hero__photo">
-    <img
-      class="iv-hero__athlete"
-      src="{{ 'iv-athlete.jpg' | asset_url }}"
-      alt="IRON VAULT athlete"
-      width="728"
-      height="600"
-      loading="eager"
-      fetchpriority="high"
-    >
+    {% if section.settings.athlete_image != blank %}
+      {{ section.settings.athlete_image | image_url: width: 1800 | image_tag: class: 'iv-hero__athlete', loading: 'eager', fetchpriority: 'high', widths: '480, 720, 960, 1200, 1600, 1800', sizes: '(min-width: 981px) 50vw, 100vw', alt: 'IRON VAULT athlete' }}
+    {% else %}
+      <img class="iv-hero__athlete" src="{{ 'iron-vault-athlete-hero.jpg' | file_url }}" alt="IRON VAULT athlete" width="728" height="600" loading="eager" fetchpriority="high">
+    {% endif %}
     <span class="iv-hero__photo-shade" aria-hidden="true"></span>
     <span class="iv-hero__photo-index" aria-hidden="true">IV / 01</span>
   </div>
