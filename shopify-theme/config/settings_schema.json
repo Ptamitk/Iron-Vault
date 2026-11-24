@@ -6,8 +6,7 @@
     "theme_author": "IRON VAULT"
   },
   {
-    "name": "brand",
-    "title": "Brand settings",
+    "name": "Brand settings",
     "settings": [
       {
         "type": "text",
