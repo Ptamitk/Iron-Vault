@@ -1,0 +1,6 @@
+<section class="collection-index section-light">
+<header class="collection-index-heading"><p class="eyebrow"><span></span>IRON VAULT STORE</p><h1 class="display">SHOP ALL<br><em>CATEGORIES.</em></h1><p>Four ways to build your kit. Choose your category and explore the collection.</p></header>
+<div class="collection-index-grid">{% assign category_handles = 'peptides,supplements,clothing,accessories' | split: ',' %}{% for category_handle in category_handles %}{% assign category_collection = collections[category_handle] %}{% if category_collection != blank %}
+<a class="collection-index-card collection-index-card--{{ category_handle }}" href="{{ category_collection.url }}"><span class="collection-index-number">0{{ forloop.index }}</span><div><p class="eyebrow">IRON VAULT / CATEGORY</p><h2>{{ category_collection.title | escape }}</h2><span class="collection-index-link">EXPLORE COLLECTION ↗</span></div></a>
+{% endif %}{% endfor %}</div></section>
+{% schema %}{"name":"Collection index","settings":[]}{% endschema %}

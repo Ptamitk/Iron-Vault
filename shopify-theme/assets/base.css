@@ -122,3 +122,30 @@
  .mobile-nav:not([hidden]){top:calc(28px + 66px);padding-inline:18px}
  .mobile-nav>a{font-size:25px}
 }
+
+
+/* Category collection pages */
+.collection-header{max-width:980px;padding:clamp(28px,5vw,70px) 0 38px;border-bottom:1px solid #10101025}
+.collection-header h1{font-size:clamp(76px,12vw,164px);line-height:.84;letter-spacing:-.045em}
+.collection-header .eyebrow{color:var(--iv-accent)}
+.collection-intro{max-width:650px;margin-top:22px;font-size:15px}
+.collection-header-note{margin-top:22px;font-size:9px;font-weight:900;letter-spacing:.16em;color:#777}
+.collection-empty{grid-column:1/-1;min-height:300px;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:clamp(30px,7vw,90px);background:#e7e7e2}
+.collection-empty>span{font-size:9px;font-weight:900;letter-spacing:.18em;color:#e21d2b}
+.collection-empty h2{max-width:700px;margin:18px 0;font:800 clamp(42px,7vw,92px)/.9 var(--iv-head);letter-spacing:-.03em}
+.collection-empty p{max-width:420px;color:#666;font-size:13px;line-height:1.7}
+.collection-index{padding:70px var(--iv-gutter) 110px}
+.collection-index-heading{max-width:900px;margin-bottom:50px}
+.collection-index-heading h1{font-size:clamp(76px,12vw,160px);line-height:.85;margin:18px 0}
+.collection-index-heading h1 em{color:var(--iv-accent);font-style:normal}
+.collection-index-heading>p:last-child{max-width:480px;color:#666;font-size:14px;line-height:1.7}
+.collection-index-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.collection-index-card{position:relative;min-height:330px;padding:clamp(24px,4vw,52px);display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;background:#111;color:#f5f4f0;isolation:isolate}
+.collection-index-card:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 80% 15%,#ffffff20,transparent 55%),linear-gradient(135deg,#252525,#090909 65%)}
+.collection-index-card:after{content:"";position:absolute;z-index:-1;width:260px;height:260px;right:-70px;bottom:-120px;border:1px solid #ffffff22;border-radius:50%;box-shadow:0 0 0 28px #ffffff08,0 0 0 58px #ffffff05}
+.collection-index-number{font:700 12px var(--iv-head);color:#e21d2b;letter-spacing:.14em}
+.collection-index-card .eyebrow{font-size:9px;color:#aaa;letter-spacing:.16em}
+.collection-index-card h2{margin:10px 0 22px;font:800 clamp(40px,6vw,76px)/.9 var(--iv-head);text-transform:uppercase}
+.collection-index-link{font-size:9px;font-weight:900;letter-spacing:.15em;border-bottom:1px solid #e21d2b;padding-bottom:8px}
+.collection-index-card:hover h2{color:#e21d2b}
+@media(max-width:640px){.collection-index-grid{grid-template-columns:1fr}.collection-index-card{min-height:250px}.collection-header h1{font-size:clamp(64px,18vw,100px)}.collection-intro{font-size:13px}}

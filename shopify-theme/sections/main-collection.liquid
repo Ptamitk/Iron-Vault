@@ -1,1 +1,44 @@
-<section class="collection-page section-light"><header class="collection-header"><p class="eyebrow"><span></span>IRON VAULT STORE</p><h1 class="display">{{ collection.title | escape }}</h1>{% if collection.description != blank %}<div class="rte">{{ collection.description }}</div>{% endif %}</header><div class="collection-toolbar"><span>{{ collection.products_count }} PRODUCTS</span><form method="get"><label for="SortBy">SORT BY</label><select id="SortBy" name="sort_by" onchange="this.form.submit()">{% assign sort_by = collection.sort_by | default: collection.default_sort_by %}{% for option in collection.sort_options %}<option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>{% endfor %}</select></form></div>{% paginate collection.products by section.settings.products_per_page %}<div class="product-grid">{% for product in collection.products %}{% render 'product-card', card_product: product %}{% else %}<p>No products found in this collection.</p>{% endfor %}</div>{% if paginate.pages > 1 %}<nav class="pagination">{{ paginate | default_pagination }}</nav>{% endif %}{% endpaginate %}</section>{% schema %}{"name":"Main collection","settings":[{"type":"range","id":"products_per_page","label":"Products per page","min":8,"max":48,"step":4,"default":24}]}{% endschema %}
+{% liquid
+  assign category_eyebrow = 'IRON VAULT STORE'
+  assign category_intro = collection.description
+  case collection.handle
+    when 'peptides'
+      assign category_eyebrow = 'RESEARCH & PERFORMANCE'
+      if category_intro == blank
+        assign category_intro = 'Explore the collection. Product availability and sale eligibility are subject to applicable laws and regulatory requirements.'
+      endif
+    when 'supplements'
+      assign category_eyebrow = 'DAILY PERFORMANCE'
+      if category_intro == blank
+        assign category_intro = 'Explore sports nutrition essentials, from protein and creatine to hydration and everyday wellness.'
+      endif
+    when 'clothing'
+      assign category_eyebrow = 'TRAINING APPAREL'
+      if category_intro == blank
+        assign category_intro = 'Gym-ready layers and training essentials. Discover tees, tanks, shorts and more as the apparel range grows.'
+      endif
+    when 'accessories'
+      assign category_eyebrow = 'THE TRAINING KIT'
+      if category_intro == blank
+        assign category_intro = 'Useful extras for your training routine, from shaker bottles and gym bags to lifting straps and everyday carry.'
+      endif
+  endcase
+%}
+<section class="collection-page section-light">
+  <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="{{ routes.root_url }}">HOME</a><span>/</span><span>{{ collection.title | escape }}</span></nav>
+  <header class="collection-header collection-header--{{ collection.handle }}">
+    <p class="eyebrow"><span></span>{{ category_eyebrow }}</p><h1 class="display">{{ collection.title | escape }}</h1>
+    {% if category_intro != blank %}<div class="rte collection-intro">{{ category_intro | escape | newline_to_br }}</div>{% endif %}
+    <p class="collection-header-note">BUILT FOR THE WORK. MADE FOR THE EVERYDAY.</p>
+  </header>
+  <div class="collection-toolbar"><span>{{ collection.products_count }} PRODUCTS</span>
+    <form method="get"><label for="SortBy">SORT BY</label><select id="SortBy" name="sort_by" onchange="this.form.submit()">{% assign sort_by = collection.sort_by | default: collection.default_sort_by %}{% for option in collection.sort_options %}<option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>{% endfor %}</select></form>
+  </div>
+  {% paginate collection.products by section.settings.products_per_page %}
+    <div class="product-grid">{% for product in collection.products %}{% render 'product-card', card_product: product %}{% else %}
+      <div class="collection-empty"><span>COMING SOON</span><h2>THE NEXT DROP IS ON ITS WAY.</h2><p>We’re preparing this category. Check back soon for new arrivals.</p></div>
+    {% endfor %}</div>
+    {% if paginate.pages > 1 %}<nav class="pagination" aria-label="Pagination">{{ paginate | default_pagination }}</nav>{% endif %}
+  {% endpaginate %}
+</section>
+{% schema %}{"name":"Main collection","settings":[{"type":"range","id":"products_per_page","label":"Products per page","min":8,"max":48,"step":4,"default":24}]}{% endschema %}
