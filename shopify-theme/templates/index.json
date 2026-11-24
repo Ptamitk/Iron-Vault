@@ -3,12 +3,12 @@
     "hero": {
       "type": "hero",
       "settings": {
-        "eyebrow": "PERFORMANCE NUTRITION",
-        "heading": "TRAIN.|FUEL.|RECOVER.|REPEAT.",
+        "eyebrow": "PERFORMANCE. PRECISION. POWER.",
+        "heading": "TRAIN WITH PURPOSE\nFUEL YOUR POTENTIAL",
         "subheading": "Performance supplements from trusted international brands, with every ingredient listed up front. Pick your goal and shop it in a minute.",
-        "button_label": "SHOP NOW",
+        "button_label": "SHOP THE COLLECTION",
         "button_link": "/collections/all",
-        "secondary_label": "SHOP PROTEIN",
+        "secondary_label": "",
         "secondary_link": "/collections/protein"
       }
     },
@@ -21,7 +21,8 @@
       "settings": {
         "heading": "BUILT FOR EVERY GOAL",
         "products_to_show": 8,
-        "show_view_all": true
+        "show_view_all": false,
+        "collection": "all"
       }
     },
     "trust": {
@@ -62,7 +63,10 @@
     },
     "cta": {
       "type": "closing-cta",
-      "settings": {}
+      "settings": {
+        "button_label": "OUR APPROACH",
+        "button_link": "/pages/about-us"
+      }
     }
   },
   "order": [

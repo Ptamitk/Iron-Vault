@@ -7,6 +7,21 @@
     mobileNav.hidden = expanded;
     document.body.classList.toggle('menu-open', !expanded);
   });
+  // Remove repeated destinations from each navigation group.
+  document.querySelectorAll('.desktop-nav, .mobile-nav').forEach((nav) => {
+    const seen = new Set();
+    nav.querySelectorAll('a[href]').forEach((link) => {
+      const url = new URL(link.href, window.location.origin);
+      const destination = url.pathname + url.search;
+      if (seen.has(destination)) link.remove();
+      else seen.add(destination);
+    });
+  });
+  if (mobileNav) mobileNav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
+    mobileNav.hidden = true;
+    menuButton?.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-open');
+  }));
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (!reducedMotion && 'IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
