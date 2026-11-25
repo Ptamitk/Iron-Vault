@@ -30,6 +30,9 @@
   let activeController;
   const openSearch = () => {
     if (!searchLayer) return;
+    if (mobileNav) mobileNav.hidden = true;
+    menuButton?.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-open');
     searchLayer.hidden = false;
     document.body.classList.add('search-open');
     window.requestAnimationFrame(() => searchInput?.focus());
@@ -108,7 +111,7 @@
         url.searchParams.set('q', query);
         url.searchParams.set('resources[type]', 'product');
         url.searchParams.set('resources[limit]', '6');
-        url.searchParams.set('resources[options][unavailable_products]', 'hide');
+        url.searchParams.set('resources[options][unavailable_products]', 'show');
         url.searchParams.set('resources[options][fields]', 'title,product_type,variants.title,vendor');
         try {
           const response = await fetch(url.toString(), { signal: activeController.signal, headers: { Accept: 'application/json' } });
