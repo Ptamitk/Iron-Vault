@@ -1,8 +1,6 @@
 <div class="announcement">{{ settings.announcement_text | escape }}</div>
-
 <header class="site-header">
   <a class="brand-mark" href="{{ routes.root_url }}" aria-label="IRON VAULT home">IRON<span>VAULT</span><i></i></a>
-
   <nav class="desktop-nav" aria-label="Shop categories">
     <a class="nav-home" href="{{ routes.root_url }}">HOME</a>
     <a href="/collections/peptides">PEPTIDES</a>
@@ -10,33 +8,31 @@
     <a href="/collections/clothing">CLOTHING</a>
     <a href="/collections/accessories">ACCESSORIES</a>
   </nav>
-
   <div class="header-actions">
-    <a class="header-search" href="{{ routes.search_url }}" aria-label="Search">SEARCH</a>
+    <button class="header-search" type="button" data-search-open aria-haspopup="dialog" aria-controls="IVSearch" aria-label="Open product search"><span class="search-icon" aria-hidden="true"></span><span>SEARCH</span></button>
     <a class="header-account" href="{{ routes.account_url }}" aria-label="Account">ACCOUNT</a>
     <a class="cart-link" href="{{ routes.cart_url }}" aria-label="Shopping bag">BAG <span>{{ cart.item_count }}</span></a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="MobileNav" aria-label="Open menu">
-      <span></span><span></span>
-    </button>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="MobileNav" aria-label="Open menu"><span></span><span></span></button>
   </div>
 </header>
-
 <nav id="MobileNav" class="mobile-nav" aria-label="Mobile navigation" hidden>
-  <a href="{{ routes.root_url }}">HOME</a>
-  <a href="/collections/peptides">PEPTIDES</a>
-  <a href="/collections/supplements">SUPPLEMENTS</a>
-  <a href="/collections/clothing">CLOTHING</a>
-  <a href="/collections/accessories">ACCESSORIES</a>
-  <div class="mobile-nav-utilities">
-    <a href="{{ routes.search_url }}">SEARCH</a>
-    <a href="{{ routes.account_url }}">ACCOUNT</a>
-    <a href="{{ routes.cart_url }}">BAG ({{ cart.item_count }})</a>
-  </div>
+  <a href="{{ routes.root_url }}">HOME</a><a href="/collections/peptides">PEPTIDES</a><a href="/collections/supplements">SUPPLEMENTS</a><a href="/collections/clothing">CLOTHING</a><a href="/collections/accessories">ACCESSORIES</a>
+  <div class="mobile-nav-utilities"><button type="button" data-search-open>SEARCH PRODUCTS</button><a href="{{ routes.account_url }}">ACCOUNT</a><a href="{{ routes.cart_url }}">BAG ({{ cart.item_count }})</a></div>
 </nav>
-
-{% schema %}
-{
-  "name": "Header",
-  "settings": []
-}
-{% endschema %}
+<div id="IVSearch" class="iv-search" role="dialog" aria-modal="true" aria-labelledby="IVSearchTitle" data-predictive-url="{{ routes.predictive_search_url }}" hidden>
+  <button class="iv-search-backdrop" type="button" data-search-close aria-label="Close search"></button>
+  <div class="iv-search-panel">
+    <div class="iv-search-top"><p class="iv-search-kicker">IRON VAULT / PRODUCT FINDER</p><button class="iv-search-close" type="button" data-search-close aria-label="Close search">×</button></div>
+    <h2 id="IVSearchTitle">FIND YOUR <span>EDGE.</span></h2>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="iv-search-form" data-predictive-form>
+      <label class="visually-hidden" for="IVSearchInput">Search products, brands and categories</label>
+      <span class="search-icon" aria-hidden="true"></span>
+      <input id="IVSearchInput" type="search" name="q" placeholder="Search products, brands, categories..." autocomplete="off" autocorrect="off" spellcheck="false" data-predictive-input>
+      <input type="hidden" name="options[prefix]" value="last">
+      <button type="submit">SEARCH <span aria-hidden="true">↗</span></button>
+    </form>
+    <div class="iv-search-suggestions" data-predictive-results aria-live="polite"><span>POPULAR CATEGORIES</span><div><a href="/collections/creatine">CREATINE</a><a href="/collections/pre-workout">PRE-WORKOUT</a><a href="/collections/supplements">SUPPLEMENTS</a></div></div>
+    <p class="iv-search-foot">TYPE TO SEE MATCHING PRODUCTS · PRESS ENTER TO VIEW ALL RESULTS</p>
+  </div>
+</div>
+{% schema %}{"name":"Header","settings":[]} {% endschema %}
