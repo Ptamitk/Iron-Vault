@@ -1,1 +1,35 @@
-<section class="collection-page section-light"><header class="collection-header"><p class="eyebrow"><span></span>FIND YOUR FUEL</p><h1 class="display">SEARCH</h1></header><form action="{{ routes.search_url }}" method="get" role="search" class="search-form"><label class="visually-hidden" for="SearchInput">Search products</label><input id="SearchInput" type="search" name="q" value="{{ search.terms | escape }}" placeholder="Search products, brands and categories"><input type="hidden" name="options[prefix]" value="last"><button class="iv-button" type="submit">SEARCH ↗</button></form>{% if search.performed %}<p class="search-count">{{ search.results_count }} RESULTS FOR “{{ search.terms | escape }}”</p><div class="product-grid">{% for item in search.results %}{% if item.object_type == 'product' %}{% render 'product-card', card_product: item %}{% endif %}{% endfor %}</div>{% endif %}</section>{% schema %}{"name":"Main search","settings":[]} {% endschema %}
+<section class="collection-page section-light iv-search-page">
+  <header class="collection-header">
+    <p class="eyebrow"><span></span>FIND YOUR FUEL</p>
+    <h1 class="display">SEARCH<span class="iv-search-page-accent">.</span></h1>
+    <p class="rte">Find products by name, brand or category. Search results update from the products in our store.</p>
+  </header>
+  <form action="{{ routes.search_url }}" method="get" role="search" class="iv-search-page-form">
+    <label class="visually-hidden" for="SearchInput">Search products, brands and categories</label>
+    <span class="search-icon" aria-hidden="true"></span>
+    <input id="SearchInput" type="search" name="q" value="{{ search.terms | escape }}" placeholder="WHAT ARE YOU LOOKING FOR?" autocomplete="off">
+    <input type="hidden" name="options[prefix]" value="last">
+    <button type="submit" class="iv-button">SEARCH <span aria-hidden="true">↗</span></button>
+  </form>
+  {% if search.performed %}
+    <div class="iv-search-results-heading"><span>{{ search.results_count }} RESULTS</span><span>FOR “{{ search.terms | escape }}”</span></div>
+    {% paginate search.results by 24 %}
+      <div class="product-grid">
+        {% assign product_results = 0 %}
+        {% for item in search.results %}
+          {% if item.object_type == 'product' %}
+            {% assign product_results = product_results | plus: 1 %}
+            {% render 'product-card', card_product: item %}
+          {% endif %}
+        {% endfor %}
+        {% if product_results == 0 %}
+          <div class="iv-search-no-results"><span>NO MATCHES FOUND</span><h2>NOTHING IN THE VAULT. YET.</h2><p>Try a different product name, brand or category.</p><a class="iv-button" href="{{ routes.all_products_collection_url }}">BROWSE PRODUCTS</a></div>
+        {% endif %}
+      </div>
+      {% if paginate.pages > 1 %}<nav class="pagination" role="navigation" aria-label="Search pages">{% if paginate.previous %}<a href="{{ paginate.previous.url }}">← PREVIOUS</a>{% endif %}<span>PAGE {{ paginate.current_page }} / {{ paginate.pages }}</span>{% if paginate.next %}<a href="{{ paginate.next.url }}">NEXT →</a>{% endif %}</nav>{% endif %}
+    {% endpaginate %}
+  {% else %}
+    <div class="iv-search-browse"><span>START WITH A CATEGORY</span><div><a href="/collections/creatine">CREATINE ↗</a><a href="/collections/pre-workout">PRE-WORKOUT ↗</a><a href="/collections/supplements">SUPPLEMENTS ↗</a></div></div>
+  {% endif %}
+</section>
+{% schema %}{"name":"Main search","settings":[]} {% endschema %}
